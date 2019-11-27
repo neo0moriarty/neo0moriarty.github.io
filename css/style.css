@@ -5,16 +5,17 @@
  * @version 1.3
  * @link http://pickcho.com
  */
- @font-face {
+
+ /* @font-face {
     font-family: 'icomoon';
     src:url('fonts/icomoon.woff?-i5ysuu') format('woff'),
         url('fonts/icomoon.ttf?-i5ysuu') format('truetype');
     font-weight: normal;
     font-style: normal;
-}
+} */
 
 [class^="icon-"], [class*=" icon-"] {
-    font-family: 'icomoon';
+    /* font-family: 'icomoon'; */
     speak: none;
     font-style: normal;
     font-weight: normal;
@@ -69,11 +70,11 @@
 body {
     background-color:#FFF;
     color:#444;
-    font-size: 15px;
+    font-size: 17px;
     /**
     font-family:"TIBch", "Classic Grotesque W01", "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
     **/
-    font-family: "Iowan Old Style", "Ovo", "Hoefler Text", Georgia, "Times New Roman", "TIBch", "Source Han Sans", "PingFangSC-Regular", "Hiragino Sans GB", "STHeiti", "Microsoft Yahei", "Droid Sans Fallback", "WenQuanYi Micro Hei", sans-serif;
+    font-family: "Noto Serif CJK SC", "Source Han Serif SC", "Noto Sans CJK SC", "Noto Sans CJK", "Source Han Sans", "PingFangSC-Regular", "Hiragino Sans GB", "STHeiti", "Microsoft Yahei", "Droid Sans Fallback", "WenQuanYi Micro Hei", sans-serif;
     /**-webkit-font-smoothing: antialiased;**/
     -moz-osx-font-smoothing: grayscale;
 }
@@ -421,7 +422,7 @@ textarea {
     border-top:1px solid #ddd;
     list-style:none;
     padding:25px 0 0;
-    font-size:16px;
+    font-size:19px;
     text-align: center;
 }
 .page-navigator li {
@@ -551,7 +552,7 @@ textarea.textarea {
     margin:0;
     line-height:1.8;
     color:#222;
-    font-size:14px;
+    font-size:16px;
     background:#fdfdfd!important;
     color: #555;
 }
@@ -583,7 +584,7 @@ textarea.textarea {
     color:#6E7173;
     line-height:2.7;
     margin-top:0;
-    font-size:16px;
+    font-size:19px;
     border-bottom:1px solid #ddd;
     display:block;
 }
@@ -675,7 +676,7 @@ img.alignright {
     margin-left: 1.5em;
 }
 .post-content-pages {
-    font-size: 17px;
+    font-size: 19px;
 }
 .body404{
     height: 100%;
@@ -693,14 +694,14 @@ img.alignright {
     font-size: 74px;
 }
 .title404 span{
-    font-size: 15px;
+    font-size: 17px;
     width: 2px;
 }
 .site-name404 i {
     font-style: normal;
 }
 .title404 p{
-    font-size: 20px;
+    font-size: 22px;
     margin: 0.5em 0 .6em;
 }
 .info404{
@@ -723,7 +724,7 @@ img.alignright {
     font-weight: 500;
     line-height: 14px;
     letter-spacing: 1px;
-    font-size: 14px;
+    font-size: 16px;
     -moz-user-select: -moz-none;
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -738,7 +739,7 @@ img.alignright {
     padding: 10px 0 25px;
 }
 .icon-about a{
-    font-size: 20px;
+    font-size: 22px;
     margin: 5px;
     color: #fff;
     background-color: #000;
@@ -781,7 +782,7 @@ img.alignright {
         padding-top:5px;
     }
     .post-content {
-        font-size: 14px;
+        font-size: 16px;
     }
 }
 @media print, screen and (max-width:860px) {
@@ -829,7 +830,7 @@ img.alignright {
         padding:0 15px;
         line-height:27px;
         height:27px;
-        font-size:13px;
+        font-size:15px;
     }
 }
 @media print, screen and (max-width:500px) {
@@ -846,7 +847,7 @@ img.alignright {
         margin-right:-160px;
     }
     .post-content-pages {
-        font-size: 14px;
+        font-size: 16px;
     }
     .al_mon_list {
         margin-left: 70px;
@@ -890,7 +891,7 @@ img.alignright {
 }
 .post-donation-qrcode p {
     margin: 0 auto auto auto;
-    font-size: 85%;
+    font-size: 88%;
 }
 /** Comment extra **/
 #comment-submitted {
@@ -906,7 +907,7 @@ img.alignright {
 
 /* for archive page starts*/
 .post-archive {
-    font-size: 15px;
+    font-size: 17px;
     line-height: 2;
     padding-bottom: .8em; 
 }
@@ -980,7 +981,7 @@ img.alignright {
 
 /* read more*/
 .readmore a {
-    font-size: 14px;
+    font-size: 17px;
     color: #444;
     margin: -10px 0;
     padding: 5px 10px;
