@@ -105,8 +105,7 @@
 <pre><code class="language-bash">$ ssh-keygen -t rsa
 </code></pre>
 
-<p><img src="https://molock.cn/img/posts/1261/1.jpg" alt="" />
-提示输入密码，直接按回车就行
+<p>提示输入密码，直接按回车就行
 生成的密钥在 ~/.ssh 下：id_rsa是私钥，id_rsa.pub是公钥</p>
 
 <h3 id="机器b上的操作">机器B上的操作</h3>
@@ -116,9 +115,9 @@
 <pre><code class="language-bash">$ touch ~/.ssh/authorized_keys
 </code></pre>
 
-<p>查看 ~/.ssh 和 authorized_keys 的权限
-<img src="https://molock.cn/img/posts/1261/2.jpg" alt="" />
-~/.ssh 的权限是700，authorized_keys的权限是600，如果权限不对需要改过来：</p>
+<p>查看 ~/.ssh 和 authorized_keys 的权限</p>
+
+<p>~/.ssh 的权限是700，authorized_keys的权限是600，如果权限不对需要改过来：</p>
 
 <pre><code class="language-bash">$ chmod 700 ~/.ssh
 $ chmod 600 ~/.ssh/authorized_keys

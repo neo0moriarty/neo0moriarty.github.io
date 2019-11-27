@@ -26,9 +26,7 @@
       <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/ubuntu-mount-exfat/</guid>
-      <description>ubuntu默认不支持exfat格式的硬盘挂载。
-安装工具解决：
-sudo apt-get install exfat-utils  重启电脑生效。</description>
+      <description>&lt;p&gt;ubuntu默认不支持exfat格式的硬盘挂载。&lt;/p&gt;</description>
     </item>
     
     <item>

@@ -413,8 +413,6 @@ a, b, *rest = range(2)
 
 <p>collections.namedtuple 是一个工厂函数，它可以用来构建一个带字段名的元组和一个有名字的类——这个带名字的类对调试程序有很大帮助。<strong>用 namedtuple 构建的类的实例所消耗的内存跟元组是一样的</strong>，因为字段名都被存在对应的类里面。这个实例跟普通的对象实例比起来也要小一些，因为Python不会用 <code>__dict__</code> 来存放这些实例的属性。</p>
 
-<p>如何用具名元组来记录一个城市的信息的示例，参考<a href="https://molock.cn/posts/2697/">这篇博客</a>。</p>
-
 <hr />
 
 <p><strong>作为不可变列表的元组</strong></p>
@@ -427,7 +425,7 @@ a, b, *rest = range(2)
 
 <p>a:b:c 这种用法只能作为索引或者下标用在 [] 中来返回一个切片对象：slice(a, b, c)</p>
 
-<p>Python序列的+、<code>*</code>、+=、*= 示例参考<a href="https://molock.cn/posts/14457/">这篇博客</a></p>
+<p>Python序列的+、<code>*</code>、+=、*=</p>
 
 <p>用返回 None 来表示就地改动这个惯例有个弊端，那就是调用者无法将其串联起来。而返回一个新对象的方法（比如说 str 里的 所有方法）则正好相反，它们可以串联起来调用，从而形成连贯接口（fluent interface）。</p>
 
@@ -437,19 +435,17 @@ a, b, *rest = range(2)
 
 <p><strong>已排序的序列可以用来进行快速搜索，而标准库的 bisect 模块给我们提供了二分查找算法。bisect 模块包含两个主要函数，bisect 和 insort，两个函数都利用二分查找算法来在有序序列中查找或插入元素。</strong></p>
 
-<p>具体示例参考<a href="https://molock.cn/posts/37303/">这篇博客</a></p>
-
 <hr />
 
 <p>虽然列表既灵活又简单，但面对各类需求时，我们可能会有更好的选择。比如，要存放 1000 万个浮点数的话，数组（array）的效率要高得多，因为<strong>数组在背后存的并不是 float 对象，而是数字的机器翻译，也就是字节表述。这一点就跟 C 语言中的数组一样。</strong>再比如说，如果需要频繁对序列做先进先出的操作，deque（双端队列）的速度应该会更快。如果在你的代码里，包含操作（比如检查一个元素是否出现在一个集合中）的频率很高，用 set（集合）会更合适。<strong>set专为检查元素是否存在做过优化</strong>。<strong>但是它并不是序列，因为 set 是无序的</strong>。</p>
 
-<p>数组的使用示例，参考<a href="https://molock.cn/posts/29186/">这篇博客</a>。</p>
+<p>数组的使用示例</p>
 
 <p><strong>内存视图memoryview</strong></p>
 
 <p>memoryview 是一个内置类，它能让用户在<strong>不复制内容的情况下操作同一个数组的不同切片</strong>。memoryview 的概念受到了 NumPy 的启发。<strong>内存视图其实是泛化和去数学化的 NumPy 数组。它让你在不需要复制内容的前提下，在数据结构之间共享内存。其中数据结构可以是任何形式，比如 PIL 图片、SQLite 数据库和 NumPy 的数组，等等。这个功能在处理大型数据集合的时候非常重要。</strong></p>
 
-<p>memoryview的使用示例，参考<a href="https://molock.cn/posts/37798/">这篇博客</a>。</p>
+<p>memoryview的使用示例</p>
 
 <hr />
 
@@ -457,13 +453,9 @@ a, b, *rest = range(2)
 
 <p>整本书我都在强调如何最大限度地利用 Python 标准库。但是 NumPy 和 SciPy 的优秀让我觉得偶尔跑个题来谈谈它们也是很值得的。</p>
 
-<p>使用示例参考<a href="https://molock.cn/posts/51467/">这篇博客</a>。</p>
-
 <hr />
 
 <p>在介绍完扁平序列（包括标准数组和 NumPy 数组）之后，让我们把目光投向 Python 中可以取代列表的另外一种数据结构：队列。</p>
-
-<p>关于双向队列deque的使用示例参考<a href="https://molock.cn/posts/46166/">这篇博客</a>。</p>
 
 <p>除了 deque 之外，还有些其他的 Python 标准库也有对队列的实现。</p>
 
@@ -519,8 +511,7 @@ list.sort、sorted、max 和 min 函数的 key 参数是一个很棒的设计。
 
 <h2 id="第3章-字典和集合">第3章 字典和集合</h2>
 
-<p>字典这个数据结构在Python里无处不在，不但在各种程序里广泛使用，它也是 Python 语言的基石。模块的命名空间、实例的属性和函数的关键字参数中都可以看到字典的身影。跟它有关的内置函数都在 <code>__builtins__.__dict__</code>模块中。<strong>正是因为字典至关重要，Python 对它的实现做了高度优化，而散列表则是字典类型性能出众的根本原因。</strong>集合（set）的实现其实也依赖于<strong>散列表</strong>。
-更多内容参考<a href="https://molock.cn/posts/53865/">这篇博客</a>。</p>
+<p>字典这个数据结构在Python里无处不在，不但在各种程序里广泛使用，它也是 Python 语言的基石。模块的命名空间、实例的属性和函数的关键字参数中都可以看到字典的身影。跟它有关的内置函数都在 <code>__builtins__.__dict__</code>模块中。<strong>正是因为字典至关重要，Python 对它的实现做了高度优化，而散列表则是字典类型性能出众的根本原因。</strong>集合（set）的实现其实也依赖于<strong>散列表</strong>。</p>
 
 <p>2017.11.27 阅读</p>
 
@@ -529,11 +520,7 @@ list.sort、sorted、max 和 min 函数的 key 参数是一个很棒的设计。
 <p>人类使用文本，计算机使用字节序列。
 Python 3 明确区分了人类可读的文本字符串和原始的字节序列。隐式地把字节序列转换成 Unicode 文本已成过去。</p>
 
-<p>字符的编码和解码解释和示例参考<a href="https://molock.cn/posts/26190/">这篇博客</a>。</p>
-
 <p>memoryview 类不是用于创建或存储字节序列的，而是共享内存，让你访问其他二进制序列、打包的数组和缓冲中的数据切片，而无需复制字节序列，例如 Python Imaging Library（PIL）就是这样处理图像的。</p>
-
-<p>使用 memoryview 和 struct 查看一个 GIF 图像的首部 示例参考<a href="https://molock.cn/posts/37798/">这篇博客</a></p>
 
 <p>Python 自带了超过 100 种编解码器（codec, encoder/decoder），用于在文本和字节之间相互转换。每个编解码器都有一个名称，如 &lsquo;utf_8&rsquo;， 而且经常有几个别名，如 &lsquo;utf8&rsquo;、&rsquo;utf-8&rsquo; 和 &lsquo;U8&rsquo;。这些名称可以传 给 open()、str.encode()、bytes.decode() 等函数的 encoding 参数。</p>
 
@@ -545,12 +532,6 @@ latin_1 b'El Ni\xf1o'
 utf_8 b'El Ni\xc3\xb1o'
 utf_16 b'\xff\xfeE\x00l\x00 \x00N\x00i\x00\xf1\x00o\x00'
 </code></pre>
-
-<p>如何找出字节序列的编码？参考<a href="https://molock.cn/posts/32227/">这篇博客</a>。</p>
-
-<p>关于Python源码文件编码，参考 <a href="https://molock.cn/posts/27339/">这篇博客</a>。</p>
-
-<p>处理文本文件的最佳实践，参考 <a href="https://molock.cn/posts/62932/">这篇博客</a>。</p>
 
 <p>unicode仍有不尽如人意的地方：</p>
 
@@ -651,8 +632,6 @@ False
 
 <h2 id="第6章-使用一等函数实现设计">第6章 使用一等函数实现设计</h2>
 
-<p>策略模式的应用实现参考<a href="https://molock.cn/posts/15705/">这篇博客</a>。</p>
-
 <p>经典的《设计模式：可复用面向对象软件的基础》一书出版几年后 Peter Norvig 指出，“在 Lisp 或 Dylan 中，23 个设计模式中有 16 个的实现方式比 C++ 中更简单，而且能保持同等质量，至少各个模式的某些 用途如此”。Python 有些动态特性与 Lisp 和 Dylan 一样，尤其是本书这一部分着重讨论的一等函数。</p>
 
 <p>很多情况下，在 Python 中使用函数或可调用对象实现回调更自然，这比模仿 Gamma、Helm、Johnson 和 Vlissides 在书中所述的“策略”或“命令”模式要好。本章对“策略”模式的重构和对“命令”模式的讨论是为了通过示例说明一个更为常见的做法：有时，设计模式或 API 要求组件实现单方法接口，而那个方法的名称很宽泛，例 如“execute”“run”或“doIt”。在 Python 中，这些模式或 API 通常可以使用一等函数或其他可调用的对象实现，从而减少样板代码。</p>
@@ -690,11 +669,7 @@ target = decorate(target)
 
 <p><strong>综上，装饰器的一大特性是，能把被装饰的函数替换成其他函数。第二个特性是，装饰器在加载模块时立即执行。</strong></p>
 
-<p>使用装饰器改进策略模式，以电商购物车的打折为例，参考<a href="https://molock.cn/posts/15705/">这篇博客</a>。</p>
-
-<p>Python的作用域和闭包的示例参考<a href="https://molock.cn/posts/47622/">这篇博客</a>。</p>
-
-<p>简单的装饰器的实现，以及三个好用的Python自带装饰器：functools.wraps、functools.lru_cache、functools.singledispatch，参见<a href="https://molock.cn/posts/61338/">这篇博客</a>。</p>
+<p>简单的装饰器的实现，以及三个好用的Python自带装饰器：functools.wraps、functools.lru_cache、functools.singledispatch</p>
 
 <p>小结：</p>
 
@@ -713,8 +688,6 @@ target = decorate(target)
 <p>2017.12.01 阅读</p>
 
 <h2 id="第8章-对象引用-可变性和垃圾回收">第8章 对象引用、可变性和垃圾回收</h2>
-
-<p>Python中的引用与复制简单示例，参考<a href="https://molock.cn/posts/12544/">这篇博客</a>。</p>
 
 <p>del 语句删除名称（引用），而不是对象。del 命令可能会导致对象被当作垃圾回收，但是仅当删除的变量保存的是对象的最后一个引用，或者无法得到对象时。重新绑定也可能会导致对象的引用数量归零，导致对象被销毁。</p>
 

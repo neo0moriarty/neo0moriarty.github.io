@@ -87,7 +87,7 @@
 
 <p>示意图：</p>
 
-<p><img src="https://molock.cn/upload/posts/unicode_sandwich.png" alt="" /></p>
+<p><img src="/unicode_sandwich.png" alt="" /></p>
 
 <p>要尽早把输入（例如读取文件时）的字节序列解码成字符串。这种三明治中的“肉片”是<strong>程序的业务逻辑，在这里只能处理字符串对象</strong>。在其他处理过程中，一定不能编码或解码。对输出来说，则要尽量晚地把字符串编码成字节序列。多数 Web 框架都是这样做的，使用框架时很少接触字节序列。例如，在 Django 中，视图应该输出 Unicode 字符串； Django 会负责把响应编码成字节序列，而且默认使用 UTF-8 编码。</p>
 

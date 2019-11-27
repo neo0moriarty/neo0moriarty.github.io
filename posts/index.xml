@@ -35,9 +35,7 @@
       <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/ubuntu-mount-exfat/</guid>
-      <description>ubuntu默认不支持exfat格式的硬盘挂载。
-安装工具解决：
-sudo apt-get install exfat-utils  重启电脑生效。</description>
+      <description>&lt;p&gt;ubuntu默认不支持exfat格式的硬盘挂载。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -998,15 +996,6 @@ Python3.x中print是一个内置函数。&lt;/p&gt;</description>
     </item>
     
     <item>
-      <title>Nginx配置nginx.conf</title>
-      <link>https://neo0moriarty.github.io/nginx-config/</link>
-      <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://neo0moriarty.github.io/nginx-config/</guid>
-      <description>&lt;p&gt;阿里云 nginx.conf&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Python中的 *args 和 **kwargs</title>
       <link>https://neo0moriarty.github.io/python-args/</link>
       <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
@@ -1591,15 +1580,6 @@ os.getcwd()与os.path.dirname()的区别。&lt;/p&gt;</description>
       
       <guid>https://neo0moriarty.github.io/hexo-blog-build/</guid>
       <description>&lt;p&gt;Hexo博客搭建教程简要记录&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Hexo绑定独立域名并解析</title>
-      <link>https://neo0moriarty.github.io/hexo-bind-domain/</link>
-      <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://neo0moriarty.github.io/hexo-bind-domain/</guid>
-      <description>&lt;p&gt;Hexo博客部署绑定域名教程&lt;/p&gt;</description>
     </item>
     
   </channel>

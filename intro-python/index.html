@@ -101,7 +101,7 @@
 
 <p>2017年有人统计了包含GitHub中450万用户，以及10TB的源代码，分析了393种语言的变化趋势，最后总结出来的流行语言的Top 10：</p>
 
-<p><img src="https://molock.cn/upload/language_top_10.png" alt="" /></p>
+<p><img src="/language_top_10.png" alt="" /></p>
 
 <p>采用的算法是马尔可夫链的平稳分布，由于特定的原因javascript并未加入统计。更多信息可以访问<a href="https://blog.sourced.tech/post/language_migrations/">原文</a>。</p>
 
@@ -195,18 +195,18 @@
 
 <p>sites-package是Python的重要目录。查看Python代码路径和sites-package路径方法：</p>
 
-<p><img src="https://molock.cn/upload/site_package.png" alt="" /></p>
+<p><img src="/site_package.png" alt="" /></p>
 
 <p>IPython解释器的交互更为人性化，推荐使用。</p>
 
-<p><img src="https://molock.cn/upload/ipython.png" alt="" /></p>
+<p><img src="/ipython.png" alt="" /></p>
 
 <p>如果想功能更加强大，特别是用作数据分析/科学计算等，推荐使用Anaconda和Jupyter Notebook，非常强大。进一步了解和安装使用直接访问<a href="http://jupyter.org">官网</a>。
 效果如下：</p>
 
-<p><img src="https://molock.cn/upload/jupyter.png" alt="" /></p>
+<p><img src="/jupyter.png" alt="" /></p>
 
-<p><img src="https://molock.cn/upload/jpyternotebook.png" alt="" /></p>
+<p><img src="/jpyternotebook.png" alt="" /></p>
 
 <p><strong>进阶内容：</strong></p>
 
@@ -291,7 +291,7 @@ with open(&quot;test.py&quot;, 'r') as f:
 
 # 装饰器 函数 *args **kwargs python中的可变参数
 # *args表示任何多个无名参数，它是一个tuple；kwargs表示关键字参数，它是一个dict。
-# 详细解释参考 https://molock.cn/posts/58101/
+
 def decoration(func):
     def wrapper(*args, **kwargs):  
         print(&quot;You must go through me first because I'm your decoration..&quot;)
@@ -324,7 +324,7 @@ def web_lookup(url):
     return urllib.urlopen(url).read()
 
 # 最简单的web服务示例 
-# 更详细的代码解析参考 https://molock.cn/posts/43465/
+
 # import/装饰器/__name__的用法/__name__ == '__main__'的意义
 # import test
 from flask import Flask  
@@ -341,8 +341,7 @@ def hello_world():
 
 <p><strong>进阶代码示例：</strong></p>
 
-<p>这是机器学习里面感知机学习算法的Python简单实现，借此代码希望大家能领会到Python简洁性和表达能力强的特点。
-代码来自：<a href="https://molock.cn/posts/37234/">https://molock.cn/posts/37234/</a></p>
+<p>这是机器学习里面感知机学习算法的Python简单实现，借此代码希望大家能领会到Python简洁性和表达能力强的特点。</p>
 
 <pre><code># -*- coding: utf-8 -*-
 import numpy as np
@@ -448,11 +447,9 @@ Python之禅 by Tim Peters
 命名空间是一种绝妙的理念，我们应当多加利用（倡导与号召）
 </code></pre>
 
-<p><a href="https://molock.cn/posts/30249/">Python开发风格指南</a></p>
-
 <p>**Python入门任务： **
 Assignment 1:
-已知一张图片url，下载保存到硬盘，给定url： <a href="https://molock.cn/random">https://molock.cn/random</a></p>
+已知一张图片url，下载保存到硬盘</p>
 
 <p>Assignment 2:
 硬盘中某文件夹有N张命名不同的图片，但有些是重复的（即一模一样的图片，提示：md5）
@@ -550,7 +547,7 @@ print(response.read())
 
 <p>运行结果是网页的源码：</p>
 
-<p><img src="https://molock.cn/upload/pacong_demo.png" alt="" /></p>
+<p><img src="/pacong_demo.png" alt="" /></p>
 
 <h4 id="post方式请求网页示例-模拟登录">Post方式请求网页示例(模拟登录)</h4>
 

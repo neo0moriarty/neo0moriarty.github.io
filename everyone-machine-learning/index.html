@@ -104,7 +104,7 @@
 
 <p>传统的算法设计是根据给定的输入和目标，设计求解的计算过程。机器学习中涉及的算法则是用一种参数化的方式设计这一求解过程。因为机器学习的目标是generalization，我们希望得到一个在未来能多用几次的模型；而传统算法在大多数情况下都是为具体问题设计的，力求一次性解决问题。机器学习通常会基于一些假设，带有一种强烈的玄学色彩。</p>
 
-<p><img src="https://molock.cn/upload/posts/51546/2.jpg" alt="" /></p>
+<p><img src="/51546/2.jpg" alt="" /></p>
 
 <p>看着上图就可以用一句话来定义机器学习</p>
 
@@ -122,9 +122,9 @@
 
 <p><strong>PLA 的基本想法是每个特征都有个权重，表示该特征的重要程度。综合所有的特征和权重计算一个最终的分数(线性组合)，如果分数超过某个阈值 (threshold)，结果为1，否则为-1。</strong></p>
 
-<p><img src="https://molock.cn/upload/posts/39954/1.jpg" alt="" />
+<p><img src="/39954/1.jpg" alt="" />
 等价于：
-<img src="https://molock.cn/upload/posts/39954/2.jpg" alt="" /></p>
+<img src="/39954/2.jpg" alt="" /></p>
 
 <p><strong>在算法完成学习之前，函数中的w_i和threshold是未知的，不同的w_i和threshold值对应了不同的函数，事实上所有可能的w_i和threshold所代表的函数集合，构成了PLA的假设集合(Hypothesis Set)，叫做 Perceptron Hypothesis 。而 PLA 算法要做的，就是根据训练数据找到最优的w和threshold。</strong></p>
 
@@ -133,24 +133,24 @@
 <p>直观形象化理解：
 简化-&gt;降维
 假设输入只有两个特征（二维）, h(x):
-<img src="https://molock.cn/upload/posts/39954/3.jpg" alt="" /></p>
+<img src="/39954/3.jpg" alt="" /></p>
 
-<p><img src="https://molock.cn/upload/posts/39954/4.png" alt="" /></p>
+<p><img src="/39954/4.png" alt="" /></p>
 
 <p><strong>更多维的(直线变成平面、超平面)可以类比二维平面来理解，都是一种划分，基于以上特性，Perceptron是一种线性分类器，二分类的线性分类器。线性理解成特征向量线性组合还是线性划分？貌似都可以。打个问号。</strong></p>
 
 <p>PLA 具体是如何确定最优的w和threshold，得到最优的那条线的？
 h(x)简化变形：
-<img src="https://molock.cn/upload/posts/39954/5.png" alt="" /></p>
+<img src="/39954/5.png" alt="" /></p>
 
 <p>这个变形的目的是把参数threshold统一收进w，于是 PLA 找到最优的那条线就等价于找到最优的参数w。</p>
 
 <p>于是 PLA 算法就可以写得相当简洁，仅有如下4步：
-<img src="https://molock.cn/upload/posts/39954/6.png" alt="" /></p>
+<img src="/39954/6.png" alt="" /></p>
 
 <p>就是这么简单，PLA的基本思路就是：先随便找一条线，如果没能正确切分，就<strong>修正一点点</strong>，直到所有的1都在右边，-1都在左边。</p>
 
-<p><img src="https://molock.cn/upload/posts/39954/7.png" alt="" /></p>
+<p><img src="/39954/7.png" alt="" /></p>
 
 <p><strong>事实上，如果训练数据本身就不存在任何一条线能将其正确切分，那么 PLA 无论如何也无法找到理想的直线。学习将进入永不停止的循环。</strong></p>
 
@@ -159,21 +159,19 @@ h(x)简化变形：
 <p><strong>训练数据是线性可分的 (Liner Seperable) ，是 PLA 能够学习的必要条件。</strong></p>
 
 <p>在现实中，哪怕原本的训练数据产生于某个“上帝真相”并且是线性可分的，在收集数据处理数据的过程中不可避免的会引入一些<strong>脏数据</strong>，这部分错误的训练数据我们称为<strong>噪声</strong>(Noise)。
-<img src="https://molock.cn/upload/posts/39954/8.jpg" alt="" /></p>
+<img src="/39954/8.jpg" alt="" /></p>
 
 <p>针对这种噪声数据引起的，原本线性可分的训练数据变成了不是线性可分的情况，有一个<strong>升级版的 PLA 算法</strong>，只需要增加简单的两步节能解决问题：
-<img src="https://molock.cn/upload/posts/39954/9.png" alt="" /></p>
+<img src="/39954/9.png" alt="" /></p>
 
 <p>怎么衡量表现的好坏？？ -&gt; 犯错率
-<img src="https://molock.cn/upload/posts/39954/10.png" alt="" /></p>
+<img src="/39954/10.png" alt="" /></p>
 
 <p>TODO:</p>
 
 <ul>
 <li>要找时间代码实践PLA！！</li>
 </ul>
-
-<p>代码实现：<a href="https://molock.cn/posts/37234/">https://molock.cn/posts/37234/</a>      2017.11.22更新</p>
 
 <p>4、5、6篇是关于机器学习可行性的理论知识，暂时关小黑屋了，放到最后。。。</p>
 
@@ -183,8 +181,8 @@ h(x)简化变形：
 
 <p>线性回归(Linear Regression)</p>
 
-<p><img src="https://molock.cn/upload/posts/39954/16.png" alt="" />
-<img src="https://molock.cn/upload/posts/39954/17.png" alt="" /></p>
+<p><img src="/39954/16.png" alt="" />
+<img src="/39954/17.png" alt="" /></p>
 
 <p>Q: 线性回归模型里面为啥要有一个阈值 (threshold)？PLA模型中能理解 模型计算出一个分值超过某阈值 为点击 或不点击</p>
 
@@ -193,14 +191,14 @@ h(x)简化变形：
 <p>线性回归的直观形象理解：
 依旧是降维和类比来理解</p>
 
-<p><img src="https://molock.cn/upload/posts/39954/18.png" alt="" />
-<img src="https://molock.cn/upload/posts/39954/19.png" alt="" /></p>
+<p><img src="/39954/18.png" alt="" />
+<img src="/39954/19.png" alt="" /></p>
 
 <p>由此推广到更高维度上,虽然没办法再想象了。。类似想象高纬度的宇宙，但数学是高度抽象的，表达能力极强的，爱因斯坦的想象力也要数学来实现，如广义相对论的诞生</p>
 
 <p>怎么表示近呢？？</p>
 
-<p><img src="https://molock.cn/upload/posts/39954/20.png" alt="" /></p>
+<p><img src="/39954/20.png" alt="" /></p>
 
 <p><strong>对于任意样本标注 (x,y) 和模型的预测值 h(x) ，均方误差表示为标注值 y 和 预测值 h(x) 差的平方：Error=(h(x)-y)^2
 所以，我们的目标是对于训练数据中的所有 N 个样本点，使平均均方误差(损失函数)最小。</strong></p>
@@ -213,13 +211,13 @@ h(x)简化变形：
 
 <p>keyword: <a href="https://zh.wikipedia.org/wiki/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95">最小二乘法</a></p>
 
-<p><img src="https://molock.cn/upload/posts/39954/21.png" alt="" /></p>
+<p><img src="/39954/21.png" alt="" /></p>
 
 <p>实际使用线性回归非常简单，仅有三步：
-<img src="https://molock.cn/upload/posts/39954/22.png" alt="" /></p>
+<img src="/39954/22.png" alt="" /></p>
 
 <p>PLA vs 线性回归
-<img src="https://molock.cn/upload/posts/39954/23.png" alt="" /></p>
+<img src="/39954/23.png" alt="" /></p>
 
 <h3 id="第四篇-机器学习的可行性-上">第四篇 机器学习的可行性 上</h3>
 
@@ -255,15 +253,15 @@ h(x)简化变形：
 
 <p>要调查某省总人口中的男性比例，自然不可能去统计总人口数和男性的总人数。常见的方法是进行科学的抽样，抽样所得的男性比例即可近似作为总人口的男性比例。这样做的科学性是由著名的<a href="https://en.wikipedia.org/wiki/Hoeffding's_inequality">【Hoeffding 不等式 (hoeffding&rsquo;s Inequality) </a>保证的。</p>
 
-<p><img src="https://molock.cn/upload/posts/39954/11.png" alt="" /></p>
+<p><img src="/39954/11.png" alt="" /></p>
 
-<p><img src="https://molock.cn/upload/posts/39954/12.png" alt="" /></p>
+<p><img src="/39954/12.png" alt="" /></p>
 
-<p><img src="https://molock.cn/upload/posts/39954/13.png" alt="" /></p>
+<p><img src="/39954/13.png" alt="" /></p>
 
-<p><img src="https://molock.cn/upload/posts/39954/14.png" alt="" /></p>
+<p><img src="/39954/14.png" alt="" /></p>
 
-<p><img src="https://molock.cn/upload/posts/39954/15.png" alt="" /></p>
+<p><img src="/39954/15.png" alt="" /></p>
 
 <h3 id="第六篇-机器学习的可行性-下">第六篇 机器学习的可行性 下</h3>
 

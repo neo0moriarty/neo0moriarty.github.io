@@ -147,14 +147,5 @@
       <description>&lt;p&gt;Hexo博客搭建教程简要记录&lt;/p&gt;</description>
     </item>
     
-    <item>
-      <title>Hexo绑定独立域名并解析</title>
-      <link>https://neo0moriarty.github.io/hexo-bind-domain/</link>
-      <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://neo0moriarty.github.io/hexo-bind-domain/</guid>
-      <description>&lt;p&gt;Hexo博客部署绑定域名教程&lt;/p&gt;</description>
-    </item>
-    
   </channel>
 </rss>

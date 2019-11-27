@@ -578,11 +578,6 @@
   </url>
   
   <url>
-    <loc>https://neo0moriarty.github.io/nginx-config/</loc>
-    <lastmod>2017-11-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://neo0moriarty.github.io/python-args/</loc>
     <lastmod>2017-11-21T00:00:00+00:00</lastmod>
   </url>
@@ -889,11 +884,6 @@
   
   <url>
     <loc>https://neo0moriarty.github.io/hexo-blog-build/</loc>
-    <lastmod>2017-09-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://neo0moriarty.github.io/hexo-bind-domain/</loc>
     <lastmod>2017-09-21T00:00:00+00:00</lastmod>
   </url>
   
