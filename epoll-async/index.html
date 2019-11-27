@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.59.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>epoll、异步、并发 | neo0moriarty</title>
+    <meta property="og:title" content="epoll、异步、并发 - neo0moriarty">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2018-01-12T00:00:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2018-01-12T00:00:00&#43;08:00">
+        
+    <meta name="Keywords" content="[epoll]">
+    <meta name="description" content="epoll、异步、并发">
+        
+    <meta name="author" content="neo0moriarty">
+    <meta property="og:url" content="https://neo0moriarty.github.io/epoll-async/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://neo0moriarty.github.io/">
+                        neo0moriarty
+                    </a>
+                
+                <p class="description">o(╯□╰)o  (゜-゜)つロ  o(╯□╰)o</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://neo0moriarty.github.io/">首页</a>
+                    
+                    <a  href="https://neo0moriarty.github.io/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">epoll、异步、并发</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2018年1月12日
+                        </date>
+                        
+                        
+                        
+                        <div class="post-content">
+                            <p>关于异步、并发相关的笔记与资料汇总。</p>
+
+<p><strong>epoll：</strong></p>
+
+<p>一般情况下，异步非阻塞IO模型性能是远高于同步阻塞IO模型的，可以参考nginx与apache性能的对比。</p>
+
+<p>貌似现在主流的异步非阻塞IO的实现都是基于<strong>单线程的事件循环</strong>来实现的，底层用的是epoll(windows下是iocp，mac下是kqueue)。异步在linux下主要有三种实现：select，poll，epoll。</p>
+
+<p>并发（不是并行）编程目前有四种方式，<strong>多进程，多线程，异步，和协程</strong>。关于协程，可以参考greenlet,stackless,gevent,eventlet等的实现。</p>
+
+<p>涉及到底层原理和实现，水平马上就暴露了，实在有限，道理是看懂一些了，还是没弄懂具体是怎么回事。不过对于轮询和事件注册大概是弄懂了，<strong>select和poll大概是对应轮询，epoll对应事件注册和回调</strong>，用小明和宿管大妈找人的例子比较形象易懂。</p>
+
+<p>epoll底层用红黑树和链表存储socket和就绪事件，用定时循环处理事件。实现事件循环和多路复用IO。</p>
+
+<p>以上对epoll的现在的认知，可能是有问题的，还没从根本上弄清原理。</p>
+
+<p><strong>同步编程：</strong></p>
+
+<p>同步编程的改进方式有多进程、多线程，但对于 c10k 问题都不是良好的解决方案，<strong>多进程的方式存在操作系统可调度进程数量上限较低，进程间上下文切换时间过长，进程间通信较为复杂。</strong></p>
+
+<p>而 Python 的多线程方式，由于存在众所周知的<strong>GIL锁</strong>，性能提升并不稳定，仅能满足成百上千规模的 I/O 密集型任务，<strong>多线程还有一个缺点是由操作系统进行抢占式调度存在竞态条件，可能需要引入了锁与队列等保障原子性操作的工具</strong>。</p>
+
+<p><strong>异步编程：</strong></p>
+
+<p>说到异步非阻塞调用，目前的代名词都是 epoll 与 kqueue，select/poll 由于效率问题基本已被取代。</p>
+
+<p>epoll 是04年 Linux2.6 引入内核的一种 I/O 事件通知机制，它的作用是将大量的文件描述符托管给内核，<strong>内核将最底层的 I/O 状态变化封装成读写事件</strong>，这样就避免了由程序员去主动轮询状态变化的重复工作，<strong>程序员将回调函数注册到 epoll 的状态上，当检测到相对应文件描述符产生状态变化时，就进行函数回调</strong>。</p>
+
+<p><strong>事件循环是异步编程的底层基石。</strong></p>
+
+<p>epoll繁琐的注册回调与回调的过程得以封装，并抽象成EventLoop。EventLoop屏蔽了进行epoll系统调用的具体操作。对于用户来说，将不同的I/O状态考量为事件的触发，<strong>只需关注更高层次下不同事件的回调行为</strong>。诸如libev, libevent之类的使用C编写的高性能异步事件库已经取代这部分琐碎的工作。</p>
+
+<p>在Python框架里一般会见到的这几种事件循环：</p>
+
+<ul>
+<li>libevent/libev: Gevent(greenlet+前期libevent，后期libev)使用的网络库，广泛应用；</li>
+<li>tornado: tornado框架自己实现的IOLOOP；</li>
+<li>uvloop: Python3时代的新起之秀。Guido操刀打造了asyncio库，asyncio可以配置可插拔的event loop，但需要满足相关的API要求，uvloop继承自libuv，将一些低层的结构体和函数用Python对象包装。目前Sanic框架基于这个库</li>
+</ul>
+
+<p><strong>协程：</strong></p>
+
+<p>Python中解决IO密集型任务（打开多个网站）的方式有很多种，比如多进程、多线程。但理论上一台电脑中的线程数、进程数是有限的，而且进程、线程之间的切换也比较消耗资源、浪费时间。所以就出现了“协程”的概念。<strong>协程允许一个执行过程A阻塞时挂起，然后转到执行过程B，在适当的时候再一次回调回来，有点类似于多线程。</strong>但协程有以下优势：</p>
+
+<ul>
+<li><strong>协程的数量</strong>理论上可以是无限个，而且没有线程之间的上下文切换动作，执行效率比线程高。<strong>开销低得多</strong>。</li>
+<li><strong>协程不需要“锁”机制，即不需要lock和release过程，因为所有的协程都在一个线程中。</strong></li>
+</ul>
+
+<p>EventLoop简化了不同平台上的事件处理，但是处理事件触发时的回调依然很麻烦，响应式的异步程序编写对程序员的心智是一项不小的麻烦。</p>
+
+<p>因此，协程被引入来替代回调以简化问题。协程模型主要在在以下方面优于回调模型：</p>
+
+<ul>
+<li><strong>以近似同步代码的编程模式</strong>取代异步回调模式，真实的业务逻辑往往是同步线性推演的，因此，这种同步式的代码写起来更加容易。底层的回调依然是callback hell，但这部分脏活累活已经转交给编译器与解释器去完成，程序员不易出错。</li>
+<li><strong>异常处理更加健全</strong>，可以复用语言内的错误处理机制，回调方式。而传统异步回调模式需要自己判定成功失败，错误处理行为复杂化。</li>
+<li><strong>上下文管理简单化</strong>，回调方式代码上下文管理严重依赖闭包，不同的回调函数之间相互耦合，割裂了相同的上下文处理逻辑。协程直接利用代码的执行位置来表示状态，而回调则是维护了一堆数据结构来处理状态。</li>
+<li>方便处理并发行为，<strong>协程的开销成本很低</strong>，每一个协程仅有一个轻巧的用户态栈空间。</li>
+</ul>
+
+<p><strong>EventLoop与协程的发展史：</strong></p>
+
+<p><strong>04年，event-driven 的 nginx 诞生并快速传播，06年以后从俄语区国家扩散到全球。</strong>同时期，EventLoop 变得具象化与多元化，相继在不同的编程语言实现。</p>
+
+<p>近十年以来，后端领域内古老的子例程与事件循环得到结合，协程(协作式子例程)快速发展，并也革新与诞生了一些语言，比如 golang 的 goroutine，luajit 的 coroutine，Python 的 gevent,erlang 的 process，scala 的 actor 等。</p>
+
+<p>就不同语言中面向并发设计的协程实现而言，Scala 与 Erlang 的 Actor 模型、Golang 中的 goroutine 都较 Python 更为成熟，不同的协程使用通信来共享内存，优化了竞态、冲突、不一致性等问题。然而，<strong>根本的理念没有区别，都是在用户态通过事件循环驱动实现调度。</strong></p>
+
+<p>由于历史包袱较少，后端语言上的各种异步技术除 Python Twisted 外基本也没有 callback hell 的存在。其他的方案都已经将 callback hell 的过程进行封装，交给库代码、编译器、解释器去解决。</p>
+
+<p>有了协程，有了事件循环库，传统的 C10K 问题已经不是挑战并已经上升到了 C1M 问题。</p>
+
+<p><strong>asyncio:</strong></p>
+
+<p>Python3.3以后到Python3.6，从生成器发展而来，从yield from到async/await，asyncio 比其他协程的实现和使用更加优雅。从 Python 语言发展的角度来说，<strong>async/await 并非是多么伟大的改进，只是引进了其他语言中成熟的语义，协程的基石还是在于 eventloop 库的发展，以及生成器的完善。</strong></p>
+
+<p>从结构原理而言，asyncio 实质担当的角色是一个异步框架，async/await 是为异步框架提供的 API，因为使用者目前并不能脱离 asyncio 或其他异步库使用 async/await 编写协程代码。即使用户可以避免显式地实例化事件循环，比如支持 asyncio/await 语法的协程网络库 curio，但是脱离了 eventloop 如心脏般的驱动作用，async/await 关键字本身也毫无作用。</p>
+
+<p>阅读和参考资料：</p>
+
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/21416728">同步？异步？阻塞？非阻塞？网络IO模型笔记</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/23614423">网络编程（九）：Python裸写异步非阻塞网络框架</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/32059005">网络编程（九.2）：Python裸写异步非阻塞网络框架（图示）</a></li>
+<li><a href="https://www.zhihu.com/question/20122137/answer/14049112">epoll 或者 kqueue 的原理是什么？</a></li>
+<li><a href="https://www.zhihu.com/question/19764056/answer/20241839">redis是个单线程的程序，为什么会这么快呢？</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/27050330">linux下非阻塞io库 epoll</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/30937065">为什么epoll是线程安全？</a></li>
+<li><a href="https://www.zhihu.com/question/21516827/answer/53576754">epoll编程，如何实现高并发服务器开发？</a></li>
+<li><a href="https://www.zhihu.com/question/34563459/answer/74598002">node.js 底层使用的是epoll这种单线程io多路复用，还是多线程阻塞模型？</a></li>
+<li><a href="https://www.cnblogs.com/tangzhirong/p/6910776.html">Node.js异步IO原理剖析</a></li>
+<li><a href="https://www.zhihu.com/question/24200063/answer/27001942">在有epoll 后，哪些应用场景下还需要select？</a></li>
+<li><a href="https://www.cnblogs.com/hymenz/p/3504939.html">高性能python编程之协程(stackless)</a></li>
+<li><a href="https://www.v2ex.com/t/54931">stackless python 给我们带来了什么？</a></li>
+<li><a href="https://www.shymonk.com/posts/2016/06/stackless-python-tan-mi/">Stackless Python 探秘</a></li>
+<li><a href="https://www.cnblogs.com/lao454490095/p/4397261.html">stackless python初体验</a></li>
+<li><a href="http://blog.csdn.net/permike/article/details/54846831">Python几种并发实现方案的性能比较</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/30275154">谈谈Python协程技术的演进</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/24118476">理解Python中的异步IO和协程</a></li>
+</ul>
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://neo0moriarty.github.io/">neo0moriarty</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://neo0moriarty.github.io/epoll-async/">https://neo0moriarty.github.io/epoll-async/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/about-restful-api/">关于RESTful API设计风格</a></li>
+        
+        <li><a href="/code-style/">项目中的代码风格规范的必要性</a></li>
+        
+        <li><a href="/kill-port-pid/">查看端口占用进程并kill掉</a></li>
+        
+        <li><a href="/mongodb-note/">MongoDB常用语法和命令</a></li>
+        
+        <li><a href="/mysql-replace-into/">MySQL replace into</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://neo0moriarty.github.io/tags/dev">dev</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://neo0moriarty.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-hugo-blog-record/" title="Mac下Hugo搭建记录">Mac下Hugo搭建记录</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-usb-iso/" title="Mac下格式化U盘并制作iso系统启动">Mac下格式化U盘并制作iso系统启动</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/ubuntu-mount-exfat/" title="ubuntu挂载exfat格式的硬盘">ubuntu挂载exfat格式的硬盘</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-neovim/" title="Neovim安装">Neovim安装</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-full-vim/" title="Mac 安装最完整的 Vim">Mac 安装最完整的 Vim</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-website/" title="Python相关网址收集">Python相关网址收集</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-round/" title="Python中使用round函数要注意的事">Python中使用round函数要注意的事</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-binary-tree/" title="Python实现和遍历二叉树">Python实现和遍历二叉树</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/practical-vim/" title="Vim实用技巧总结">Vim实用技巧总结</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/make-zsh-default/" title="配置zsh默认编辑器">配置zsh默认编辑器</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://neo0moriarty.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/blog/">blog</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/book/">book</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/crawler/">crawler</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/dev/">dev</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/os/">os</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/python/">python</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/study/">study</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://coolshell.cn/" title="酷壳 – CoolShell.cn">酷壳 – CoolShell.cn</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.flysnow.org" title="飞雪无情的博客">飞雪无情的博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>

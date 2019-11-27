@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dev on neo0moriarty</title>
+    <link>https://neo0moriarty.github.io/tags/dev/</link>
+    <description>Recent content in dev on neo0moriarty</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 04 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://neo0moriarty.github.io/tags/dev/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ubuntu挂载exfat格式的硬盘</title>
+      <link>https://neo0moriarty.github.io/ubuntu-mount-exfat/</link>
+      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/ubuntu-mount-exfat/</guid>
+      <description>ubuntu默认不支持exfat格式的硬盘挂载。
+安装工具解决：
+sudo apt-get install exfat-utils  重启电脑生效。</description>
+    </item>
+    
+    <item>
+      <title>Neovim安装</title>
+      <link>https://neo0moriarty.github.io/install-neovim/</link>
+      <pubDate>Fri, 26 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/install-neovim/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://neovim.io/&#34;&gt;Neovim&lt;/a&gt;应该算是Vim的一个衍生版本或类似插件吧，从&lt;a href=&#34;https://github.com/neovim/neovim&#34;&gt;github&lt;/a&gt;两万多的star数可以看出其火爆程度。貌似提升性能和增加功能的同时也兼容了Vim。安装来体验一下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mac 安装最完整的 Vim</title>
+      <link>https://neo0moriarty.github.io/install-full-vim/</link>
+      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/install-full-vim/</guid>
+      <description>&lt;p&gt;机器上默认安装的 Vim 一般不是完整的,需要手动升级到 Vim, 以获得更多的功能.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Vim实用技巧总结</title>
+      <link>https://neo0moriarty.github.io/practical-vim/</link>
+      <pubDate>Thu, 18 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/practical-vim/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://book.douban.com/subject/25869486/&#34;&gt;《Practical Vim》(《Vim实用技巧》)&lt;/a&gt; 是关于Vim技巧最好的教程，豆瓣评分9.1。之前断断续续地看过，不过没整理笔记。这书得经常翻看并实践，以后把看书和Vim练习的笔记记录整理在此，便于反复复习和练习使用。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>epoll、异步、并发</title>
+      <link>https://neo0moriarty.github.io/epoll-async/</link>
+      <pubDate>Fri, 12 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/epoll-async/</guid>
+      <description>&lt;p&gt;关于异步、并发相关的笔记与资料汇总。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>关于RESTful API设计风格</title>
+      <link>https://neo0moriarty.github.io/about-restful-api/</link>
+      <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/about-restful-api/</guid>
+      <description>&lt;p&gt;最近抽空在看Sanic的文档，准备写个Demo，重温一遍RESTful API设计风格的知识。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>项目中的代码风格规范的必要性</title>
+      <link>https://neo0moriarty.github.io/code-style/</link>
+      <pubDate>Sat, 06 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/code-style/</guid>
+      <description>&lt;p&gt;在项目中使用相同的代码风格规范是很有必要的。通过实践，发现好处多多。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>查看端口占用进程并kill掉</title>
+      <link>https://neo0moriarty.github.io/kill-port-pid/</link>
+      <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/kill-port-pid/</guid>
+      <description>&lt;p&gt;Linux和Mac下查看端口占用、kill掉占用进程&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MongoDB常用语法和命令</title>
+      <link>https://neo0moriarty.github.io/mongodb-note/</link>
+      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mongodb-note/</guid>
+      <description>&lt;p&gt;MongoDB常用语法和命令记录集合&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL replace into</title>
+      <link>https://neo0moriarty.github.io/mysql-replace-into/</link>
+      <pubDate>Thu, 07 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mysql-replace-into/</guid>
+      <description>&lt;p&gt;Mysql提供了replace into，是insert into增强版&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQLdb报错解决</title>
+      <link>https://neo0moriarty.github.io/fix-mysqldb-error/</link>
+      <pubDate>Thu, 07 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/fix-mysqldb-error/</guid>
+      <description>&lt;p&gt;Library not loaded: libmysqlclient.18.dylib
+_mysql.so image not found&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mac配置MongoDB开发测试环境</title>
+      <link>https://neo0moriarty.github.io/mac-mongodb/</link>
+      <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-mongodb/</guid>
+      <description>&lt;p&gt;Mac下MongoDB配置记录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mac配置Redis开发测试环境</title>
+      <link>https://neo0moriarty.github.io/mac-redis/</link>
+      <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-redis/</guid>
+      <description>&lt;p&gt;Mac下Redis配置记录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Tmux常用命令</title>
+      <link>https://neo0moriarty.github.io/tmux-cli/</link>
+      <pubDate>Sat, 02 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/tmux-cli/</guid>
+      <description>&lt;p&gt;tmux是一个非常实用的终端工具，用于在一个终端窗口中运行多个终端会话。由于 tmux 允许随时随地断开或重新接入会话（Session），所以最大的作用就是&lt;strong&gt;在远程服务器上持久地保存工作状态&lt;/strong&gt;。由于网络的不稳定会经常造成远程连接断开，这个工具保存会话状态的功能非常实用！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux安全防火墙iptables</title>
+      <link>https://neo0moriarty.github.io/linux-iptables/</link>
+      <pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/linux-iptables/</guid>
+      <description>&lt;p&gt;Centos为例，iptables命令相关&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux开机启动服务</title>
+      <link>https://neo0moriarty.github.io/linux-init/</link>
+      <pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/linux-init/</guid>
+      <description>&lt;p&gt;Linux服务器重启后，有些服务是不会自动重启的，可以设置为开机自启。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>命令行下的接口调试工具httpie</title>
+      <link>https://neo0moriarty.github.io/httpie/</link>
+      <pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/httpie/</guid>
+      <description>&lt;p&gt;常用的开发接口调试工具有postman等。
+命令行下可以用curl、wget，以及更好用的httpie。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>NumPy和SciPy简介</title>
+      <link>https://neo0moriarty.github.io/python-numpy-scipy/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-numpy-scipy/</guid>
+      <description>&lt;p&gt;如果利用数组来做高级的数字处理是你的日常工作，那么 NumPy 和 SciPy 应该是你的常用武器。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>处理文本文件的最佳实践</title>
+      <link>https://neo0moriarty.github.io/python-deal-with-text/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-deal-with-text/</guid>
+      <description>&lt;p&gt;处理文本的最佳实践是 &amp;ldquo;Unicode三明治&amp;rdquo;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python判断计算机是大端还是小端</title>
+      <link>https://neo0moriarty.github.io/python-big-little-end/</link>
+      <pubDate>Mon, 27 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-big-little-end/</guid>
+      <description>&lt;p&gt;little endian（小端）和big endian（大端）之分
+用python判断大端还是小端&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>文件读取方式r&#43;、w&#43;、a&#43;的区别</title>
+      <link>https://neo0moriarty.github.io/python-read-write/</link>
+      <pubDate>Mon, 27 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-read-write/</guid>
+      <description>&lt;p&gt;文件读取方式有 r、w、a 与 +、b 的组合&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Sublime Text 3 快捷键和常用配置</title>
+      <link>https://neo0moriarty.github.io/subl-config/</link>
+      <pubDate>Sat, 25 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/subl-config/</guid>
+      <description>&lt;p&gt;Mac sublime text 3 常用快捷键和配置记录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx配置nginx.conf</title>
+      <link>https://neo0moriarty.github.io/nginx-config/</link>
+      <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/nginx-config/</guid>
+      <description>&lt;p&gt;阿里云 nginx.conf&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>最大似然估计</title>
+      <link>https://neo0moriarty.github.io/maximum-likelihood-estimation/</link>
+      <pubDate>Tue, 07 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/maximum-likelihood-estimation/</guid>
+      <description>&lt;p&gt;关于&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1&#34;&gt;最大似然估计&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>deeplearning.ai 神经网络和深度学习</title>
+      <link>https://neo0moriarty.github.io/deep-learning-course/</link>
+      <pubDate>Tue, 24 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/deep-learning-course/</guid>
+      <description>&lt;p&gt;deeplearning.ai深度学习5个入门课程的第一门课。&lt;/p&gt;
+
+&lt;p&gt;这门课将为你介绍深度学习的基础知识。学完这门课，你将能够：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;理解驱动深度学习的主要技术趋势。&lt;/li&gt;
+&lt;li&gt;能够搭建、训练并且运用全连接的深层神经网络。&lt;/li&gt;
+&lt;li&gt;了解如何实现高效的（向量化）的神经网络。&lt;/li&gt;
+&lt;li&gt;理解神经网络架构中的关键参数。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这门课将会详尽地介绍深度学习的基本原理，而不仅仅只进行理论概述。&lt;/p&gt;
+
+&lt;p&gt;当你完成这门微专业之后，你就能够将深度学习运用到你的个人应用中，调教出属于你自己的AI。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux下用Squid搭建网络代理服务器</title>
+      <link>https://neo0moriarty.github.io/squid-proxy/</link>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/squid-proxy/</guid>
+      <description>&lt;p&gt;Squid可以用来搭建代理服务器，用来代理客户端联网。
+Linux下搭建Squid服务很简单，在此记录squid服务安装配置过程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>并发与并行</title>
+      <link>https://neo0moriarty.github.io/concurrency-parallelism/</link>
+      <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/concurrency-parallelism/</guid>
+      <description>&lt;p&gt;参考了一些资料，摘录汇总并发（concurrency）和并行（parallelism）的联系和区别。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux查看剩余容量大小</title>
+      <link>https://neo0moriarty.github.io/check-disk-available/</link>
+      <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/check-disk-available/</guid>
+      <description>&lt;p&gt;Linux中关于查看剩余容量大小的命令&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用nvm方便地切换node.js版本</title>
+      <link>https://neo0moriarty.github.io/nvm-python-version/</link>
+      <pubDate>Wed, 11 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/nvm-python-version/</guid>
+      <description>&lt;p&gt;安装和切换node.js版本最便捷的方式——使用nvm&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Google开源项目风格指南</title>
+      <link>https://neo0moriarty.github.io/google-code-style/</link>
+      <pubDate>Wed, 04 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/google-code-style/</guid>
+      <description>&lt;p&gt;Google 开源项目风格指南&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>centos安装python3</title>
+      <link>https://neo0moriarty.github.io/centos-install-python3/</link>
+      <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/centos-install-python3/</guid>
+      <description>&lt;p&gt;Centos上编译安装Python3记录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux下sudo用户设置</title>
+      <link>https://neo0moriarty.github.io/set-sudo/</link>
+      <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/set-sudo/</guid>
+      <description>&lt;p&gt;Linux下将普通用户加入sudo用户设置方法&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>我的vim配置文件vimrc</title>
+      <link>https://neo0moriarty.github.io/vimrc/</link>
+      <pubDate>Sun, 01 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/vimrc/</guid>
+      <description>&lt;p&gt;我的vim配置文件，使用Vundle管理插件&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux显示当前目录下文件和文件夹的数目</title>
+      <link>https://neo0moriarty.github.io/list-current-dir/</link>
+      <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/list-current-dir/</guid>
+      <description>&lt;p&gt;Linux显示当前目录下文件和文件夹的数目命令&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Centos定时任务crontab使用</title>
+      <link>https://neo0moriarty.github.io/centos-crontab/</link>
+      <pubDate>Fri, 29 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/centos-crontab/</guid>
+      <description>&lt;p&gt;Centos下定时任务crontab的使用&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx开启gzip压缩</title>
+      <link>https://neo0moriarty.github.io/nginx-gzip/</link>
+      <pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/nginx-gzip/</guid>
+      <description>&lt;p&gt;Nginx开启gzip静态文件压缩配置&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SSH免密码远程登录</title>
+      <link>https://neo0moriarty.github.io/ssh-no-passwd/</link>
+      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/ssh-no-passwd/</guid>
+      <description>&lt;p&gt;实现SSH免密码登录服务器&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Git日常常用命令汇总</title>
+      <link>https://neo0moriarty.github.io/git-github-note/</link>
+      <pubDate>Fri, 22 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/git-github-note/</guid>
+      <description>&lt;p&gt;记录git日常常用命令&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

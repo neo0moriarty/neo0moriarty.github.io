@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.59.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Scrapy抓取日本乐天的前五大品牌洗衣机的评论 | neo0moriarty</title>
+    <meta property="og:title" content="Scrapy抓取日本乐天的前五大品牌洗衣机的评论 - neo0moriarty">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2017-12-21T00:00:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2017-12-21T00:00:00&#43;08:00">
+        
+    <meta name="Keywords" content="[Scrapy抓取日本乐天的前五大品牌洗衣机的评论]">
+    <meta name="description" content="Scrapy抓取日本乐天的前五大品牌洗衣机的评论">
+        
+    <meta name="author" content="neo0moriarty">
+    <meta property="og:url" content="https://neo0moriarty.github.io/scrapy-rakuten/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://neo0moriarty.github.io/">
+                        neo0moriarty
+                    </a>
+                
+                <p class="description">o(╯□╰)o  (゜-゜)つロ  o(╯□╰)o</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://neo0moriarty.github.io/">首页</a>
+                    
+                    <a  href="https://neo0moriarty.github.io/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Scrapy抓取日本乐天的前五大品牌洗衣机的评论</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2017年12月21日
+                        </date>
+                        
+                        
+                        
+                        <div class="post-content">
+                            <p>rakuten.co.jp是日本比较老牌的电商网站，跟日本亚马逊差不多，是日本用得比较多的电商购物网站。
+不过跟中国的京东和淘宝天猫比起来就是小巫见大巫了。</p>
+
+<hr />
+
+<p>抓取的逻辑直接看代码即可，不用过多解释。</p>
+
+<p>Scrapy主代码：</p>
+
+<pre><code>import urllib
+import re
+import json
+from random import choice
+from scrapy.spiders import Spider
+from scrapy.http import FormRequest
+from scrapy import Request
+import time
+import copy
+from scrapy.selector import Selector
+
+
+class Rakuten(Spider):
+
+    def __init__(self):
+        self.d = {}
+        # self.with_com_item_count = {}
+        self.url_list = [
+            # 'https://review.rakuten.co.jp/item/1/270903_10431504/1.1/', # 测试评论
+            'https://search.rakuten.co.jp/search/mall/-/204491/tg1004749/', # 海尔
+            'https://search.rakuten.co.jp/search/mall/-/204491/tg1002881/', # 东芝
+            'https://search.rakuten.co.jp/search/mall/-/204491/tg1004726/', # 日立
+            'https://search.rakuten.co.jp/search/mall/-/204491/tg1002867/', # 松下
+            'https://search.rakuten.co.jp/search/mall/-/204491/tg1002860/', # 夏普
+
+        ]
+
+    name = 'r'
+
+    def start_requests(self):
+        self.logger.warning(&quot;rakuten start_requests请求入口&quot;)
+        for url in self.url_list:
+            yield Request(url,dont_filter=True,
+                          meta={'cookiejar': 1},
+                          callback=self.parse_item_pages,
+                          )
+
+    def parse_item_pages(self, response):
+        url = response.url
+        item = {}
+        if '/204491/tg1004749/' in url:
+            item['brand_name'] = '海尔'
+        elif '/204491/tg1002881/' in url:
+            item['brand_name'] = '东芝'
+        elif '/204491/tg1004726/' in url:
+            item['brand_name'] = '日立'
+        elif '/204491/tg1002867/' in url:
+            item['brand_name'] = '松下'
+        elif '/204491/tg1002860/' in url:
+            item['brand_name'] = '夏普'
+
+        # 主URL搜索的商品条数
+        total_num = 0
+        total_num_str = '//h1[@class=&quot;section&quot;]/text()[2]'
+        total_num_result = response.xpath(total_num_str).re('[0-9]+')
+        if total_num_result:
+            total_num = int(total_num_result[0])
+            item['total_items_num'] = total_num
+        # 分页数 每页45条
+        page_num = 0
+        if total_num:
+            page_num = total_num // 45
+            if total_num % 45 != 0:
+                page_num += 1
+                item['total_items_page_num'] = page_num
+        meta = {'cookiejar': response.meta['cookiejar'], 'item': item} # 传递item
+        urls = [url] # 构造url列表
+        p = 2
+        while p &lt;= page_num:
+            urls.append(url + '?p=' + str(p))
+            p += 1
+        for url in urls:
+            yield FormRequest.from_response(response, url=url, meta=meta, callback=self.parse_one_item_page)
+
+
+    def parse_one_item_page(self, response):
+        self.logger.warning('进入parse 处理一个商品列表分页')
+        if response.status == 200:
+            url = response.url
+            d = copy.deepcopy(response.meta['item'])
+            self.logger.warning('访问商品列表分页成功：{}'.format(url))
+            total_num = d['total_items_num']
+            page_num = d['total_items_page_num']
+            # 当前分页所有有评论的链接
+            with_com_links_str = '//a[@class=&quot;dui-rating-filter _link&quot;]'
+            with_com_links_result = response.xpath(with_com_links_str).extract()
+            for with_com_item in with_com_links_result:
+                item = copy.deepcopy(response.meta['item'])
+                item['item_belong2_page_url'] =  url # 商品列表分页url
+                find_link_reg = re.compile('href=&quot;(.*?)&quot;')
+                find_link_result = find_link_reg.findall(with_com_item)
+                if find_link_result:
+                    item['comment_url'] = find_link_result[0] # 评论详情页
+                find_score_reg = re.compile('&lt;span class=&quot;score&quot;&gt;(.*?)&lt;/span&gt;')
+                find_score_result = find_score_reg.findall(with_com_item)
+                if find_score_result:
+                    item['avg_score'] = float(find_score_result[0]) # 平均评分
+                find_score_num_reg = re.compile('&lt;span class=&quot;legend&quot;&gt;\((.*?)件\)&lt;/span&gt;')
+                find_score_num_result = find_score_num_reg.findall(with_com_item)
+                if find_score_num_result:
+                    item['score_people_count'] = int(find_score_num_result[0]) # 评论人数
+                comment_page_count = 0  # 评论分页
+                comment_page_count = item['score_people_count'] // 15
+                if item['score_people_count'] % 15 != 0:
+                    comment_page_count += 1
+                item['comment_page_count'] = comment_page_count
+
+                if item['comment_url']:
+                    yield Request(item['comment_url'], dont_filter=True,
+                                callback=self.parse_comment_page,
+                                meta={'item': item, 'cookiejar': response.meta['cookiejar']}
+                        )
+        else:
+            self.logger.error(response.url)
+            self.logger.error('状态码为：{}'.format(response.status))
+
+
+    def parse_comment_page(self, response):
+        self.logger.warning('处理评论页面：{}'.format(response.url))
+        d = copy.deepcopy(response.meta['item'])
+        # 商品名
+        name_str = '//a[@sid_linkname=&quot;item_01&quot;]/text()'
+        name = response.xpath(name_str).extract_first()
+        d['item_name'] = name.replace(u'\u3000', u' ')
+
+        # 商品主页 和 商品id
+        item_str = '//a[@sid_linkname=&quot;item_01&quot;]'
+        item = response.xpath(item_str).extract_first()
+        find_href = re.compile('href=&quot;(.*?)&quot;')
+        find_result = find_href.findall(item)
+        if find_result:
+            find_result = find_result[0]
+            d['item_url'] = find_result
+            d['item_id'] = find_result.split('/')[-2]
+
+        if d['item_url'] not in self.d:
+            self.d[d['item_url']] = d
+
+        if 'comment_list' not in self.d[d['item_url']]:
+            self.d[d['item_url']]['comment_list'] = []  # 元素是dict 存放所有的评论信息
+
+        # 处理单页信息 当前页
+        coms_str = '//div[@class=&quot;revRvwUserMain&quot;]'
+        coms_results = response.xpath(coms_str).extract()
+
+        # self.logger.warning('处理当前页的15条评论 开始')
+        for coms_result in coms_results:
+            # 处理单个评论
+            single_com = {}
+            # 用户评分
+            user_score = 0
+            user_score_reg = re.compile('&lt;span class=&quot;revUserRvwerNum value&quot;&gt;(.*?)&lt;/span&gt;')
+            user_score_result = user_score_reg.findall(coms_result)
+            if user_score_result:
+                user_score = int(user_score_result[0])
+                single_com['user_score'] = user_score
+
+            # 用户评论指标
+            com_subjects_reg = re.compile('&lt;li class=&quot;revUserDispList&quot;&gt;(.*?):&lt;span class=&quot;revDispListTxt&quot;&gt;(.*?)&lt;/span&gt;&lt;/li&gt;')
+            com_subjects_result = com_subjects_reg.findall(coms_result)
+            if com_subjects_result:
+                td = {}
+                for k, v in com_subjects_result:
+                    td[k] = v
+                single_com['com_subjects'] = td
+
+            # 用户主评论
+            com_summary_reg = re.compile('&lt;dt class=&quot;revRvwUserEntryTtl summary&quot;&gt;(.*?)&lt;/dt&gt;')
+            com_summary_result = com_summary_reg.findall(coms_result)
+            if com_summary_result:
+                single_com['com_summary'] = com_summary_result[0]
+
+            # 用户评论详情
+            # com_detail_reg = re.compile('&quot;revRvwUserEntryCmt description&quot;&gt;(.*?)&lt;/dd&gt;')
+            # com_detail_result = com_detail_reg.findall(coms_result)
+            # if com_detail_result:
+            #     single_com['com_detail'] = com_detail_result[0]
+
+            com_list = Selector(text=coms_result).xpath(
+                    '//dd[@class=&quot;revRvwUserEntryCmt description&quot;]/text()').extract()
+            single_com['com_detail'] = ''.join(com_list)
+
+            # 评论日期
+            com_date_reg = re.compile('&lt;span class=&quot;revUserEntryDate dtreviewed&quot;&gt;(.*?)&lt;/span&gt;')
+            com_date_result = com_date_reg.findall(coms_result)
+            if com_date_result:
+                single_com['com_date'] = com_date_result[0]
+
+            if single_com not in self.d[d['item_url']]['comment_list']:
+                self.d[d['item_url']]['comment_list'].append(single_com)
+
+
+        # self.logger.warning('处理当前页的15条评论 结束')
+        # self.logger.error(self.d)
+        # self.logger.error(len(self.d[d['item_id']]['comment_list']))
+
+        # self.logger.warning('处理下一页')
+        # # 处理评论分页
+        item = copy.deepcopy(response.meta['item'])
+        url = response.url
+        p = int(url.split('/')[-2].split('.')[0])  # 当前页数
+        page_num = item['comment_page_count'] # 评论总页数
+        # self.logger.warning('评论总页数:' + str(page_num))
+        # self.logger.warning('当前页数:' + str(p))
+        if p &lt; page_num:
+            url = url.split('/')
+            url[-2] = str(p+1) + '.1'
+            url = '/'.join(url)
+            yield Request(
+                    url, callback=self.parse_comment_page,
+                    meta={'item': item, 'cookiejar': response.meta['cookiejar']}
+            )
+        elif p == page_num:
+            self.logger.error('处理完一个商品的评论+++++++++++++++++++++++++++++++')
+            self.d[d['item_url']]['comment_count'] = len(self.d[d['item_url']]['comment_list'])
+            yield self.d[d['item_url']]
+
+
+</code></pre>
+
+<p>直接写入MongoDB即可，可以方便地转为json和csv等格式。</p>
+
+<p>结果简单说明，TOP5洗衣机品牌的商品评论非常的少，共190个商品条目左右。有评论的也绝大多数在一页以内（15条）。可以说是非常的冷清，相比京东的家电销量和评论。这个也跟之前的预期相符，海尔在日本卖得很好，这个有点意外。</p>
+
+<p>日本电商重实体，实体电商是非常火爆的，服务也是别的国家所不能望其项背的。所以线上电商这么萧条也可以理解。</p>
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://neo0moriarty.github.io/">neo0moriarty</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://neo0moriarty.github.io/scrapy-rakuten/">https://neo0moriarty.github.io/scrapy-rakuten/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/scrapy-restart/">Scrapy断点续爬</a></li>
+        
+        <li><a href="/two-crawler-books/">两本爬虫相关的书籍</a></li>
+        
+        <li><a href="/scrapy-sum/">Scrapy抓取结果汇总分析</a></li>
+        
+        <li><a href="/douban-movie-count/">抓取瓣所有电影详情页并统计豆瓣收录的电影的数量</a></li>
+        
+        <li><a href="/scrapy-to-mongo/">Scrapy将抓取结果写入MongoDB数据库</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://neo0moriarty.github.io/tags/crawler">crawler</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://neo0moriarty.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-hugo-blog-record/" title="Mac下Hugo搭建记录">Mac下Hugo搭建记录</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-usb-iso/" title="Mac下格式化U盘并制作iso系统启动">Mac下格式化U盘并制作iso系统启动</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/ubuntu-mount-exfat/" title="ubuntu挂载exfat格式的硬盘">ubuntu挂载exfat格式的硬盘</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-neovim/" title="Neovim安装">Neovim安装</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-full-vim/" title="Mac 安装最完整的 Vim">Mac 安装最完整的 Vim</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-website/" title="Python相关网址收集">Python相关网址收集</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-round/" title="Python中使用round函数要注意的事">Python中使用round函数要注意的事</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-binary-tree/" title="Python实现和遍历二叉树">Python实现和遍历二叉树</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/practical-vim/" title="Vim实用技巧总结">Vim实用技巧总结</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/make-zsh-default/" title="配置zsh默认编辑器">配置zsh默认编辑器</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://neo0moriarty.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/blog/">blog</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/book/">book</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/crawler/">crawler</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/dev/">dev</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/os/">os</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/python/">python</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/study/">study</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://coolshell.cn/" title="酷壳 – CoolShell.cn">酷壳 – CoolShell.cn</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.flysnow.org" title="飞雪无情的博客">飞雪无情的博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>

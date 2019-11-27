@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.59.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Python中setdefault和defaultdict的应用示例 | neo0moriarty</title>
+    <meta property="og:title" content="Python中setdefault和defaultdict的应用示例 - neo0moriarty">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2017-11-27T00:00:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2017-11-27T00:00:00&#43;08:00">
+        
+    <meta name="Keywords" content="[Python中setdefault的应用示例 Python中defaultdict的应用示例]">
+    <meta name="description" content="Python中setdefault和defaultdict的应用示例">
+        
+    <meta name="author" content="neo0moriarty">
+    <meta property="og:url" content="https://neo0moriarty.github.io/python-setdefault/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://neo0moriarty.github.io/">
+                        neo0moriarty
+                    </a>
+                
+                <p class="description">o(╯□╰)o  (゜-゜)つロ  o(╯□╰)o</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://neo0moriarty.github.io/">首页</a>
+                    
+                    <a  href="https://neo0moriarty.github.io/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Python中setdefault和defaultdict的应用示例</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2017年11月27日
+                        </date>
+                        
+                        
+                        
+                        <div class="post-content">
+                            <p>也许每个 Python 程序员都知道可以用 d.get(k, default) 来代替 d[k]，给找不到的键一个默认的返回值（这比处理 KeyError 要方便不少）。</p>
+
+<p>但是要更<strong>新某个键对应的值的时候</strong>，不管使用 <code>__getitem__</code> 还是 get 都会不自然，而且效率低。</p>
+
+<p>dict.get 并不是处理找不到的键的最好方法。而是应该<strong>用setdefault或defaultdict处理找不到的键</strong>。</p>
+
+<hr />
+
+<p><strong>示例代码：</strong></p>
+
+<p>test.py 里面代码如下</p>
+
+<pre><code># -*- coding: utf-8 -*-
+import sys
+import re
+
+WORD_RE = re.compile(r'\w+')
+
+index = {}
+
+with open(sys.argv[1]) as fp:
+    for line_no, line in enumerate(fp, 1):
+        for match in WORD_RE.finditer(line):
+            word = match.group()
+            column_no = match.start() + 1
+            location = (line_no, column_no)
+            # target
+            occurrences = index.get(word, [])
+            occurrences.append(location)
+            index[word] = occurrences
+
+# 以字母顺序打印出结果
+# sorted 函数的 key= 参数没有调用 str.uppper，而是把这个方法的引用传递
+# 给 sorted 函数，这样在排序的时候，单词会被规范成统一格式。
+for word in sorted(index, key=str.upper):
+    print(word, index[word])
+</code></pre>
+
+<p>先生成zen.txt文本文件：</p>
+
+<pre><code>python -c &quot;import this&quot; &gt; zen.txt
+</code></pre>
+
+<p>运行代码:</p>
+
+<pre><code>python test.py zen.txt
+</code></pre>
+
+<p>输出结果（部分）如下：</p>
+
+<pre><code>('a', [(19, 48), (20, 53)])
+('Although', [(11, 1), (16, 1), (18, 1)])
+('ambiguity', [(14, 16)])
+('and', [(15, 23)])
+('are', [(21, 12)])
+('aren', [(10, 15)])
+('at', [(16, 38)])
+('bad', [(19, 50)])
+('be', [(15, 14), (16, 27), (20, 50)])
+('beats', [(11, 23)])
+('Beautiful', [(3, 1)])
+...
+</code></pre>
+
+<p><strong>示例讲解：</strong></p>
+
+<p>这段代码是实现读取文本文件，列出文本中所有的单词在文本中出现的地方。
+单词出现的地方用列表表示，列表元素是元组，元组存储单词出现的行和列数。</p>
+
+<p>target三行代码是主要实现：从索引获取单词的列表，将找到的单词出现的地方加入列表并更新索引。</p>
+
+<p>target三行代码效率分析:
+<strong>查找单词在索引里的值，一次查询；新单词加入列表后更新索引，又一次查询。</strong>
+查询了两次。</p>
+
+<p><strong>target代码更好的实现，使用setdefault：</strong>
+三行代码替换成一行</p>
+
+<pre><code>index.setdefault(word, []).append(location)
+</code></pre>
+
+<p><strong>用 setdefault 只需要一次就可以完成整个操作! 简洁又高效，Pythonic !</strong></p>
+
+<p>上面这行代码的效果跟以下一样：</p>
+
+<pre><code>if key not in my_dict:
+    my_dict[key] = [] 
+my_dict[key].append(new_value)
+</code></pre>
+
+<p><strong>只不过后者至少要进行两次键查询——如果键不存在的话，就是三次，用 setdefault 只需要一次就可以完成整个操作。</strong></p>
+
+<p><strong>target代码更好的实现，使用defaultdict：</strong>
+三行代码替换成一行</p>
+
+<pre><code>index[word].append(location)
+</code></pre>
+
+<p>但index要改成defaultdict：</p>
+
+<pre><code>import collections
+# 把 list 构造方法作为 default_factory 来创建一个 defaultdict。
+index = collections.defaultdict(list) 
+</code></pre>
+
+<p>如果 index 并没有 word 的记录，那么 default_factory 会被调用，为查询不到的键创造一个值。这个值在这里是一个空的列表，然后这个空列表被赋值给 index[word]，继而被当作返回值返回，因此 .append(location) 操作总能成功。如果在创建defaultdict 的时候没有指定 default_factory，查询不存在的键会触发 KeyError。</p>
+
+<p>defaultdict 里的 default_factory 只会在 <code>__getitem__</code> 里被调用，在其他的方法里完全不会发挥作用。比如，dd 是个 defaultdict，k 是个找不到的键， <strong>dd[k] 这个表达式会调用 default_factory 创造某个默认值，而 dd.get(k) 则会返回 None。</strong></p>
+
+<p><strong>参考：</strong>
+这个示例代码来自《流畅的Python》第三章。很棒的示例代码！不仅是setdefault和defaultdict，还有其它知识点，如finditer、enumerate、re、sorted、sys.argv等。</p>
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://neo0moriarty.github.io/">neo0moriarty</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://neo0moriarty.github.io/python-setdefault/">https://neo0moriarty.github.io/python-setdefault/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/python-big-little-end/">Python判断计算机是大端还是小端</a></li>
+        
+        <li><a href="/python-generate-floats/">Python生成千万行的文本并测试numpy运算性能</a></li>
+        
+        <li><a href="/python-read-write/">文件读取方式r&#43;、w&#43;、a&#43;的区别</a></li>
+        
+        <li><a href="/python-study-website/">Python相关的网站收集</a></li>
+        
+        <li><a href="/fluent-python/">《流畅的Python》</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://neo0moriarty.github.io/tags/python">python</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://neo0moriarty.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-hugo-blog-record/" title="Mac下Hugo搭建记录">Mac下Hugo搭建记录</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-usb-iso/" title="Mac下格式化U盘并制作iso系统启动">Mac下格式化U盘并制作iso系统启动</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/ubuntu-mount-exfat/" title="ubuntu挂载exfat格式的硬盘">ubuntu挂载exfat格式的硬盘</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-neovim/" title="Neovim安装">Neovim安装</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-full-vim/" title="Mac 安装最完整的 Vim">Mac 安装最完整的 Vim</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-website/" title="Python相关网址收集">Python相关网址收集</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-round/" title="Python中使用round函数要注意的事">Python中使用round函数要注意的事</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-binary-tree/" title="Python实现和遍历二叉树">Python实现和遍历二叉树</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/practical-vim/" title="Vim实用技巧总结">Vim实用技巧总结</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/make-zsh-default/" title="配置zsh默认编辑器">配置zsh默认编辑器</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://neo0moriarty.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/blog/">blog</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/book/">book</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/crawler/">crawler</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/dev/">dev</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/os/">os</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/python/">python</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/study/">study</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://coolshell.cn/" title="酷壳 – CoolShell.cn">酷壳 – CoolShell.cn</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.flysnow.org" title="飞雪无情的博客">飞雪无情的博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>

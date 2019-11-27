@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.59.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>替换rm命令防止误删除 | neo0moriarty</title>
+    <meta property="og:title" content="替换rm命令防止误删除 - neo0moriarty">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2017-10-11T00:00:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2017-10-11T00:00:00&#43;08:00">
+        
+    <meta name="Keywords" content="[替换rm rm命令]">
+    <meta name="description" content="替换rm命令防止误删除">
+        
+    <meta name="author" content="neo0moriarty">
+    <meta property="og:url" content="https://neo0moriarty.github.io/stop-rm/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://neo0moriarty.github.io/">
+                        neo0moriarty
+                    </a>
+                
+                <p class="description">o(╯□╰)o  (゜-゜)つロ  o(╯□╰)o</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://neo0moriarty.github.io/">首页</a>
+                    
+                    <a  href="https://neo0moriarty.github.io/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">替换rm命令防止误删除</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2017年10月11日
+                        </date>
+                        
+                        
+                        
+                        <div class="post-content">
+                            <p>mac和linux使用rm命令行删除，默认是不会放到回收站/废纸篓里面的，容易误删除，尤其是root用户下。利用alias把rm命令重定向到新的shell脚本，把删除的文件移到指定的目录下，可以一定程度缓解误删除的操作。</p>
+
+<hr />
+
+<p>1.准备shell脚本文件，rm.sh为例</p>
+
+<pre><code>TRASH_DIR='/Users/molock/.trash'
+for i in $*; do
+    STAMP=`date &quot;+%y%m%d%H%M%S&quot;`
+    fileName=`basename $i`
+    mv $i $TRASH_DIR/$fileName.$STAMP
+done
+</code></pre>
+
+<p>2.alias设置，如果用zsh，则 vim ~/.zshrc</p>
+
+<pre><code>alias rm=&quot;sh /Users/molock/.tool/rm.sh&quot;
+</code></pre>
+
+<p>source ~/.zshrc</p>
+
+<p>上面个以普通用户molock为例，root用户方法一样。</p>
+
+<p>这种方式可以降低误删操作，但用rm绝对路径(/bin/rm)删除还是可以的，要彻底的话可以修改rm命令源码。</p>
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://neo0moriarty.github.io/">neo0moriarty</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://neo0moriarty.github.io/stop-rm/">https://neo0moriarty.github.io/stop-rm/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/set-sudo/">Linux下sudo用户设置</a></li>
+        
+        <li><a href="/vimrc/">我的vim配置文件vimrc</a></li>
+        
+        <li><a href="/ssh-no-passwd/">SSH免密码远程登录</a></li>
+        
+        <li><a href="/use-qiqiu-paste-picture/">使用七牛云图床并实现快速贴图</a></li>
+        
+        <li><a href="/mac-mweb-markdown/">Markdown编辑器Mweb</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://neo0moriarty.github.io/tags/os">os</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://neo0moriarty.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-hugo-blog-record/" title="Mac下Hugo搭建记录">Mac下Hugo搭建记录</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-usb-iso/" title="Mac下格式化U盘并制作iso系统启动">Mac下格式化U盘并制作iso系统启动</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/ubuntu-mount-exfat/" title="ubuntu挂载exfat格式的硬盘">ubuntu挂载exfat格式的硬盘</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-neovim/" title="Neovim安装">Neovim安装</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-full-vim/" title="Mac 安装最完整的 Vim">Mac 安装最完整的 Vim</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-website/" title="Python相关网址收集">Python相关网址收集</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-round/" title="Python中使用round函数要注意的事">Python中使用round函数要注意的事</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-binary-tree/" title="Python实现和遍历二叉树">Python实现和遍历二叉树</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/practical-vim/" title="Vim实用技巧总结">Vim实用技巧总结</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/make-zsh-default/" title="配置zsh默认编辑器">配置zsh默认编辑器</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://neo0moriarty.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/blog/">blog</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/book/">book</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/crawler/">crawler</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/dev/">dev</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/os/">os</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/python/">python</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/study/">study</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://coolshell.cn/" title="酷壳 – CoolShell.cn">酷壳 – CoolShell.cn</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.flysnow.org" title="飞雪无情的博客">飞雪无情的博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>

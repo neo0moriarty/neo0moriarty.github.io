@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.59.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Python的GIL与多线程、多进程 | neo0moriarty</title>
+    <meta property="og:title" content="Python的GIL与多线程、多进程 - neo0moriarty">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2017-10-16T00:00:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2017-10-16T00:00:00&#43;08:00">
+        
+    <meta name="Keywords" content="[python的GIL python多线程、多进程]">
+    <meta name="description" content="Python的GIL与多线程、多进程">
+        
+    <meta name="author" content="neo0moriarty">
+    <meta property="og:url" content="https://neo0moriarty.github.io/python-gil/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://neo0moriarty.github.io/">
+                        neo0moriarty
+                    </a>
+                
+                <p class="description">o(╯□╰)o  (゜-゜)つロ  o(╯□╰)o</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://neo0moriarty.github.io/">首页</a>
+                    
+                    <a  href="https://neo0moriarty.github.io/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Python的GIL与多线程、多进程</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2017年10月16日
+                        </date>
+                        
+                        
+                        
+                        <div class="post-content">
+                            <p>GIL是什么，Python中什么时候用多线程，什么时候用多进程？
+本篇博文主要是摘录汇总对以上问题的解答。</p>
+
+<hr />
+
+<h2 id="gil是什么">GIL是什么</h2>
+
+<blockquote>
+<p><strong>GIL 的全称为 Global Interpreter Lock ，意即全局解释器锁。</strong>在 Python 语言的主流实现 CPython 中，GIL 是一个货真价实的全局线程锁，在解释器解释执行任何 Python 代码时，都需要先获得这把锁才行，在遇到 I/O 操作时会释放这把锁。如果是纯计算的程序，没有 I/O 操作，解释器会每隔 100 次操作就释放这把锁，让别的线程有机会执行（这个次数可以通过 sys.setcheckinterval 来调整）。所以虽然 CPython 的线程库直接封装操作系统的原生线程，但 <strong>CPython 进程做为一个整体，同一时间只会有一个获得了 GIL 的线程在跑，其它的线程都处于等待状态等着 GIL 的释放。</strong></p>
+
+<p>也就是说：
+<strong>对于任何 Python 程序，不论有多少线程，多少处理器，任何时候都只有一个线程在执行。</strong></p>
+</blockquote>
+
+<h2 id="为什么gil如此设计">为什么GIL如此设计</h2>
+
+<blockquote>
+<p>GIL 直接导致 CPython 不能利用物理多核的性能加速运算。那为什么会有这样的设计呢？我猜想应该还是历史遗留问题。多核 CPU 在 1990 年代还属于类科幻，Guido van Rossum 在创造 python 的时候，也想不到他的语言有一天会被用到很可能 1000＋ 个核的 CPU 上面，一个全局锁搞定多线程安全在那个时代应该是最简单经济的设计了。简单而又能满足需求，那就是合适的设计（对设计来说，应该只有合适与否，而没有好与不好）。怪只怪硬件的发展实在太快了，摩尔定律给软件业的红利这么快就要到头了。短短 20 年不到，代码工人就不能指望仅仅靠升级 CPU 就能让老软件跑的更快了。在多核时代，编程的免费午餐没有了。如果程序不能用并发挤干每个核的运算性能，那就意谓着会被淘汰。</p>
+</blockquote>
+
+<h2 id="多线程与多进程">多线程与多进程</h2>
+
+<blockquote>
+<p>想要利用多核系统，Python 必须支持多线程。<strong>作为解释型语言，Python 的解释器对多线程的支持必须是既安全又高效的。我们都知道多线程编程带来的问题。解释器必须避免不同的线程操作内部共享的数据。同时还要保证用户线程能完成尽量多的计算。</strong></p>
+
+<p>那么在不同线程同时访问数据时，怎样才能保护数据呢？答案是全局解释器锁。顾名思义，这是一个加在解释器上的全局锁（从互斥量或者类似意义上来看）。这种方式是很安全，但是（对于 Python 初学者来说）这也就意味着：对于任何 Python 程序，不论有多少线程，多少处理器，任何时候都只有一个线程在执行。</p>
+
+<p>许多人都是偶然发现这个事实。网上的讨论组和留言板充斥着来自 Python 初学者和专家提出的类似的问题：<strong>为什么我全新的多线程 Python 程序运行得比其只有一个线程的时候还要慢？</strong>在问这个问题时，许多人还觉得自己像个傻瓜，因为如果程序确实是可并行的，那么两个线程的程序显然要比单线程要快。事实上，<strong>问及这个问题的次数实在太多了，Python 的专家们已经为它准备了一个标准答案：不要使用多线程，请使用多进程。</strong>但这个答案比问题本身更加让人困惑：难道我不能在 Python 中使用多线程？在 Python 这样流行的语言中使用多线程究竟是有多糟糕，连专家都建议不要使用。是我哪里没有搞明白吗？</p>
+
+<p>很遗憾，并不是。<strong>由于 Python 解释器的设计，使用多线程以提高性能可以算是一个困难的任务。在最坏的情况下，多线程反而会降低（有时很明显）程序的运行速度。一个计算机科学专业的新生就可以告诉你：当多个线程竞争一个共享资源时将会发生什么。</strong>结果通常不理想。很多情况下多线程都能很好地工作，对于解释器的实现和内核开发人员来说，不要对 Python 多线程性能有太多抱怨可能是他们最大的心愿。</p>
+</blockquote>
+
+<h2 id="适用场景讨论">适用场景讨论</h2>
+
+<blockquote>
+<p>如果python代码是<strong>CPU密集型</strong>，<strong>多个线程的代码很有可能是线性执行的。所以这种情况下多线程是鸡肋，效率可能还不如单线程因为有上下文切换。</strong>
+如果python代码是<strong>IO密集型</strong>，多线程可以明显提高效率。例如网络爬虫，绝大多数时间爬虫是在等待socket返回数据。<strong>遇到 I/O 操作时会释放全局锁，正在执行的线程在等待IO的时候，其他线程可以继续执行，效率得以提高。</strong></p>
+
+<p>对于IO密集型的程序，Python多线程还是有很大作用的。<strong>然而 Python 3 引入的 asyncio 模块使得很多 IO 操作有了更好的方式去解决</strong>，这就非常类似 Node.js 了，都是没有多线程，而是采用 Event Loop 来处理耗时的 IO 操作。</p>
+
+<p>一般大部分的观点是由于有GIL的存在，Python中的多线程不能真正的利用多核，不能解决 cpu bound 的问题，但是在一些 IO bound 的程序上却可以有很好的提升。<strong>但是目前的情况是 我们有了协程啊，在 2.x 系列里我们可以使用 gevent 啊，在 3.x 系列的标准库里又有了 asyncio 。IO bound 的问题完全可以用协程解决。而且我们可以自主的控制协程的调度了。为什么还要使用由 OS 调度的不太可控的线程呢</strong>？所以我认为线程在 Python 里就是个鸡肋。尤其实在 3.x 系列里。</p>
+</blockquote>
+
+<p><strong>摘录参考资料：</strong></p>
+
+<ul>
+<li><a href="http://blog.csdn.net/five3/article/details/78563365">再谈Python多线程&ndash;避免GIL对性能的影响</a></li>
+<li><a href="http://blog.csdn.net/five3/article/details/78553823">再谈Python多线程&ndash;threading各类锁</a></li>
+<li><a href="http://blog.csdn.net/five3/article/details/78552617">再谈Python多线程&ndash;正确的使用场景</a></li>
+<li><a href="http://python.jobbole.com/88673/">最令人头疼的Python问题</a></li>
+<li><a href="http://zhuoqiang.me/python-thread-gil-and-ctypes.html">python 线程，GIL 和 ctypes</a></li>
+<li><a href="https://www.zhihu.com/question/23474039">为什么有人说 Python 的多线程是鸡肋呢？</a></li>
+<li><a href="http://blog.csdn.net/i2cbus/article/details/23133099">Python GIL 系列之通过实例认识Python的GIL</a></li>
+<li><a href="http://blog.csdn.net/i2cbus/article/details/23555063">Python GIL 系列之再谈Python的GIL</a></li>
+<li><a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/00143192823818768cd506abbc94eb5916192364506fa5d000">廖雪峰python教程：进程和线程</a></li>
+</ul>
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://neo0moriarty.github.io/">neo0moriarty</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://neo0moriarty.github.io/python-gil/">https://neo0moriarty.github.io/python-gil/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/python-tutorial/">Python教程</a></li>
+        
+        <li><a href="/python-pip-version/">pip常用命令</a></li>
+        
+        <li><a href="/python-delete-duplicate-files/">Python实现删除当前目录下重复文件</a></li>
+        
+        <li><a href="/python-insert-sort/">插入排序python实现</a></li>
+        
+        <li><a href="/python-dev-code-style/">Python开发风格指南</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://neo0moriarty.github.io/tags/python">python</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://neo0moriarty.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-hugo-blog-record/" title="Mac下Hugo搭建记录">Mac下Hugo搭建记录</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-usb-iso/" title="Mac下格式化U盘并制作iso系统启动">Mac下格式化U盘并制作iso系统启动</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/ubuntu-mount-exfat/" title="ubuntu挂载exfat格式的硬盘">ubuntu挂载exfat格式的硬盘</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-neovim/" title="Neovim安装">Neovim安装</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-full-vim/" title="Mac 安装最完整的 Vim">Mac 安装最完整的 Vim</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-website/" title="Python相关网址收集">Python相关网址收集</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-round/" title="Python中使用round函数要注意的事">Python中使用round函数要注意的事</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-binary-tree/" title="Python实现和遍历二叉树">Python实现和遍历二叉树</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/practical-vim/" title="Vim实用技巧总结">Vim实用技巧总结</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/make-zsh-default/" title="配置zsh默认编辑器">配置zsh默认编辑器</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://neo0moriarty.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/blog/">blog</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/book/">book</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/crawler/">crawler</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/dev/">dev</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/os/">os</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/python/">python</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/study/">study</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://coolshell.cn/" title="酷壳 – CoolShell.cn">酷壳 – CoolShell.cn</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.flysnow.org" title="飞雪无情的博客">飞雪无情的博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>

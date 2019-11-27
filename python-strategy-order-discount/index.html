@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.59.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Python中策略模式的应用：以电商购物车的打折策略为例 | neo0moriarty</title>
+    <meta property="og:title" content="Python中策略模式的应用：以电商购物车的打折策略为例 - neo0moriarty">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2017-11-30T00:00:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2017-11-30T00:00:00&#43;08:00">
+        
+    <meta name="Keywords" content="[Python中策略模式的应用 以电商购物车的打折策略的实现为例]">
+    <meta name="description" content="Python中策略模式的应用：以电商购物车的打折策略为例">
+        
+    <meta name="author" content="neo0moriarty">
+    <meta property="og:url" content="https://neo0moriarty.github.io/python-strategy-order-discount/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://neo0moriarty.github.io/">
+                        neo0moriarty
+                    </a>
+                
+                <p class="description">o(╯□╰)o  (゜-゜)つロ  o(╯□╰)o</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://neo0moriarty.github.io/">首页</a>
+                    
+                    <a  href="https://neo0moriarty.github.io/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Python中策略模式的应用：以电商购物车的打折策略为例</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2017年11月30日
+                        </date>
+                        
+                        
+                        
+                        <div class="post-content">
+                            <p><a href="https://baike.baidu.com/item/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/646307?fr=aladdin">策略模式</a>是常见的设计模式之一。本文探讨Python中关于策略模式的应用，以电商购物车的不同打折策略的实现为例，并<strong>示范怎么逐步优化代码的实现</strong>。</p>
+
+<hr />
+
+<h2 id="需求描述">需求描述</h2>
+
+<p>假如一个网店制定了下述折扣规则：
+1、 有 1000 或以上积分的顾客，每个订单享 5% 折扣。
+2、 同一订单中，单个商品的数量达到 20 个或以上，享 10% 折扣。
+3、 订单中的不同商品达到 10 个或以上，享 7% 折扣。</p>
+
+<p>简单起见，我们假定一个订单一次只能享用一个折扣。</p>
+
+<h2 id="需求分析">需求分析</h2>
+
+<p>不同的打折策略对应着设计模式的策略模式，以策略模式的思路来解决问题即可。</p>
+
+<h2 id="用策略类实现策略模式">用策略类实现策略模式</h2>
+
+<p>典型的策略实现是以策略类为基础，不同的策略创建不同的类。
+解决方案分析如下：</p>
+
+<p>上下文</p>
+
+<p>　　把一些计算委托给实现不同算法的可互换组件，它提供服务。在这个电商示例中，上下文是 Order，它会根据不同的算法计算促销折扣。</p>
+
+<p>策略</p>
+
+<p>　　实现不同算法的组件共同的接口。在这个示例中，名为 Promotion 的抽象类扮演这个角色。</p>
+
+<p>具体策略</p>
+
+<p>　　“策略”的具体子类。fidelityPromo、BulkPromo 和 LargeOrderPromo 是这里实现的三个具体策略。</p>
+
+<p>按照《设计模式：可复用面向对象软件的基础》一书的说明，具体策略由上下文类的客户选择。在这个示例 中，实例化订单之前，系统会以某种方式选择一种促销折扣策略，然后把它传给 Order 构造方法。
+具体怎么选择策略，不在这个模式的职责范围内。</p>
+
+<p>实现 Order 类，支持插入式折扣策略。</p>
+
+<p>实现代码如下：</p>
+
+<pre><code>from abc import ABC, abstractclassmethod
+from collections import namedtuple
+
+Customer = namedtuple('Customer', 'name fidelity')
+
+
+class LineItem:
+    '''购物车条目类 每个条目有属性：产品 价格 数量'''
+
+    def __init__(self, product, quantity, price):
+        self.product = product
+        self.quantity = quantity
+        self.price = price
+
+    def total(self):
+        '''购物车一个条目的总价'''
+        return self.price * self.quantity
+
+
+class Order:
+    '''订单类 客户 购物车 折扣 计算总价和应付款 '''
+
+    def __init__(self, customer, cart, promotion):
+        self.customer = customer
+        self.cart = list(cart)
+        self.promotion = promotion
+
+    def total(self):
+        '''打折前的总价'''
+        # if not hasattr(self, '__total'): # 为什么要加这句判断？
+        #     self.__total = sum(item.total() for item in self.cart)
+        # return self.__total
+        return sum(item.total() for item in self.cart)
+
+    def due(self):
+        '''打折后的应付款'''
+        if not self.promotion:
+            discount = 0
+        else:
+            discount = self.promotion.discount(self)
+        return self.total() - discount
+
+    def __repr__(self):
+        fmt = '&lt;Order total: {:.2f} due: {:.2f}&gt;'
+        return fmt.format(self.total(), self.due())
+        
+        
+class Promotion(ABC):
+    '''在 Python 3.4 中，声明抽象基类最简单的方式是子类化 abc.ABC。'''
+
+    @abstractclassmethod
+    def discount(self, order):
+        pass
+
+
+class FidelityPromo(Promotion):
+
+    def discount(self, order):
+        return order.total() * .05 if order.customer.fidelity &gt;= 1000 else 0
+
+
+
+class BulkItemPromo(Promotion):
+
+    def discount(self, order):
+        discount = 0
+        for item in order.cart:
+            if item.quantity &gt;= 20:
+                discount += item.total() * .1
+        return discount
+
+
+class LargeOrderPromo(Promotion):
+
+    def discount(self, order):
+        distinct_items = {item.product for item in order.cart}
+        if len(distinct_items) &gt;= 10:
+            return order.total() * .07
+        return 0
+</code></pre>
+
+<p>测试用例：</p>
+
+<pre><code>joe = Customer('John Doe', 0)
+ann = Customer('Ann Smith', 1100)
+cart = [LineItem('banana', 4, .5), 
+        LineItem('apple', 10, 1.5), 
+        LineItem('watermellon', 5, 5.0)]
+print(Order(joe, cart, FidelityPromo()))
+print(Order(ann, cart, FidelityPromo()))
+banana_cart = [LineItem('banana', 30, .5), 
+                LineItem('apple', 10, 1.5)]
+print(Order(joe, banana_cart, BulkItemPromo()))
+long_order = [LineItem(str(item_code), 1, 1.0) for item_code in range(10)]
+print(Order(joe, long_order, LargeOrderPromo()))
+print(Order(joe, cart, LargeOrderPromo()))
+</code></pre>
+
+<h2 id="用函数实现策略模式">用函数实现策略模式</h2>
+
+<p>利用 Python 中作为对象的函数，可以使用更少的代码实现相同的功能。
+每个具体策略都是一个类，而且都只定义了一个方法，即 discount。此外，策略实例没有状态（没有实例属性）。你可能会说，它们看起来像是普通的函数——的确如此。可以把具体策略换成简单的函数，去掉 Promotion 抽象类。用函数分别实现不同的促销策略，并把促销函数作为参数传入即可。</p>
+
+<p>以下是重构之后的实现：</p>
+
+<pre><code>from collections import namedtuple
+
+Customer = namedtuple('Customer', 'name fidelity')
+
+
+class LineItem:
+    '''购物车条目类 每个条目有属性：产品 价格 数量'''
+
+    def __init__(self, product, quantity, price):
+        self.product = product
+        self.quantity = quantity
+        self.price = price
+
+    def total(self):
+        '''购物车一个条目的总价'''
+        return self.price * self.quantity
+
+
+class Order:
+    '''订单类 客户 购物车 折扣 计算总价和应付款 '''
+
+    def __init__(self, customer, cart, promotion):
+        self.customer = customer
+        self.cart = list(cart)
+        self.promotion = promotion
+
+    def total(self):
+        '''打折前的总价'''
+        # if not hasattr(self, '__total'): # 为什么要加这句判断？
+        #     self.__total = sum(item.total() for item in self.cart)
+        # return self.__total
+        return sum(item.total() for item in self.cart)
+
+    def due(self):
+        '''打折后的应付款'''
+        if not self.promotion:
+            discount = 0
+        else:
+            discount = self.promotion(self)
+        return self.total() - discount
+
+    def __repr__(self):
+        fmt = '&lt;Order total: {:.2f} due: {:.2f}&gt;'
+        return fmt.format(self.total(), self.due())
+
+
+
+def fidelity_promo(order):
+    return order.total() * .05 if order.customer.fidelity &gt;= 1000 else 0
+
+def bulk_item_promo(order):
+    discount = 0
+    for item in order.cart:
+        if item.quantity &gt;= 20:
+            discount += item.total() * .1
+    return discount
+
+def large_order_promo(order):
+    distinct_items = {item.product for item in order.cart}
+    if len(distinct_items) &gt;= 10:
+        return order.total() * .07
+    return 0
+</code></pre>
+
+<p>不难看出，用函数实现策略后，去掉了抽象类和策略类，代码更精简，也更加易读，
+新的 Order 类使用起来更简单。</p>
+
+<p>测试用例：</p>
+
+<pre><code>joe = Customer('John Doe', 0)
+ann = Customer('Ann Smith', 1100)
+cart = [LineItem('banana', 4, .5), 
+        LineItem('apple', 10, 1.5), 
+        LineItem('watermellon', 5, 5.0)]
+print(Order(joe, cart, fidelity_promo))
+print(Order(ann, cart, fidelity_promo))
+banana_cart = [LineItem('banana', 30, .5), 
+                LineItem('apple', 10, 1.5)]
+print(Order(joe, banana_cart, bulk_item_promo))
+long_order = [LineItem(str(item_code), 1, 1.0) for item_code in range(10)]
+print(Order(joe, long_order, large_order_promo))
+print(Order(joe, cart, large_order_promo))
+</code></pre>
+
+<p>具体策略一般没有内部状态，只是处理上下文中的数据。此时，适合使用普通的函数，别去编写只有一个方法的类，再去实现另一个类声明的单函数接口。函数比用户定义的类的实例轻量，因为各个策略函数在 Python 编译模块时只会创建一次。普通的函数也是“可共享的对象，可以同时在多个上下文中使用”。（模式是死的，人是活的！）</p>
+
+<h2 id="需求升级与实现">需求升级与实现</h2>
+
+<p>新的需求，帮用户自动选择最优惠的打折方式。用户买单的时候自动判断好了最划算的打折并返回应付款。</p>
+
+<p>解决方案：</p>
+
+<p>迭代一个函数列表，并找出折扣额度最大的，实现代码如下：</p>
+
+<pre><code>promos = [fidelity_promo, bulk_item_promo, large_order_promo]
+
+def best_promo(order):
+    return max(promo(order) for promo in promos) # 生成器表达式 简洁有力！
+</code></pre>
+
+<p>测试用例：</p>
+
+<pre><code>joe = Customer('John Doe', 0)
+ann = Customer('Ann Smith', 1100)
+cart = [LineItem('banana', 4, .5), 
+        LineItem('apple', 10, 1.5), 
+        LineItem('watermellon', 5, 5.0)]
+print(Order(joe, cart, best_promo))
+print(Order(ann, cart, best_promo))
+banana_cart = [LineItem('banana', 30, .5), 
+                LineItem('apple', 10, 1.5)]
+print(Order(joe, banana_cart, best_promo))
+long_order = [LineItem(str(item_code), 1, 1.0) for item_code in range(10)]
+print(Order(joe, long_order, best_promo))
+print(Order(joe, cart, best_promo))
+</code></pre>
+
+<p>以上函数列表的方式虽然简洁易读，但有容易被忽略的缺陷，新添加的促销策略，要添加到promos列表中，否则出问题。</p>
+
+<p>解决方案是利用内置函数globals():
+globals()返回一个字典，表示当前的全局符号表。这个符号表始终针对当前模块（对函数或方法来说，是指定义它们的模块，而不是调用它们的模块）。</p>
+
+<p>借助globals 函数帮助 best_promo 自动找到其他可用的 *_promo 函数，实现如下：</p>
+
+<pre><code>promos = [globals()[name] for name in globals()
+            if name.endswith('_promo')
+            and name != 'best_promo']
+
+def best_promo(order):
+    return max(promo(order) for promo in promos)
+</code></pre>
+
+<p>测试用例:</p>
+
+<pre><code>joe = Customer('John Doe', 0)
+ann = Customer('Ann Smith', 1100)
+cart = [LineItem('banana', 4, .5), 
+        LineItem('apple', 10, 1.5), 
+        LineItem('watermellon', 5, 5.0)]
+print(Order(joe, cart, best_promo))
+print(Order(ann, cart, best_promo))
+banana_cart = [LineItem('banana', 30, .5), 
+                LineItem('apple', 10, 1.5)]
+print(Order(joe, banana_cart, best_promo))
+long_order = [LineItem(str(item_code), 1, 1.0) for item_code in range(10)]
+print(Order(joe, long_order, best_promo))
+print(Order(joe, cart, best_promo))
+</code></pre>
+
+<p>以上的改进已经挺好的了，但其中有个小限制是要求策略函数都以_promo结果。
+一种思路是既然要收集所有可用的促销函数，就可以在单独的模块中保存策略函数，
+把best_promo排除在外。
+要导入 promotions 模块，得用到高阶内省函数的 inspect 模块，inspect.getmembers 函数用于获取对象（这里是 promotions 模块）的属性，第二个参数是可选的判断条件（一个布尔值函数）。我们使用的是 inspect.isfunction，只获取模块中的函数。</p>
+
+<p>实现如下:</p>
+
+<p>(忽略把策略函数放到单独模块promotion的过程)</p>
+
+<pre><code>import promotion
+import inspect
+
+promos = [func for _, func in inspect.getmembers(promotion, inspect.isfunction)]
+
+def best_promo(order):
+    return max(promo(order) for promo in promos)
+</code></pre>
+
+<p>测试用例:</p>
+
+<pre><code>joe = Customer('John Doe', 0)
+ann = Customer('Ann Smith', 1100)
+cart = [LineItem('banana', 4, .5), 
+        LineItem('apple', 10, 1.5), 
+        LineItem('watermellon', 5, 5.0)]
+print(Order(joe, cart, best_promo))
+print(Order(ann, cart, best_promo))
+banana_cart = [LineItem('banana', 30, .5), 
+                LineItem('apple', 10, 1.5)]
+print(Order(joe, banana_cart, best_promo))
+long_order = [LineItem(str(item_code), 1, 1.0) for item_code in range(10)]
+print(Order(joe, long_order, best_promo))
+print(Order(joe, cart, best_promo))
+</code></pre>
+
+<p>修改后，经测试可以是行得通的，把策略函数的实现放到单独的模块，逻辑清晰，方便扩展，
+定义函数也更加灵活自在，不必拘泥于函数名。到此可能会觉得已经改进得差不多了。但其实是有问题的。
+promotions 模块只能包含计算订单折扣的函数！这是对代码的隐性假设。如果有人在 promotions 模块中使用不同的签名定义函数，那么 best_promo 函数尝试将其应用到订单上时会出错。(实际上以_promo结尾标记策略函数也有同样的问题。)
+解决方案思路之一是可以添加更为严格的测试，审查传给实例的参数，进一步过滤函数。</p>
+
+<p>但有更简单更优雅地方式来解决这个问题：
+使用简单的装饰器来实现动态收集促销折扣函数！</p>
+
+<p><strong>装饰器的一个关键特性是，它们在被装饰的函数定义之后立即运行。
+这通常是在导入时(即 Python 加载模块时)而不是运行时。</strong></p>
+
+<p>promos 列表中的值使用 promotion 装饰器填充，代码重构如下：</p>
+
+<pre><code>promos = []
+
+def promotion(promo_func):
+    promos.append(promo_func)
+    return promo_func
+
+
+@promotion
+def fidelity_promo(order):
+    return order.total() * .05 if order.customer.fidelity &gt;= 1000 else 0
+
+@promotion
+def bulk_item_promo(order):
+    discount = 0
+    for item in order.cart:
+        if item.quantity &gt;= 20:
+            discount += item.total() * .1
+    return discount
+
+@promotion
+def large_order_promo(order):
+    distinct_items = {item.product for item in order.cart}
+    if len(distinct_items) &gt;= 10:
+        return order.total() * .07
+    return 0
+
+
+def best_promo(order):
+    return max(promo(order) for promo in promos)
+</code></pre>
+
+<p>测试用例：</p>
+
+<pre><code>joe = Customer('John Doe', 0)
+ann = Customer('Ann Smith', 1100)
+cart = [LineItem('banana', 4, .5), 
+        LineItem('apple', 10, 1.5), 
+        LineItem('watermellon', 5, 5.0)]
+print(Order(joe, cart, best_promo))
+print(Order(ann, cart, best_promo))
+banana_cart = [LineItem('banana', 30, .5), 
+                LineItem('apple', 10, 1.5)]
+print(Order(joe, banana_cart, best_promo))
+long_order = [LineItem(str(item_code), 1, 1.0) for item_code in range(10)]
+print(Order(joe, long_order, best_promo))
+print(Order(joe, cart, best_promo))
+</code></pre>
+
+<p>到此，得到了一个相对完美的解决方案。优点如下：</p>
+
+<ul>
+<li>促销策略函数无需使用特殊的名称（即不用以 _promo 结尾）。</li>
+<li>@promotion 装饰器突出了被装饰的函数的作用，还便于临时禁用某个促销策略：只需把装饰器注释掉。</li>
+<li>促销折扣策略可以在其他模块中定义，在系统中的任何地方都行，只要使用 @promotion 装饰即可。</li>
+</ul>
+
+<p>本文内容参考整理自《流畅的Python》相关的内容，做了少许修改。示例代码的逐步优化很棒👍，涉及不少Python的知识点的巧妙应用，精彩！</p>
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://neo0moriarty.github.io/">neo0moriarty</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://neo0moriarty.github.io/python-strategy-order-discount/">https://neo0moriarty.github.io/python-strategy-order-discount/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/python-virtualenv/">Python的virtualenv使用</a></li>
+        
+        <li><a href="/python-closure/">Python的作用域与闭包浅析</a></li>
+        
+        <li><a href="/python-map-filter/">Python中map、filter和reduce的替代品</a></li>
+        
+        <li><a href="/python-manual-help/">查看Python帮助文档的几种方式</a></li>
+        
+        <li><a href="/python-memoryview/">Python3中的内存视图memoryview</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://neo0moriarty.github.io/tags/python">python</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://neo0moriarty.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-hugo-blog-record/" title="Mac下Hugo搭建记录">Mac下Hugo搭建记录</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-usb-iso/" title="Mac下格式化U盘并制作iso系统启动">Mac下格式化U盘并制作iso系统启动</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/ubuntu-mount-exfat/" title="ubuntu挂载exfat格式的硬盘">ubuntu挂载exfat格式的硬盘</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-neovim/" title="Neovim安装">Neovim安装</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-full-vim/" title="Mac 安装最完整的 Vim">Mac 安装最完整的 Vim</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-website/" title="Python相关网址收集">Python相关网址收集</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-round/" title="Python中使用round函数要注意的事">Python中使用round函数要注意的事</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-binary-tree/" title="Python实现和遍历二叉树">Python实现和遍历二叉树</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/practical-vim/" title="Vim实用技巧总结">Vim实用技巧总结</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/make-zsh-default/" title="配置zsh默认编辑器">配置zsh默认编辑器</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://neo0moriarty.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/blog/">blog</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/book/">book</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/crawler/">crawler</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/dev/">dev</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/os/">os</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/python/">python</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/study/">study</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://coolshell.cn/" title="酷壳 – CoolShell.cn">酷壳 – CoolShell.cn</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.flysnow.org" title="飞雪无情的博客">飞雪无情的博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>algorithm on neo0moriarty</title>
+    <link>https://neo0moriarty.github.io/tags/algorithm/</link>
+    <description>Recent content in algorithm on neo0moriarty</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 18 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://neo0moriarty.github.io/tags/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python实现和遍历二叉树</title>
+      <link>https://neo0moriarty.github.io/python-binary-tree/</link>
+      <pubDate>Thu, 18 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-binary-tree/</guid>
+      <description>&lt;p&gt;先思考：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;怎么表示一棵树(如二叉树)&lt;/li&gt;
+&lt;li&gt;树有哪几种遍历方式，怎么实现&lt;/li&gt;
+&lt;li&gt;给定其中N种遍历结果，如何还原树&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>快排python实现</title>
+      <link>https://neo0moriarty.github.io/python-quick-sort/</link>
+      <pubDate>Fri, 24 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-quick-sort/</guid>
+      <description>&lt;p&gt;快排，python递归实现&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>插入排序python实现</title>
+      <link>https://neo0moriarty.github.io/python-insert-sort/</link>
+      <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-insert-sort/</guid>
+      <description>&lt;p&gt;排序算法之插入排序，用Python实现。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

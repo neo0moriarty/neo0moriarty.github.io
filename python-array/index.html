@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.59.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Python中的数组浅析 | neo0moriarty</title>
+    <meta property="og:title" content="Python中的数组浅析 - neo0moriarty">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2017-11-28T00:00:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2017-11-28T00:00:00&#43;08:00">
+        
+    <meta name="Keywords" content="[Python中的数组浅析]">
+    <meta name="description" content="Python中的数组浅析">
+        
+    <meta name="author" content="neo0moriarty">
+    <meta property="og:url" content="https://neo0moriarty.github.io/python-array/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://neo0moriarty.github.io/">
+                        neo0moriarty
+                    </a>
+                
+                <p class="description">o(╯□╰)o  (゜-゜)つロ  o(╯□╰)o</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://neo0moriarty.github.io/">首页</a>
+                    
+                    <a  href="https://neo0moriarty.github.io/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Python中的数组浅析</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2017年11月28日
+                        </date>
+                        
+                        
+                        
+                        <div class="post-content">
+                            <p>数组并不是Python内置的数据类型，是标准库array模块里面的。</p>
+
+<hr />
+
+<p>虽然列表既灵活又简单，但面对各类需求时，我们可能会有更好的选择。比如，要存放 1000 万个浮点数的话，数组（array）的效率要高得多，因为<strong>数组在背后存的并不是 float 对象，而是数字的机器翻译，也就是字节表述。这一点就跟 C 语言中的数组一样。</strong>再比如说，如果需要频繁对序列做先进先出的操作，deque（双端队列）的速度应该会更快。如果在你的代码里，包含操作（比如检查一个元素是否出现在一个集合中）的频率很高，用 set（集合）会更合适。<strong>set专为检查元素是否存在做过优化</strong>。<strong>但是它并不是序列，因为 set 是无序的</strong>。</p>
+
+<p>如果我们需要一个只包含数字的列表，那么 array.array 比 list 更高效。数组支持所有跟可变序列有关的操作，包括 .pop、.insert 和 .extend。另外，数组还提供从文件读取和存入文件的更快的方法，如 .frombytes 和 .tofile。</p>
+
+<p><strong>Python数组array的类型:</strong></p>
+
+<table>
+<thead>
+<tr>
+<th align="center">Type Code</th>
+<th align="center">C Type</th>
+<th align="center">Minimum size in bytes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">‘c’</td>
+<td align="center">character</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">‘b’</td>
+<td align="center">signed integer</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">‘B’</td>
+<td align="center">unsigned integer</td>
+<td align="center">1</td>
+</tr>
+
+<tr>
+<td align="center">‘u’</td>
+<td align="center">Unicode character</td>
+<td align="center">2</td>
+</tr>
+
+<tr>
+<td align="center">‘h’</td>
+<td align="center">signed integer</td>
+<td align="center">2</td>
+</tr>
+
+<tr>
+<td align="center">‘H’</td>
+<td align="center">unsigned integer</td>
+<td align="center">2</td>
+</tr>
+
+<tr>
+<td align="center">‘i’</td>
+<td align="center">signed integer</td>
+<td align="center">2</td>
+</tr>
+
+<tr>
+<td align="center">‘I’</td>
+<td align="center">unsigned integer</td>
+<td align="center">2</td>
+</tr>
+
+<tr>
+<td align="center">‘l’</td>
+<td align="center">signed integer</td>
+<td align="center">4</td>
+</tr>
+
+<tr>
+<td align="center">‘L’</td>
+<td align="center">unsigned integer</td>
+<td align="center">4</td>
+</tr>
+
+<tr>
+<td align="center">‘f’</td>
+<td align="center">floating point</td>
+<td align="center">4</td>
+</tr>
+
+<tr>
+<td align="center">‘d’</td>
+<td align="center">floating point</td>
+<td align="center">8</td>
+</tr>
+</tbody>
+</table>
+
+<p>更多请参考<a href="https://docs.python.org/2/library/array.html">这里</a></p>
+
+<p><strong>Python 数组跟 C 语言数组一样精简。创建数组需要一个类型码，这个类型码用来表示在底层的 C 语言应该存放怎样的数据类型</strong>。比如 b 类型码代表的是有符号的字符（signed char），因此 array(&lsquo;b&rsquo;) 创建出的数组就只能存放一个字节大小的整数，范围从 -128 到 127，这样在序列很大的时候，我们能节省很多空间。<strong>而且Python不会允许你在数组里存放除指定类型之外的数据</strong>。</p>
+
+<p>展示了从创建一个有 1000 万个随机浮点数的数组开始，到如何把这个数组存放到文件里，再到如何从文件读取这个数组示例:</p>
+
+<pre><code>&gt;&gt;&gt; from array import array 
+&gt;&gt;&gt; from random import random
+&gt;&gt;&gt; floats = array('d', (random() for i in range(10**7))) 
+&gt;&gt;&gt; floats[-1] 
+0.07802343889111107 
+&gt;&gt;&gt; fp = open('floats.bin', 'wb') 
+&gt;&gt;&gt; floats.tofile(fp)  
+&gt;&gt;&gt; fp.close() 
+&gt;&gt;&gt; floats2 = array('d') 
+&gt;&gt;&gt; fp = open('floats.bin', 'rb') 
+&gt;&gt;&gt; floats2.fromfile(fp, 10**7) 
+&gt;&gt;&gt; fp.close() 
+&gt;&gt;&gt; floats2[-1] 
+0.07802343889111107 
+&gt;&gt;&gt; floats2 == floats 
+True
+</code></pre>
+
+<p><strong>利用一个可迭代对象来建立一个双精度浮点数组（类型码是 &rsquo;d&rsquo;），这里我们用的可迭代对象是一个生成器表达式。</strong></p>
+
+<p>二进制文件与文本文件的读取差别很大！</p>
+
+<p><strong>从上面的代码我们能得出结论，array.tofile 和 array.fromfile 用起来很简单。把这段代码跑一跑，你还会发现它的速度也很快。一个小试验告诉我，用 array.fromfile 从一个二进制文件里读出 1000 万个双精度浮点数只需要 0.1 秒，这比从文本文件里读取的速度要快 60 倍，因为后者会使用内置的 float 方法把每一行文字转换成浮点数。</strong></p>
+
+<p><strong>另外，使用 array.tofile 写入到二进制文件，比以每行一个浮点数的方式把所有数字写入到文本文件要快 7 倍。另外，1000 万个这样的数在二进制文件里只占用 80 000 000 个字节（每个浮点数占用 8 个字节， 不需要任何额外空间），如果是文本文件的话，我们需要 181 515 739 个字节。</strong></p>
+
+<p><strong>另外一个快速序列化数字类型的方法是使用<a href="https://docs.python.org/3/library/pickle.html">pickle模块</a>。pickle.dump 处理浮点数组的速度几乎跟 array.tofile 一样快。不过前者可以处理几乎所有的内置数字类型，包含复数、嵌套集合，甚至用户自定义的类。前提是这些类没有什么特别复杂的实现</strong>。</p>
+
+<p>从 Python 3.4 开始，数组类型不再支持诸如 list.sort() 这种就地排序方法。要给数组排序的话，得用 sorted 函数新建一个数组：</p>
+
+<pre><code>a = array.array(a.typecode, sorted(a))
+</code></pre>
+
+<p>想要在不打乱次序的情况下为数组添加新的元素，bisect.insort 还是能派上用场。</p>
+
+<p>整理自《流畅的Python》关于array模块的内容。</p>
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://neo0moriarty.github.io/">neo0moriarty</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://neo0moriarty.github.io/python-array/">https://neo0moriarty.github.io/python-array/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/python-memoryview/">Python3中的内存视图memoryview</a></li>
+        
+        <li><a href="/python3-unicode/">Python3中的字符编码和解码示例</a></li>
+        
+        <li><a href="/python3-file-encode/">Python3的文件编码</a></li>
+        
+        <li><a href="/python-bisect-insort/">Python中bisect和insort的应用示例</a></li>
+        
+        <li><a href="/python-namedtuple/">Python中具名元组namedtuple的应用示例</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://neo0moriarty.github.io/tags/python">python</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://neo0moriarty.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-hugo-blog-record/" title="Mac下Hugo搭建记录">Mac下Hugo搭建记录</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-usb-iso/" title="Mac下格式化U盘并制作iso系统启动">Mac下格式化U盘并制作iso系统启动</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/ubuntu-mount-exfat/" title="ubuntu挂载exfat格式的硬盘">ubuntu挂载exfat格式的硬盘</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-neovim/" title="Neovim安装">Neovim安装</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-full-vim/" title="Mac 安装最完整的 Vim">Mac 安装最完整的 Vim</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-website/" title="Python相关网址收集">Python相关网址收集</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-round/" title="Python中使用round函数要注意的事">Python中使用round函数要注意的事</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-binary-tree/" title="Python实现和遍历二叉树">Python实现和遍历二叉树</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/practical-vim/" title="Vim实用技巧总结">Vim实用技巧总结</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/make-zsh-default/" title="配置zsh默认编辑器">配置zsh默认编辑器</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://neo0moriarty.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/blog/">blog</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/book/">book</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/crawler/">crawler</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/dev/">dev</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/os/">os</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/python/">python</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/study/">study</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://coolshell.cn/" title="酷壳 – CoolShell.cn">酷壳 – CoolShell.cn</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.flysnow.org" title="飞雪无情的博客">飞雪无情的博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>

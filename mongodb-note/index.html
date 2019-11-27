@@ -1,0 +1,906 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.59.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>MongoDB常用语法和命令 | neo0moriarty</title>
+    <meta property="og:title" content="MongoDB常用语法和命令 - neo0moriarty">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2017-12-15T00:00:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2017-12-15T00:00:00&#43;08:00">
+        
+    <meta name="Keywords" content="[MongoDB常用语法和命令]">
+    <meta name="description" content="MongoDB常用语法和命令">
+        
+    <meta name="author" content="neo0moriarty">
+    <meta property="og:url" content="https://neo0moriarty.github.io/mongodb-note/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://neo0moriarty.github.io/">
+                        neo0moriarty
+                    </a>
+                
+                <p class="description">o(╯□╰)o  (゜-゜)つロ  o(╯□╰)o</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://neo0moriarty.github.io/">首页</a>
+                    
+                    <a  href="https://neo0moriarty.github.io/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">MongoDB常用语法和命令</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2017年12月15日
+                        </date>
+                        
+                        
+                        
+                        <div class="post-content">
+                            <p>MongoDB常用语法和命令记录集合</p>
+
+<hr />
+
+<p>原地备份collection:</p>
+
+<pre><code>db.subjects.find().forEach(function(x){db.subjects_bak_171218.insert(x);});
+</code></pre>
+
+<pre><code>查看数据库：
+db.stats();
+
+{  
+    &quot;db&quot; : &quot;test&quot;,               //当前数据库  
+    &quot;collections&quot; : 3,           //当前数据库多少表  
+    &quot;objects&quot; : 4,               //当前数据库所有表多少条数据  
+    &quot;avgObjSize&quot; : 51,           //每条数据的平均大小  
+    &quot;dataSize&quot; : 204,            //所有数据的总大小  
+    &quot;storageSize&quot; : 16384,       //所有数据占的磁盘大小  
+    &quot;numExtents&quot; : 3,  
+    &quot;indexes&quot; : 1,               //索引数  
+    &quot;indexSize&quot; : 8176,          //索引大小  
+    &quot;fileSize&quot; : 201326592,      //预分配给数据库的文件大小  
+    &quot;nsSizeMB&quot; : 16,  
+    &quot;dataFileVersion&quot; : {  
+        &quot;major&quot; : 4,  
+        &quot;minor&quot; : 5  
+    },  
+    &quot;ok&quot; : 1  
+}  
+
+查看cellection:
+db.posts.stats();
+
+mongodb导出json：
+mongoexport -d douban -c subjects -o subjects.json
+
+collection添加字段：
+db.subjects.update({},{$set: {'category':'电影'}}, true, true)
+
+collection更改字段名：
+db.subjects.update({}, {$rename : {&quot;movie_type&quot; : &quot;type&quot;}}, false, true)
+
+重命名collection：
+db.subjects.renameCollection('subjects')
+
+列出所有collection：
+db.getCollectionNames()
+
+列出所有数据库：
+show dbs;
+
+删除当前database：
+db.dropDatabase()
+
+隐式创建Collection:
+db.foo.insert({_id:1,name:&quot;test&quot;})
+
+显式创建Collection：
+db.createCollection('test')
+</code></pre>
+
+<p><a href="http://chenzhou123520.iteye.com/blog/1641319">Mongodb数据导出工具mongoexport和导入工具mongoimport介绍</a></p>
+
+<p><a href="https://docs.mongodb.com/manual/reference/program/mongoexport/">mongoexport官方文档</a></p>
+
+<pre><code>1 ) . 大于，小于，大于或等于，小于或等于
+
+$gt:大于
+$lt:小于
+$gte:大于或等于
+$lte:小于或等于
+
+例子：
+
+db.collection.find({ &quot;field&quot; : { $gt: value } } ); // greater than : field &gt; value
+db.collection.find({ &quot;field&quot; : { $lt: value } } ); // less than : field &lt; value
+db.collection.find({ &quot;field&quot; : { $gte: value } } ); // greater than or equal to : field &gt;= value
+db.collection.find({ &quot;field&quot; : { $lte: value } } ); // less than or equal to : field &lt;= value
+如查询j大于3,小于4:
+db.things.find({j : {$lt: 3}});
+db.things.find({j : {$gte: 4}});
+也可以合并在一条语句内:
+db.collection.find({ &quot;field&quot; : { $gt: value1, $lt: value2 } } ); // value1 &lt; field &lt; value
+2) 不等于 $ne
+例子：
+db.things.find( { x : { $ne : 3 } } );
+
+
+3) in 和 not in ($in $nin)
+
+语法：
+db.collection.find( { &quot;field&quot; : { $in : array } } );
+例子：
+db.things.find({j:{$in: [2,4,6]}});
+db.things.find({j:{$nin: [2,4,6]}});
+
+
+4) 取模运算$mod
+
+如下面的运算：
+db.things.find( &quot;this.a % 10 == 1&quot;)
+可用$mod代替：
+db.things.find( { a : { $mod : [ 10 , 1 ] } } )
+
+
+5)  $all
+
+$all和$in类似，但是他需要匹配条件内所有的值：
+
+如有一个对象：
+
+{ a: [ 1, 2, 3 ] }
+下面这个条件是可以匹配的：
+db.things.find( { a: { $all: [ 2, 3 ] } } );
+但是下面这个条件就不行了：
+db.things.find( { a: { $all: [ 2, 3, 4 ] } } );
+
+6)  $size
+
+$size是匹配数组内的元素数量的，如有一个对象：{a:[&quot;foo&quot;]}，他只有一个元素：
+
+下面的语句就可以匹配：db.things.find( { a : { $size: 1 } } );
+官网上说不能用来匹配一个范围内的元素，如果想找$size&lt;5之类的，他们建议创建一个字段来保存元素的数量。
+You cannot use $size to find a range of sizes (for example: arrays with more than 1 element). If you need to query for a range, create an extra size field that you increment when you add elements.
+7）$exists
+$exists用来判断一个元素是否存在：
+如：
+db.things.find( { a : { $exists : true } } ); // 如果存在元素a,就返回
+db.things.find( { a : { $exists : false } } ); // 如果不存在元素a，就返回
+
+8)  $type
+
+$type 基于 bson type来匹配一个元素的类型，像是按照类型ID来匹配，不过我没找到bson类型和id对照表。
+db.things.find( { a : { $type : 2 } } ); // matches if a is a string
+db.things.find( { a : { $type : 16 } } ); // matches if a is an int
+9）正则表达式
+
+mongo支持正则表达式，如：
+
+db.customers.find( { name : /acme.*corp/i } ); // 后面的i的意思是区分大小写
+
+10)  查询数据内的值
+
+下面的查询是查询colors内red的记录，如果colors元素是一个数据,数据库将遍历这个数组的元素来查询。db.things.find( { colors : &quot;red&quot; } );
+
+11) $elemMatch
+
+如果对象有一个元素是数组，那么$elemMatch可以匹配内数组内的元素：
+
+&gt; t.find( { x : { $elemMatch : { a : 1, b : { $gt : 1 } } } } ) 
+{ &quot;_id&quot; : ObjectId(&quot;4b5783300334000000000aa9&quot;), 
+&quot;x&quot; : [ { &quot;a&quot; : 1, &quot;b&quot; : 3 }, 7, { &quot;b&quot; : 99 }, { &quot;a&quot; : 11 } ]
+}$elemMatch : { a : 1, b : { $gt : 1 } } 所有的条件都要匹配上才行。
+注意，上面的语句和下面是不一样的。
+&gt; t.find( { &quot;x.a&quot; : 1, &quot;x.b&quot; : { $gt : 1 } } )
+$elemMatch是匹配{ &quot;a&quot; : 1, &quot;b&quot; : 3 }，而后面一句是匹配{ &quot;b&quot; : 99 }, { &quot;a&quot; : 11 } 
+
+
+12)  查询嵌入对象的值
+
+db.postings.find( { &quot;author.name&quot; : &quot;joe&quot; } );
+注意用法是author.name，用一个点就行了。更详细的可以看这个链接： dot notation
+举个例子：
+&gt; db.blog.save({ title : &quot;My First Post&quot;, author: {name : &quot;Jane&quot;, id : 1}})
+如果我们要查询 authors name 是Jane的, 我们可以这样：
+&gt; db.blog.findOne({&quot;author.name&quot; : &quot;Jane&quot;})
+如果不用点，那就需要用下面这句才能匹配：
+db.blog.findOne({&quot;author&quot; : {&quot;name&quot; : &quot;Jane&quot;, &quot;id&quot; : 1}})
+下面这句：
+db.blog.findOne({&quot;author&quot; : {&quot;name&quot; : &quot;Jane&quot;}})
+是不能匹配的，因为mongodb对于子对象，他是精确匹配。
+13) 元操作符 $not 取反
+如：
+db.customers.find( { name : { $not : /acme.*corp/i } } );db.things.find( { a : { $not : { $mod : [ 10 , 1 ] } } } ); mongodb还有很多函数可以用，如排序，统计等，请参考原文。
+</code></pre>
+
+<p>mongodb目前没有或(or)操作符，只能用变通的办法代替，可以参考这个<a href="http://www.mongodb.org/display/DOCS/OR+operations+in+query+expressions">链接</a>。</p>
+
+<p><strong>MongoDB基本命令：</strong></p>
+
+<pre><code>成功启动MongoDB后，再打开一个命令行窗口输入mongo，就可以进行数据库的一些操作。
+
+输入help可以看到基本操作命令：
+
+show dbs:显示数据库列表 
+show collections：显示当前数据库中的集合（类似关系数据库中的表） 
+show users：显示用户
+
+use &lt;db name&gt;：切换当前数据库，这和MS-SQL里面的意思一样 
+db.help()：显示数据库操作命令，里面有很多的命令 
+db.foo.help()：显示集合操作命令，同样有很多的命令，foo指的是当前数据库下，一个叫foo的集合，并非真正意义上的命令 
+db.foo.find()：对于当前数据库中的foo集合进行数据查找（由于没有条件，会列出所有数据） 
+db.foo.find( { a : 1 } )：对于当前数据库中的foo集合进行查找，条件是数据中有一个属性叫a，且a的值为1
+
+MongoDB没有创建数据库的命令，但有类似的命令。
+
+如：如果你想创建一个“myTest”的数据库，先运行use myTest命令，之后就做一些操作（如：db.createCollection('user')）,这样就可以创建一个名叫“myTest”的数据库。
+
+数据库常用命令
+
+1、Help查看命令提示
+
+ help
+
+  db.help();
+
+  db.yourColl.help();
+
+  db.youColl.find().help();
+
+  rs.help();
+
+2、切换/创建数据库
+
+ use yourDB;  当创建一个集合(table)的时候会自动创建当前数据库
+
+3、查询所有数据库
+
+ show dbs;
+
+4、删除当前使用数据库
+
+ db.dropDatabase();
+
+5、从指定主机上克隆数据库
+
+ db.cloneDatabase(“127.0.0.1”); 将指定机器上的数据库的数据克隆到当前数据库
+
+6、从指定的机器上复制指定数据库数据到某个数据库
+
+ db.copyDatabase(&quot;mydb&quot;, &quot;temp&quot;, &quot;127.0.0.1&quot;);将本机的mydb的数据复制到temp数据库中
+
+7、修复当前数据库
+
+ db.repairDatabase();
+
+8、查看当前使用的数据库
+
+ db.getName();
+
+ db; db和getName方法是一样的效果，都可以查询当前使用的数据库
+
+9、显示当前db状态
+
+ db.stats();
+
+10、当前db版本
+
+ db.version();
+
+11、查看当前db的链接机器地址
+
+ db.getMongo();
+
+Collection聚集集合
+
+1、创建一个聚集集合（table）
+
+ db.createCollection(“collName”, {size: 20, capped: 5, max: 100});
+
+2、得到指定名称的聚集集合（table）
+
+ db.getCollection(&quot;account&quot;);
+
+3、得到当前db的所有聚集集合
+
+ db.getCollectionNames();
+
+4、显示当前db所有聚集索引的状态
+
+ db.printCollectionStats();
+
+ 用户相关
+
+1、添加一个用户
+
+ db.addUser(&quot;name&quot;);
+
+ db.addUser(&quot;userName&quot;, &quot;pwd123&quot;, true); 添加用户、设置密码、是否只读
+
+2、数据库认证、安全模式
+
+ db.auth(&quot;userName&quot;, &quot;123123&quot;);
+
+3、显示当前所有用户
+
+ show users;
+
+4、删除用户
+
+ db.removeUser(&quot;userName&quot;);
+
+其他
+
+1、查询之前的错误信息
+
+ db.getPrevError();
+
+2、清除错误记录
+
+ db.resetError();
+
+ 
+
+查看聚集集合基本信息
+
+1、查看帮助  db.yourColl.help();
+
+2、查询当前集合的数据条数  db.yourColl.count();
+
+3、查看数据空间大小 db.userInfo.dataSize();
+
+4、得到当前聚集集合所在的db db.userInfo.getDB();
+
+5、得到当前聚集的状态 db.userInfo.stats();
+
+6、得到聚集集合总大小 db.userInfo.totalSize();
+
+7、聚集集合储存空间大小 db.userInfo.storageSize();
+
+8、Shard版本信息  db.userInfo.getShardVersion()
+
+9、聚集集合重命名 db.userInfo.renameCollection(&quot;users&quot;); 将userInfo重命名为users
+
+10、删除当前聚集集合 db.userInfo.drop();
+
+聚集集合查询
+
+1、查询所有记录
+
+db.userInfo.find();
+
+相当于：select* from userInfo;
+
+默认每页显示20条记录，当显示不下的情况下，可以用it迭代命令查询下一页数据。注意：键入it命令不能带“；”
+
+但是你可以设置每页显示数据的大小，用DBQuery.shellBatchSize= 50;这样每页就显示50条记录了。
+
+ 
+
+2、查询去掉后的当前聚集集合中的某列的重复数据
+
+db.userInfo.distinct(&quot;name&quot;);
+
+会过滤掉name中的相同数据
+
+相当于：select distict name from userInfo;
+
+ 
+
+3、查询age = 22的记录
+
+db.userInfo.find({&quot;age&quot;: 22});
+
+相当于： select * from userInfo where age = 22;
+
+ 
+
+4、查询age &gt; 22的记录
+
+db.userInfo.find({age: {$gt: 22}});
+
+相当于：select * from userInfo where age &gt;22;
+
+ 
+
+5、查询age &lt; 22的记录
+
+db.userInfo.find({age: {$lt: 22}});
+
+相当于：select * from userInfo where age &lt;22;
+
+ 
+
+6、查询age &gt;= 25的记录
+
+db.userInfo.find({age: {$gte: 25}});
+
+相当于：select * from userInfo where age &gt;= 25;
+
+ 
+
+7、查询age &lt;= 25的记录
+
+db.userInfo.find({age: {$lte: 25}});
+
+ 
+
+8、查询age &gt;= 23 并且 age &lt;= 26
+
+db.userInfo.find({age: {$gte: 23, $lte: 26}});
+
+ 
+
+9、查询name中包含 mongo的数据
+
+db.userInfo.find({name: /mongo/});
+
+//相当于%%
+
+select * from userInfo where name like ‘%mongo%’;
+
+ 
+
+10、查询name中以mongo开头的
+
+db.userInfo.find({name: /^mongo/});
+
+select * from userInfo where name like ‘mongo%’;
+
+ 
+
+11、查询指定列name、age数据
+
+db.userInfo.find({}, {name: 1, age: 1});
+
+相当于：select name, age from userInfo;
+
+当然name也可以用true或false,当用ture的情况下河name:1效果一样，如果用false就是排除name，显示name以外的列信息。
+
+ 
+
+12、查询指定列name、age数据, age &gt; 25
+
+db.userInfo.find({age: {$gt: 25}}, {name: 1, age: 1});
+
+相当于：select name, age from userInfo where age &gt;25;
+
+ 
+
+13、按照年龄排序
+
+升序：db.userInfo.find().sort({age: 1});
+
+降序：db.userInfo.find().sort({age: -1});
+
+ 
+
+14、查询name = zhangsan, age = 22的数据
+
+db.userInfo.find({name: 'zhangsan', age: 22});
+
+相当于：select * from userInfo where name = ‘zhangsan’ and age = ‘22’;
+
+ 
+
+15、查询前5条数据
+
+db.userInfo.find().limit(5);
+
+相当于：selecttop 5 * from userInfo;
+
+ 
+
+16、查询10条以后的数据
+
+db.userInfo.find().skip(10);
+
+相当于：select * from userInfo where id not in (
+
+selecttop 10 * from userInfo
+
+);
+
+ 
+
+17、查询在5-10之间的数据
+
+db.userInfo.find().limit(10).skip(5);
+
+可用于分页，limit是pageSize，skip是第几页*pageSize
+
+ 
+
+18、or与 查询
+
+db.userInfo.find({$or: [{age: 22}, {age: 25}]});
+
+相当于：select * from userInfo where age = 22 or age = 25;
+
+ 
+
+19、查询第一条数据
+
+db.userInfo.findOne();
+
+相当于：selecttop 1 * from userInfo;
+
+db.userInfo.find().limit(1);
+
+ 
+
+20、查询某个结果集的记录条数
+
+db.userInfo.find({age: {$gte: 25}}).count();
+
+相当于：select count(*) from userInfo where age &gt;= 20;
+
+如果要返回限制之后的记录数量，要使用count(true)或者count(非0) 
+db.users.find().skip(10).limit(5).count(true);
+
+ 
+
+21、按照某列进行排序
+
+db.userInfo.find({sex: {$exists: true}}).count();
+
+相当于：select count(sex) from userInfo;
+
+索引
+
+1、创建索引
+
+db.userInfo.ensureIndex({name: 1});
+
+db.userInfo.ensureIndex({name: 1, ts: -1});
+
+ 
+
+2、查询当前聚集集合所有索引
+
+db.userInfo.getIndexes();
+
+ 
+
+3、查看总索引记录大小
+
+db.userInfo.totalIndexSize();
+
+ 
+
+4、读取当前集合的所有index信息
+
+db.users.reIndex();
+
+ 
+
+5、删除指定索引
+
+db.users.dropIndex(&quot;name_1&quot;);
+
+ 
+
+6、删除所有索引索引
+
+db.users.dropIndexes();
+
+ 修改、添加、删除集合数据
+
+1、添加
+
+db.users.save({name: ‘zhangsan’, age: 25, sex: true});
+
+添加的数据的数据列，没有固定，根据添加的数据为准
+
+ 
+
+2、修改
+
+db.collection.update(criteria, objNew, upsert, multi )
+
+criteria:update的查询条件，类似sql update查询内where后面的
+
+objNew:update的对象和一些更新的操作符（如$,$inc...）等，也可以理解为sql update查询内set后面的。
+
+upsert : 如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入。
+
+multi : mongodb默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新。
+
+ 
+
+db.users.update({age: 25}, {$set: {name: 'changeName'}}, false, true);
+
+相当于：update users set name = ‘changeName’ where age = 25;
+
+ 
+
+db.users.update({name: 'Lisi'}, {$inc: {age: 50}}, false, true);
+
+相当于：update users set age = age + 50 where name = ‘Lisi’;
+
+ 
+
+db.users.update({name: 'Lisi'}, {$inc: {age: 50}, $set: {name: 'hoho'}}, false, true);
+
+相当于：update users set age = age + 50, name = ‘hoho’ where name = ‘Lisi’;
+
+ 
+
+3、删除
+
+db.users.remove({age: 132});
+
+ 
+
+4、查询修改删除
+
+db.users.findAndModify({
+
+    query: {age: {$gte: 25}},
+
+    sort: {age: -1},
+
+    update: {$set: {name: 'a2'}, $inc: {age: 2}},
+
+    remove: true
+
+});
+
+ 
+
+db.runCommand({ findandmodify : &quot;users&quot;,
+
+    query: {age: {$gte: 25}},
+
+    sort: {age: -1},
+
+    update: {$set: {name: 'a2'}, $inc: {age: 2}},
+
+    remove: true
+
+});
+</code></pre>
+
+<p>参考：</p>
+
+<ul>
+<li><a href="https://www.cnblogs.com/liyonghui/p/mongodb.html">https://www.cnblogs.com/liyonghui/p/mongodb.html</a></li>
+<li><a href="http://blog.163.com/ji_1006/blog/static/10612341201311271384351/">http://blog.163.com/ji_1006/blog/static/10612341201311271384351/</a></li>
+</ul>
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://neo0moriarty.github.io/">neo0moriarty</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://neo0moriarty.github.io/mongodb-note/">https://neo0moriarty.github.io/mongodb-note/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/mysql-replace-into/">MySQL replace into</a></li>
+        
+        <li><a href="/fix-mysqldb-error/">MySQLdb报错解决</a></li>
+        
+        <li><a href="/mac-mongodb/">Mac配置MongoDB开发测试环境</a></li>
+        
+        <li><a href="/mac-redis/">Mac配置Redis开发测试环境</a></li>
+        
+        <li><a href="/tmux-cli/">Tmux常用命令</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://neo0moriarty.github.io/tags/dev">dev</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://neo0moriarty.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-hugo-blog-record/" title="Mac下Hugo搭建记录">Mac下Hugo搭建记录</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-usb-iso/" title="Mac下格式化U盘并制作iso系统启动">Mac下格式化U盘并制作iso系统启动</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/ubuntu-mount-exfat/" title="ubuntu挂载exfat格式的硬盘">ubuntu挂载exfat格式的硬盘</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-neovim/" title="Neovim安装">Neovim安装</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-full-vim/" title="Mac 安装最完整的 Vim">Mac 安装最完整的 Vim</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-website/" title="Python相关网址收集">Python相关网址收集</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-round/" title="Python中使用round函数要注意的事">Python中使用round函数要注意的事</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-binary-tree/" title="Python实现和遍历二叉树">Python实现和遍历二叉树</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/practical-vim/" title="Vim实用技巧总结">Vim实用技巧总结</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/make-zsh-default/" title="配置zsh默认编辑器">配置zsh默认编辑器</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://neo0moriarty.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/blog/">blog</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/book/">book</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/crawler/">crawler</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/dev/">dev</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/os/">os</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/python/">python</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/study/">study</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://coolshell.cn/" title="酷壳 – CoolShell.cn">酷壳 – CoolShell.cn</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.flysnow.org" title="飞雪无情的博客">飞雪无情的博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>

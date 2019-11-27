@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.59.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Python生成千万行的文本并测试numpy运算性能 | neo0moriarty</title>
+    <meta property="og:title" content="Python生成千万行的文本并测试numpy运算性能 - neo0moriarty">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2017-11-27T00:00:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2017-11-27T00:00:00&#43;08:00">
+        
+    <meta name="Keywords" content="[Python生成千万行的浮点数文本 测试numpy运算性能]">
+    <meta name="description" content="Python生成千万行的文本并测试numpy运算性能">
+        
+    <meta name="author" content="neo0moriarty">
+    <meta property="og:url" content="https://neo0moriarty.github.io/python-generate-floats/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://neo0moriarty.github.io/">
+                        neo0moriarty
+                    </a>
+                
+                <p class="description">o(╯□╰)o  (゜-゜)つロ  o(╯□╰)o</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://neo0moriarty.github.io/">首页</a>
+                    
+                    <a  href="https://neo0moriarty.github.io/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Python生成千万行的文本并测试numpy运算性能</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2017年11月27日
+                        </date>
+                        
+                        
+                        
+                        <div class="post-content">
+                            <p>Python生成千万行的浮点数文本文件
+测试numpy运算性能</p>
+
+<hr />
+
+<p>生成千万行的浮点数文本文件，浮点数范围从0到1之间，Python代码：</p>
+
+<pre><code>from random import random
+from array import array
+with open('/Users/molock/floats-10M-lines.txt', 'w') as f:
+    l = [str(random()) for i in range(10**7)]
+    f.write('\n'.join(l))
+</code></pre>
+
+<p><strong>以上代码用Python3.5运行，在本机(i5的mbp)运行需要13、14秒。</strong></p>
+
+<p><strong>生成的文本文件floats-10M-lines.txt大小是192701137字节，约192.7MB。</strong></p>
+
+<p>用numpy加载文本，简单测试加减乘除的性能。</p>
+
+<p>perf_counter是Python3的计时器模块time下入精度和性能都比较高的计时器。（Python 3.3 及更新的版本中都有这个库）</p>
+
+<p>用这个计时器来估算性能。</p>
+
+<p>测试代码：</p>
+
+<pre><code>import numpy
+from time import perf_counter as pc
+
+t_load = pc()
+floats = numpy.loadtxt('/Users/molock/floats-10M-lines.txt')
+print(&quot;load data time:&quot;, pc() - t_load)
+
+print(floats[-3:])  # 查看最后三个数
+
+t_add = pc()
+floats += .5
+print(&quot;add time:&quot;, pc() - t_add)
+
+print(floats[-3:])
+
+t_minus = pc()
+floats -= .4
+print(&quot;minus time:&quot;, pc() - t_minus)
+
+print(floats[-3:])
+
+t_mul = pc()
+floats *= 2.79
+print(&quot;multiply time:&quot;, pc() - t_mul)
+
+print(floats[-3:])
+
+t_div = pc()
+floats /= 3.52
+print(&quot;division time:&quot;, pc() - t_div)
+
+print(floats[-3:])
+
+
+t_save = pc()
+# 将运算后的结果floats数组存入后缀为.npy的二进制文件
+numpy.save('/Users/molock/floats-10M', floats)
+print(&quot;save data time:&quot;, pc() - t_save)
+
+
+t_load_again = pc()
+floats2 = numpy.load('/Users/molock/floats-10M.npy', 'r+')
+print(&quot;load data again time:&quot;, pc() - t_load_again)
+
+print(floats2[-3:])
+
+</code></pre>
+
+<p>numpy.load 方法利用了一种叫作内存映射的机制，它让我们在内存不足的情况下仍然可以对数组做切片。</p>
+
+<p>输出结果：</p>
+
+<pre><code>load data time: 65.7026106659323
+[ 0.96038447  0.99720327  0.39896402]
+
+add time: 0.017584401881322265
+[ 1.46038447  1.49720327  0.89896402]
+
+minus time: 0.0120230030734092
+[ 1.06038447  1.09720327  0.49896402]
+
+multiply time: 0.008878643857315183
+[ 2.95847266  3.06119711  1.39210962]
+
+division time: 0.01236245408654213
+[ 0.84047519  0.86965827  0.39548569]
+
+save data time: 0.07357809785753489
+
+load data again time: 0.11263397801667452
+
+[ 0.84047519  0.86965827  0.39548569]
+
+[Finished in 66.6s]
+</code></pre>
+
+<p>结果分析：</p>
+
+<p><strong>numpy.loadtxt加载文本文件生成数组并不快，1000万行，192.7M的文件load时间超过1分钟(65.7秒)</strong>，相比之下代码生成文本文件的时间是13、14秒，大概是5倍。<strong>慢的原因是：从文本文件里读取时，会使用内置的 float 方法把每一行文字转换成浮点数。</strong></p>
+
+<p><strong>numpy数组的加减乘除是很高效的，1000万个浮点数的加减乘除分别都在18毫秒内完成了。</strong></p>
+
+<p><strong>numpy数组保存为二进制文件效率很高，只需要73毫秒。</strong>二进制文件大小为80M（一个float数字8字节，1000万个）。</p>
+
+<p><strong>把二进制文件load进来效率也很高，只需要112毫秒。</strong>相同的行数，load文本文件的时间是65秒，大概是load二进制文件的580倍。</p>
+
+<p><strong>总结:</strong></p>
+
+<ul>
+<li>二进制文件的读取比文本文件的读取高效得多，占用内存也小得多。</li>
+<li>numpy运算的高性能可见一斑。</li>
+</ul>
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://neo0moriarty.github.io/">neo0moriarty</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://neo0moriarty.github.io/python-generate-floats/">https://neo0moriarty.github.io/python-generate-floats/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/python-setdefault/">Python中setdefault和defaultdict的应用示例</a></li>
+        
+        <li><a href="/python-big-little-end/">Python判断计算机是大端还是小端</a></li>
+        
+        <li><a href="/python-read-write/">文件读取方式r&#43;、w&#43;、a&#43;的区别</a></li>
+        
+        <li><a href="/python-study-website/">Python相关的网站收集</a></li>
+        
+        <li><a href="/fluent-python/">《流畅的Python》</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://neo0moriarty.github.io/tags/python">python</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://neo0moriarty.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-hugo-blog-record/" title="Mac下Hugo搭建记录">Mac下Hugo搭建记录</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-usb-iso/" title="Mac下格式化U盘并制作iso系统启动">Mac下格式化U盘并制作iso系统启动</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/ubuntu-mount-exfat/" title="ubuntu挂载exfat格式的硬盘">ubuntu挂载exfat格式的硬盘</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-neovim/" title="Neovim安装">Neovim安装</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-full-vim/" title="Mac 安装最完整的 Vim">Mac 安装最完整的 Vim</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-website/" title="Python相关网址收集">Python相关网址收集</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-round/" title="Python中使用round函数要注意的事">Python中使用round函数要注意的事</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-binary-tree/" title="Python实现和遍历二叉树">Python实现和遍历二叉树</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/practical-vim/" title="Vim实用技巧总结">Vim实用技巧总结</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/make-zsh-default/" title="配置zsh默认编辑器">配置zsh默认编辑器</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://neo0moriarty.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/blog/">blog</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/book/">book</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/crawler/">crawler</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/dev/">dev</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/os/">os</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/python/">python</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/study/">study</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://coolshell.cn/" title="酷壳 – CoolShell.cn">酷壳 – CoolShell.cn</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.flysnow.org" title="飞雪无情的博客">飞雪无情的博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>

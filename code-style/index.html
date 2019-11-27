@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.59.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>项目中的代码风格规范的必要性 | neo0moriarty</title>
+    <meta property="og:title" content="项目中的代码风格规范的必要性 - neo0moriarty">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2018-01-06T00:00:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2018-01-06T00:00:00&#43;08:00">
+        
+    <meta name="Keywords" content="[Python代码风格 Python代码规范]">
+    <meta name="description" content="项目中的代码风格规范的必要性">
+        
+    <meta name="author" content="neo0moriarty">
+    <meta property="og:url" content="https://neo0moriarty.github.io/code-style/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://neo0moriarty.github.io/">
+                        neo0moriarty
+                    </a>
+                
+                <p class="description">o(╯□╰)o  (゜-゜)つロ  o(╯□╰)o</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://neo0moriarty.github.io/">首页</a>
+                    
+                    <a  href="https://neo0moriarty.github.io/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">项目中的代码风格规范的必要性</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2018年1月6日
+                        </date>
+                        
+                        
+                        
+                        <div class="post-content">
+                            <p>在项目中使用相同的代码风格规范是很有必要的。通过实践，发现好处多多。</p>
+
+<p>第一个好处便是<strong>代码风格的统一可以很好地提高代码的可读性</strong>。制定一个相同的代码风格，如直接选用Python的PEP8官方风格指南，严格遵守后可以得到美观又统一风格的项目代码，这在多人协作的开发中是很有必要的，每个人编写代码的习惯不一样，特别是有些喜欢用一些奇怪或新奇的写法，这样可读性很差。尤其是灵活的脚本语言Python、JS等，<strong>越是灵活越需要规范，代码更多是写给人看，而不是仅仅给机器跑而已</strong>。实际上Github上稍微正规的项目都有自己的项目代码规范，如果没有显式标注，那便是默认使用官方的风格指南。Python的PEP8规范很详细，作为语言本身重要的补充，规范是代码简洁美观的有力保障。</p>
+
+<p>第二个好处是<strong>可以发现隐藏的bug</strong>。代码风格如果规范得好(像PEP8)，是可以发现代码中潜藏的bug的，比如未定义的变量，定义了变量却没使用，变量覆盖等等，当代码量越来越大，况且单元测试不完善的时候，代码规范检查可以发现一些基础的不良写法，发现隐藏的bug。(还是那句话，人都是不可靠的，总会有疏忽)</p>
+
+<p>第三个好处是可以稍微<strong>提高性能</strong>。比如定义的变量未使用，引入的模块未使用等，会造成额外的性能消耗和代码冗余，代码规范可以方便地检查出来。</p>
+
+<p>代码规范的检查最好是做到自动化，最少也要配置快捷使用方式。可以使用flake8和autopep8等检查规范和自动格式化代码的工具，很多IDE和编辑器都可以配置插件和快捷使用方式。Python中最专业最强大的IDE当数Pycharm，可以配置「External Tools」，Sublime之类的编辑器也可以方便地配置插件。</p>
+
+<p>即便有工具可以检查和格式化代码，但自己平时编写代码时最好还是按照规范来编写，第一工具并非万能，不能过分依赖；第二是按照规范来编写本来就是一个习惯问题，养成好习惯，也就离编写漂亮又优雅代码的目标不远了。</p>
+
+<p>关于代码规范和如何编写漂亮的Python代码，之前的博客：</p>
+
+<ul>
+<li><a href="https://molock.cn/posts/37293/">Python代码规范检查工具</a></li>
+<li><a href="https://molock.cn/posts/10012/">如何写出漂亮优雅的Python代码</a></li>
+<li><a href="https://molock.cn/posts/39746/">Python几个主流单元测试工具基本使用示例</a></li>
+</ul>
+
+<p>要串起来，边实践边总结，长期以往才能进步。如果过一段时间再去看之前的代码，如果觉得还可以写得更好，说明是进步了，如果没觉得有需要改进的地方，那么往往是有问题的。</p>
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://neo0moriarty.github.io/">neo0moriarty</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://neo0moriarty.github.io/code-style/">https://neo0moriarty.github.io/code-style/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/kill-port-pid/">查看端口占用进程并kill掉</a></li>
+        
+        <li><a href="/mongodb-note/">MongoDB常用语法和命令</a></li>
+        
+        <li><a href="/mysql-replace-into/">MySQL replace into</a></li>
+        
+        <li><a href="/fix-mysqldb-error/">MySQLdb报错解决</a></li>
+        
+        <li><a href="/mac-mongodb/">Mac配置MongoDB开发测试环境</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://neo0moriarty.github.io/tags/dev">dev</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://neo0moriarty.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-hugo-blog-record/" title="Mac下Hugo搭建记录">Mac下Hugo搭建记录</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-usb-iso/" title="Mac下格式化U盘并制作iso系统启动">Mac下格式化U盘并制作iso系统启动</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/ubuntu-mount-exfat/" title="ubuntu挂载exfat格式的硬盘">ubuntu挂载exfat格式的硬盘</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-neovim/" title="Neovim安装">Neovim安装</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-full-vim/" title="Mac 安装最完整的 Vim">Mac 安装最完整的 Vim</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-website/" title="Python相关网址收集">Python相关网址收集</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-round/" title="Python中使用round函数要注意的事">Python中使用round函数要注意的事</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-binary-tree/" title="Python实现和遍历二叉树">Python实现和遍历二叉树</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/practical-vim/" title="Vim实用技巧总结">Vim实用技巧总结</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/make-zsh-default/" title="配置zsh默认编辑器">配置zsh默认编辑器</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://neo0moriarty.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/blog/">blog</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/book/">book</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/crawler/">crawler</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/dev/">dev</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/os/">os</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/python/">python</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/study/">study</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://coolshell.cn/" title="酷壳 – CoolShell.cn">酷壳 – CoolShell.cn</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.flysnow.org" title="飞雪无情的博客">飞雪无情的博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>

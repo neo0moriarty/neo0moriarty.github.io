@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>os on neo0moriarty</title>
+    <link>https://neo0moriarty.github.io/tags/os/</link>
+    <description>Recent content in os on neo0moriarty</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sun, 04 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://neo0moriarty.github.io/tags/os/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mac下格式化U盘并制作iso系统启动</title>
+      <link>https://neo0moriarty.github.io/mac-usb-iso/</link>
+      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-usb-iso/</guid>
+      <description>查看磁盘可以用Mac自带「磁盘工具」。
+命令行查看：
+df -h fdisk -l  格式化：
+sudo diskutil eraseDisk FAT32 LGF MBRFormat /dev/disk2  LGF是磁盘命名，需大写。
+取消挂载：
+sudo diskutil umount /dev/disk2s1  使用dd命令写入iso文件，制作系统启动：
+sudo dd if=/Users/molock/Downloads/ubuntu-16.04.4-desktop-amd64.iso of=/dev/disk2 bs=4m  </description>
+    </item>
+    
+    <item>
+      <title>ubuntu挂载exfat格式的硬盘</title>
+      <link>https://neo0moriarty.github.io/ubuntu-mount-exfat/</link>
+      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/ubuntu-mount-exfat/</guid>
+      <description>ubuntu默认不支持exfat格式的硬盘挂载。
+安装工具解决：
+sudo apt-get install exfat-utils  重启电脑生效。</description>
+    </item>
+    
+    <item>
+      <title>Neovim安装</title>
+      <link>https://neo0moriarty.github.io/install-neovim/</link>
+      <pubDate>Fri, 26 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/install-neovim/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://neovim.io/&#34;&gt;Neovim&lt;/a&gt;应该算是Vim的一个衍生版本或类似插件吧，从&lt;a href=&#34;https://github.com/neovim/neovim&#34;&gt;github&lt;/a&gt;两万多的star数可以看出其火爆程度。貌似提升性能和增加功能的同时也兼容了Vim。安装来体验一下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mac 安装最完整的 Vim</title>
+      <link>https://neo0moriarty.github.io/install-full-vim/</link>
+      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/install-full-vim/</guid>
+      <description>&lt;p&gt;机器上默认安装的 Vim 一般不是完整的,需要手动升级到 Vim, 以获得更多的功能.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>配置zsh默认编辑器</title>
+      <link>https://neo0moriarty.github.io/make-zsh-default/</link>
+      <pubDate>Tue, 16 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/make-zsh-default/</guid>
+      <description># 修改crontab默认编辑器为vim export EDITOR=vim # 设置git commit 编辑器为sublime export GIT_EDITOR=&amp;quot;subl --wait --new-window&amp;quot;  如果subl命令还未配置，需先配置：
+# Mac下配置 ln -s &amp;quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&amp;quot; /usr/local/bin/subl  </description>
+    </item>
+    
+    <item>
+      <title>Mac下mds_stores问题</title>
+      <link>https://neo0moriarty.github.io/mac-mds-stores/</link>
+      <pubDate>Sun, 14 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-mds-stores/</guid>
+      <description>这两天Mac时不时提示内存不足进而整个系统卡死，只能重启解决，打开活动监视器查看，CPU和内存狂飙。占用进程是「mds」和「mds_stores」。搜索了一下，貌似是系统的Spotlight索引引起的，出这么大的bug，实在不应该。
+暂时的解决方案是关闭该功能：
+sudo mdutil -a -i off  </description>
+    </item>
+    
+    <item>
+      <title>Mac在finder中隐藏指定文件</title>
+      <link>https://neo0moriarty.github.io/mac-hide-files/</link>
+      <pubDate>Fri, 29 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-hide-files/</guid>
+      <description>Mac的资源管理器默认隐藏「.」开头的目录和文件。 要隐藏更多的文件可以使用终端命令「chflags」:
+# 隐藏 .pyc目录的文件 chflags hidden ./*.pyc # 恢复显示 chflags nohidden ./*.pyc  finder中切换显示隐藏文件的快捷键是 「command + shift + .」。</description>
+    </item>
+    
+    <item>
+      <title>Mac下非常好用的视频播放器movist</title>
+      <link>https://neo0moriarty.github.io/mac-movist/</link>
+      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-movist/</guid>
+      <description>Mac下使用过很多款视频播放器，最好用的当数Movist。 还没试过有播放不了的视频格式，播放非常流畅。安装包存档放于百度云盘备份，地址在这。</description>
+    </item>
+    
+    <item>
+      <title>用nload查看实时网络流量和带宽使用</title>
+      <link>https://neo0moriarty.github.io/linux-nload/</link>
+      <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/linux-nload/</guid>
+      <description>&lt;p&gt;Linux查看网络流量和带宽使用情况的工具和命令很多，nload是其中一种方式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mac配置MongoDB开发测试环境</title>
+      <link>https://neo0moriarty.github.io/mac-mongodb/</link>
+      <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-mongodb/</guid>
+      <description>&lt;p&gt;Mac下MongoDB配置记录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mac配置Redis开发测试环境</title>
+      <link>https://neo0moriarty.github.io/mac-redis/</link>
+      <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-redis/</guid>
+      <description>&lt;p&gt;Mac下Redis配置记录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Tmux常用命令</title>
+      <link>https://neo0moriarty.github.io/tmux-cli/</link>
+      <pubDate>Sat, 02 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/tmux-cli/</guid>
+      <description>&lt;p&gt;tmux是一个非常实用的终端工具，用于在一个终端窗口中运行多个终端会话。由于 tmux 允许随时随地断开或重新接入会话（Session），所以最大的作用就是&lt;strong&gt;在远程服务器上持久地保存工作状态&lt;/strong&gt;。由于网络的不稳定会经常造成远程连接断开，这个工具保存会话状态的功能非常实用！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux开机启动服务</title>
+      <link>https://neo0moriarty.github.io/linux-init/</link>
+      <pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/linux-init/</guid>
+      <description>&lt;p&gt;Linux服务器重启后，有些服务是不会自动重启的，可以设置为开机自启。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python判断计算机是大端还是小端</title>
+      <link>https://neo0moriarty.github.io/python-big-little-end/</link>
+      <pubDate>Mon, 27 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-big-little-end/</guid>
+      <description>&lt;p&gt;little endian（小端）和big endian（大端）之分
+用python判断大端还是小端&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>centos添加swap</title>
+      <link>https://neo0moriarty.github.io/centos-add-swap/</link>
+      <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/centos-add-swap/</guid>
+      <description>&lt;p&gt;在阿里云服务器setup superset时初始化数据报错，原因是内存不够用，自己添加swap解决。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mac Pycharm 2017.2 破解激活</title>
+      <link>https://neo0moriarty.github.io/pycharm2017/</link>
+      <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/pycharm2017/</guid>
+      <description>&lt;p&gt;Mac版Pycharm 2017.2.3 下载 &amp;amp; 破解激活&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>编译安装svn(subversion)支持sasl</title>
+      <link>https://neo0moriarty.github.io/install-subversion-sasl/</link>
+      <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/install-subversion-sasl/</guid>
+      <description>&lt;p&gt;系统默认的svn不支持sasl加密。若svn服务器开启sasl加密的话将报错：Cannot negotiate authentication mechanism。需重新编译安装。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>很好用的视频下载工具downie</title>
+      <link>https://neo0moriarty.github.io/downie/</link>
+      <pubDate>Sat, 14 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/downie/</guid>
+      <description>&lt;p&gt;一款很好用的视频下载工具&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux查看剩余容量大小</title>
+      <link>https://neo0moriarty.github.io/check-disk-available/</link>
+      <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/check-disk-available/</guid>
+      <description>&lt;p&gt;Linux中关于查看剩余容量大小的命令&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>替换rm命令防止误删除</title>
+      <link>https://neo0moriarty.github.io/stop-rm/</link>
+      <pubDate>Wed, 11 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/stop-rm/</guid>
+      <description>&lt;p&gt;mac和linux使用rm命令行删除，默认是不会放到回收站/废纸篓里面的，容易误删除，尤其是root用户下。利用alias把rm命令重定向到新的shell脚本，把删除的文件移到指定的目录下，可以一定程度缓解误删除的操作。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux下sudo用户设置</title>
+      <link>https://neo0moriarty.github.io/set-sudo/</link>
+      <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/set-sudo/</guid>
+      <description>&lt;p&gt;Linux下将普通用户加入sudo用户设置方法&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>我的vim配置文件vimrc</title>
+      <link>https://neo0moriarty.github.io/vimrc/</link>
+      <pubDate>Sun, 01 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/vimrc/</guid>
+      <description>&lt;p&gt;我的vim配置文件，使用Vundle管理插件&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SSH免密码远程登录</title>
+      <link>https://neo0moriarty.github.io/ssh-no-passwd/</link>
+      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/ssh-no-passwd/</guid>
+      <description>&lt;p&gt;实现SSH免密码登录服务器&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用七牛云图床并实现快速贴图</title>
+      <link>https://neo0moriarty.github.io/use-qiqiu-paste-picture/</link>
+      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/use-qiqiu-paste-picture/</guid>
+      <description>&lt;p&gt;七牛存储可以作为图床，存放一些静态资源，介绍一种快速贴图的方式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Markdown编辑器Mweb</title>
+      <link>https://neo0moriarty.github.io/mac-mweb-markdown/</link>
+      <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-mweb-markdown/</guid>
+      <description>&lt;p&gt;Mac下一款很好用的Markdow编辑软件&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

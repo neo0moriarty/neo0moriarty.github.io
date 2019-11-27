@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>book on neo0moriarty</title>
+    <link>https://neo0moriarty.github.io/tags/book/</link>
+    <description>Recent content in book on neo0moriarty</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 21 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://neo0moriarty.github.io/tags/book/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>两本爬虫相关的书籍</title>
+      <link>https://neo0moriarty.github.io/two-crawler-books/</link>
+      <pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/two-crawler-books/</guid>
+      <description>&lt;p&gt;今年想看的书单越积累越长，优先级也处于不断调整的状态。
+最近业余时间阅读了两本爬虫的书籍，也写了一些爬虫代码。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《流畅的Python》</title>
+      <link>https://neo0moriarty.github.io/fluent-python/</link>
+      <pubDate>Sat, 25 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/fluent-python/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://book.douban.com/subject/27028517/&#34;&gt;《流畅的Python》中文版&lt;/a&gt;2017年出版，豆瓣评分9.2。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《机器学习》</title>
+      <link>https://neo0moriarty.github.io/machine-learning/</link>
+      <pubDate>Thu, 16 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/machine-learning/</guid>
+      <description>&lt;p&gt;周志华 ——《机器学习》 2016年1月第一版 豆瓣评分：8.8&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《深度学习》</title>
+      <link>https://neo0moriarty.github.io/deep-learning/</link>
+      <pubDate>Thu, 16 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/deep-learning/</guid>
+      <description>&lt;p&gt;Ian Goodfellow  Yoshua Bengio  Aaron Courville —— 《Deep Learning》&lt;/p&gt;
+
+&lt;p&gt;2017年第一版  豆瓣评分：8.7&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《数学之美》</title>
+      <link>https://neo0moriarty.github.io/beauty-math/</link>
+      <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/beauty-math/</guid>
+      <description>&lt;p&gt;吴军 ——《数学之美》2012年6月第一版 豆瓣评分： 第一版 8.7  第二版 9.0&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;数学在IT技术中的美&lt;/strong&gt;，特别是语音识别和搜索引擎方面的美。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

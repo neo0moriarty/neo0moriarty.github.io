@@ -1,0 +1,1686 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on neo0moriarty</title>
+    <link>https://neo0moriarty.github.io/posts/</link>
+    <description>Recent content in Posts on neo0moriarty</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 26 Nov 2019 02:20:53 +0800</lastBuildDate>
+    
+	<atom:link href="https://neo0moriarty.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mac下Hugo搭建记录</title>
+      <link>https://neo0moriarty.github.io/mac-hugo-blog-record/</link>
+      <pubDate>Tue, 26 Nov 2019 02:20:53 +0800</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-hugo-blog-record/</guid>
+      <description>&lt;p&gt;Mac下hugo博客的一些命令和操作、修改记录。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mac下格式化U盘并制作iso系统启动</title>
+      <link>https://neo0moriarty.github.io/mac-usb-iso/</link>
+      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-usb-iso/</guid>
+      <description>查看磁盘可以用Mac自带「磁盘工具」。
+命令行查看：
+df -h fdisk -l  格式化：
+sudo diskutil eraseDisk FAT32 LGF MBRFormat /dev/disk2  LGF是磁盘命名，需大写。
+取消挂载：
+sudo diskutil umount /dev/disk2s1  使用dd命令写入iso文件，制作系统启动：
+sudo dd if=/Users/molock/Downloads/ubuntu-16.04.4-desktop-amd64.iso of=/dev/disk2 bs=4m  </description>
+    </item>
+    
+    <item>
+      <title>ubuntu挂载exfat格式的硬盘</title>
+      <link>https://neo0moriarty.github.io/ubuntu-mount-exfat/</link>
+      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/ubuntu-mount-exfat/</guid>
+      <description>ubuntu默认不支持exfat格式的硬盘挂载。
+安装工具解决：
+sudo apt-get install exfat-utils  重启电脑生效。</description>
+    </item>
+    
+    <item>
+      <title>Neovim安装</title>
+      <link>https://neo0moriarty.github.io/install-neovim/</link>
+      <pubDate>Fri, 26 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/install-neovim/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://neovim.io/&#34;&gt;Neovim&lt;/a&gt;应该算是Vim的一个衍生版本或类似插件吧，从&lt;a href=&#34;https://github.com/neovim/neovim&#34;&gt;github&lt;/a&gt;两万多的star数可以看出其火爆程度。貌似提升性能和增加功能的同时也兼容了Vim。安装来体验一下。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mac 安装最完整的 Vim</title>
+      <link>https://neo0moriarty.github.io/install-full-vim/</link>
+      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/install-full-vim/</guid>
+      <description>&lt;p&gt;机器上默认安装的 Vim 一般不是完整的,需要手动升级到 Vim, 以获得更多的功能.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python相关网址收集</title>
+      <link>https://neo0moriarty.github.io/python-website/</link>
+      <pubDate>Sat, 20 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-website/</guid>
+      <description>&lt;p&gt;将&lt;strong&gt;Python&lt;/strong&gt;相关的&lt;strong&gt;学习资源和网址&lt;/strong&gt;收集于此，主要是一些学习文档、博客、电子书主页、github等等。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中使用round函数要注意的事</title>
+      <link>https://neo0moriarty.github.io/python-round/</link>
+      <pubDate>Fri, 19 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-round/</guid>
+      <description>&lt;p&gt;使用round函数的时候发现了「奇怪」的现象。&lt;strong&gt;一直觉得round函数就是四舍五入，结果却不一定。&lt;/strong&gt;一般如果觉得奇怪，那就是没弄懂其本质的运作原理，所以深入了解了下round函数。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python实现和遍历二叉树</title>
+      <link>https://neo0moriarty.github.io/python-binary-tree/</link>
+      <pubDate>Thu, 18 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-binary-tree/</guid>
+      <description>&lt;p&gt;先思考：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;怎么表示一棵树(如二叉树)&lt;/li&gt;
+&lt;li&gt;树有哪几种遍历方式，怎么实现&lt;/li&gt;
+&lt;li&gt;给定其中N种遍历结果，如何还原树&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>Vim实用技巧总结</title>
+      <link>https://neo0moriarty.github.io/practical-vim/</link>
+      <pubDate>Thu, 18 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/practical-vim/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://book.douban.com/subject/25869486/&#34;&gt;《Practical Vim》(《Vim实用技巧》)&lt;/a&gt; 是关于Vim技巧最好的教程，豆瓣评分9.1。之前断断续续地看过，不过没整理笔记。这书得经常翻看并实践，以后把看书和Vim练习的笔记记录整理在此，便于反复复习和练习使用。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>配置zsh默认编辑器</title>
+      <link>https://neo0moriarty.github.io/make-zsh-default/</link>
+      <pubDate>Tue, 16 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/make-zsh-default/</guid>
+      <description># 修改crontab默认编辑器为vim export EDITOR=vim # 设置git commit 编辑器为sublime export GIT_EDITOR=&amp;quot;subl --wait --new-window&amp;quot;  如果subl命令还未配置，需先配置：
+# Mac下配置 ln -s &amp;quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&amp;quot; /usr/local/bin/subl  </description>
+    </item>
+    
+    <item>
+      <title>Mac下mds_stores问题</title>
+      <link>https://neo0moriarty.github.io/mac-mds-stores/</link>
+      <pubDate>Sun, 14 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-mds-stores/</guid>
+      <description>这两天Mac时不时提示内存不足进而整个系统卡死，只能重启解决，打开活动监视器查看，CPU和内存狂飙。占用进程是「mds」和「mds_stores」。搜索了一下，貌似是系统的Spotlight索引引起的，出这么大的bug，实在不应该。
+暂时的解决方案是关闭该功能：
+sudo mdutil -a -i off  </description>
+    </item>
+    
+    <item>
+      <title>epoll、异步、并发</title>
+      <link>https://neo0moriarty.github.io/epoll-async/</link>
+      <pubDate>Fri, 12 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/epoll-async/</guid>
+      <description>&lt;p&gt;关于异步、并发相关的笔记与资料汇总。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Sanic学习</title>
+      <link>https://neo0moriarty.github.io/python-sanic/</link>
+      <pubDate>Thu, 11 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-sanic/</guid>
+      <description>&lt;p&gt;Sanic学习笔记、练手记录。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Sanic实现WebSocket</title>
+      <link>https://neo0moriarty.github.io/python-sanic-websocket/</link>
+      <pubDate>Thu, 11 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-sanic-websocket/</guid>
+      <description>&lt;p&gt;Sanic除了利用Python原生的asyncio等异步特性，还可以方便地实现websocket接口。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>关于RESTful API设计风格</title>
+      <link>https://neo0moriarty.github.io/about-restful-api/</link>
+      <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/about-restful-api/</guid>
+      <description>&lt;p&gt;最近抽空在看Sanic的文档，准备写个Demo，重温一遍RESTful API设计风格的知识。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用Elasticsearch作为Hexo的搜索服务</title>
+      <link>https://neo0moriarty.github.io/hexo-elasticsearch/</link>
+      <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-elasticsearch/</guid>
+      <description>&lt;p&gt;现在博客使用的搜索插件很慢，没访问缓存、第一次打开时至少要几秒钟，有时十秒或更多，实在慢。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Pycharm中Console的使用</title>
+      <link>https://neo0moriarty.github.io/pycharm-console/</link>
+      <pubDate>Sat, 06 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/pycharm-console/</guid>
+      <description>&lt;p&gt;Pycharm是很专业的Python开发IDE，功能特别强大，Console也不例外，比直接用iTerm2终端要好用。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用logging替换print</title>
+      <link>https://neo0moriarty.github.io/python-logging/</link>
+      <pubDate>Sat, 06 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-logging/</guid>
+      <description>&lt;p&gt;平时在学习和工作中，为了调试和检查，经常会用到打印变量结果等信息，习惯用print。这是不好的习惯，尤其是在Web相关的项目中。很小的脚本文件中用print是比较方便的，在稍微大点的Web项目中应该用logging模块彻底替换print，养成习惯。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>项目中的代码风格规范的必要性</title>
+      <link>https://neo0moriarty.github.io/code-style/</link>
+      <pubDate>Sat, 06 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/code-style/</guid>
+      <description>&lt;p&gt;在项目中使用相同的代码风格规范是很有必要的。通过实践，发现好处多多。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python的代码性能测试工具</title>
+      <link>https://neo0moriarty.github.io/python-perf-counter/</link>
+      <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-perf-counter/</guid>
+      <description>&lt;p&gt;Python有挺多代码性能测试的工具，分CPU和内存的性能测试。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python 3.6 新特性一窥</title>
+      <link>https://neo0moriarty.github.io/python36-features/</link>
+      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python36-features/</guid>
+      <description>&lt;p&gt;Python3.6 在2016.12.23正式发布。发布一年多了，现在最新版本是3.6.4。
+3.6是Python的一个重要版本，巩固和新增了很多Python 3.x 的新特性。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python增强解释器Bpython</title>
+      <link>https://neo0moriarty.github.io/python-bpython/</link>
+      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-bpython/</guid>
+      <description>&lt;p&gt;Python默认的解释器是Cpython，不大好用。Ipython是一个交互比较好的增强解释器。此外，还有另一个增强解释器是Bpython。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python代码规范检查工具</title>
+      <link>https://neo0moriarty.github.io/python-pycodestyle/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-pycodestyle/</guid>
+      <description>&lt;p&gt;Python代码规范检查工具汇总。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python自定义异常类</title>
+      <link>https://neo0moriarty.github.io/python-exception/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-exception/</guid>
+      <description>&lt;p&gt;Python自定义异常可以通过继承自带的异常类来实现。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python的上下文管理器</title>
+      <link>https://neo0moriarty.github.io/python-contextor/</link>
+      <pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-contextor/</guid>
+      <description>&lt;p&gt;Python读写文件最好的写法是「 with open(filename, mode) as f 」这种方式。
+这里的with使用的就是自带的上下文管理。本篇内容介绍Python的上下文管理器(contextor)。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python str VS repr</title>
+      <link>https://neo0moriarty.github.io/python-str-repr/</link>
+      <pubDate>Sat, 30 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-str-repr/</guid>
+      <description>&lt;p&gt;Python中字符串的格式化一般使用str和repr，str和repr调用的底层特殊函数是&lt;code&gt;__str__&lt;/code&gt;和&lt;code&gt;__repr__&lt;/code&gt;。用示例展示它们之间的区别。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>当True、False和数字作为dict的key时</title>
+      <link>https://neo0moriarty.github.io/python-dict-key/</link>
+      <pubDate>Sat, 30 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-dict-key/</guid>
+      <description>&lt;p&gt;Python的字典(dict)是很常用的，但字典的key的选用是需要注意的，并不是所有数据类型都可以作为字典的key；当True、False和数字作为dict的key时会发生「诡异」的事。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mac在finder中隐藏指定文件</title>
+      <link>https://neo0moriarty.github.io/mac-hide-files/</link>
+      <pubDate>Fri, 29 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-hide-files/</guid>
+      <description>Mac的资源管理器默认隐藏「.」开头的目录和文件。 要隐藏更多的文件可以使用终端命令「chflags」:
+# 隐藏 .pyc目录的文件 chflags hidden ./*.pyc # 恢复显示 chflags nohidden ./*.pyc  finder中切换显示隐藏文件的快捷键是 「command + shift + .」。</description>
+    </item>
+    
+    <item>
+      <title>Mac下非常好用的视频播放器movist</title>
+      <link>https://neo0moriarty.github.io/mac-movist/</link>
+      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-movist/</guid>
+      <description>Mac下使用过很多款视频播放器，最好用的当数Movist。 还没试过有播放不了的视频格式，播放非常流畅。安装包存档放于百度云盘备份，地址在这。</description>
+    </item>
+    
+    <item>
+      <title>Pycharm配置pylint和pytest</title>
+      <link>https://neo0moriarty.github.io/pycharm-config-pylint/</link>
+      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/pycharm-config-pylint/</guid>
+      <description>&lt;p&gt;配置Pycharm支持pylint和pytest的快捷使用，方法是添加到右键的「External Tools」中。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python几个主流单元测试工具基本使用示例</title>
+      <link>https://neo0moriarty.github.io/python-unittest-tools/</link>
+      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-unittest-tools/</guid>
+      <description>&lt;p&gt;对比记录Python几个主流单元测试工具的基本使用示例。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python单元测试相关的模块和工具</title>
+      <link>https://neo0moriarty.github.io/python-unit-test/</link>
+      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-unit-test/</guid>
+      <description>&lt;p&gt;任何语言，要想编写足够健壮的程序，都要配合完善的单元测试，尤其是大型项目，在实践中这也是容易被忽略或不重视的一个环节。在此收集单元测试相关的模块和学习书籍、阅读资料等。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>asyncio uvloop sanic</title>
+      <link>https://neo0moriarty.github.io/python-asyncio/</link>
+      <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-asyncio/</guid>
+      <description>最近有空就去翻看Youtube的视频，看了很多Python相关的视频，主要是一些Python核心开发者的技术演讲视频。了解一些Python最前沿的技术分享。仰望众多大神，除了感到渺小和自卑外，还是能学到不少东西的。很受教，应该坚持。
+这两三年来Python3最主要和最受关注的feature莫过于asyncio，得益于node.js和高并发编程这几年的火热，异步编程和异步IO的概念更加受关注。这是好事，网络的传输一直是瓶颈，异步IO是达到高并发的有效手段。Python的asyncio的出现让Python更加焕发生机，尤其是web开发，大家一直认为这是趋势，越来越受关注。asyncio的开发者之一Yury Selivanov大神开发了uvloop，测试了asyncio+uvloop的性能，测试结果证明是可以媲美golang的性能，把node.js甩在身后，可见asyncio的潜力，具体可以参照这篇博文。现在还是起步不久，相信不久会有更令人瞩目的进步空间。
+之前写过一年左右的node.js，学到了不少异步编程的知识，node.js的纯异步编程很难有好的编程体验，相比Python，体验差了不止是几条街。现在Python+异步Python IO解决方案asyncio，让我顿时有了强烈的兴趣，接下来会持续关注和深入学习Python的web框架sanic和asyncio、uvloop等等，并实践之。
+一些asyncio阅读资料：
+ asyncio官方文档 Raymond Hettinger, Keynote on Concurrency, PyBay Asynchronous I/O With Python 3  Stay hungry. Stay foolish.</description>
+    </item>
+    
+    <item>
+      <title>Hexo博客字体的调整</title>
+      <link>https://neo0moriarty.github.io/hexo-change-font/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-change-font/</guid>
+      <description>&lt;p&gt;不同系统、平台的字体并不统一，在不同的平台上显示效果也不一样。
+修改Hexo博客的字体，取一个自己喜欢的折中效果。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Jupyter notebook添加Python 3</title>
+      <link>https://neo0moriarty.github.io/jupyter-notebook-python3/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/jupyter-notebook-python3/</guid>
+      <description>原来机器里装的是 anaconda2，默认的Python是2.7版本，默认的 jupyter notebook 也是基于Python 2内核的。
+添加Python 3 的命令：
+➜ ~ ipython3 kernelspec install-self [TerminalIPythonApp] WARNING | Subcommand `ipython kernelspec` is deprecated and will be removed in future versions. [TerminalIPythonApp] WARNING | You likely want to use `jupyter kernelspec` in the future [InstallNativeKernelSpec] WARNING | `jupyter kernelspec install-self` is DEPRECATED as of 4.0. You probably want `ipython kernel install` to install the IPython kernelspec. [InstallNativeKernelSpec] Installed kernelspec python3 in /usr/local/share/jupyter/kernels/python3  机器上安装了两个iPython。ipython3是基于Python 3 的。 报了警告，但jupyter notebook 中已经有了Python 3 的选项了，上面的命令好使。</description>
+    </item>
+    
+    <item>
+      <title>PyCon学习资源</title>
+      <link>https://neo0moriarty.github.io/python-pycon/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-pycon/</guid>
+      <description>PyCon是Python每年举行的Python实践分享大会，除了主会，还有很多地区性的PyCon大会。 PyCon是关于Python的高质量且前沿的技术分享，有很多分享视频，是学习和了解Python开发和实践的非常好用的学习资料。
+国内的PyCon规模小影响力弱，质量貌似也变味了，可以参考这篇文章。
+当然，国外的PyCon才是「正宗」的。基本上在Youtube上可以找到每年相应的PyCon分享视频。
+PyCon官方主页：https://www.pycon.org/
+Youtube频道：
+ PyCon2017 PyCon2016 PyCon2015 PyCon2014  更多的相关视频可以直接搜索Youtube，上面有不计其数的学习视频。</description>
+    </item>
+    
+    <item>
+      <title>Python 2 生命倒计时</title>
+      <link>https://neo0moriarty.github.io/python2-end/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python2-end/</guid>
+      <description>Python 2 早已不再被官方重视和重点维护，这已是众所周知的事。 官方希望在2020年的时候彻底抛弃Python 2。
+Python Clock是Python 2 生命倒计时网站。
+这是好事，Python 3 各方面都比Python 2 要好，新增了很多新特性新功能，Python 3 可以写出比Python 2 更简洁优雅同时又高效的代码。大势所趋。
+Python 3.0 是2008年12月发布的，到2020年，十几年的过渡时间可谓是很长了。
+现在，绝大多数(95%)的Python主流包或工具库都已经完成Python 3 的迁移。 详情请参照这个网站。</description>
+    </item>
+    
+    <item>
+      <title>Python is not installed as a framework 报错解决</title>
+      <link>https://neo0moriarty.github.io/python-is-not-installed-as-a-framework/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-is-not-installed-as-a-framework/</guid>
+      <description>&lt;p&gt;在iPython中 from matplotlib import pyplot 报错解决方法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中的 for else</title>
+      <link>https://neo0moriarty.github.io/python-forelse/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-forelse/</guid>
+      <description>Python中的for循环是有else的可选用法的。
+for后面加了else后，for循环结束后(没有break)会进入else执行语句；如果碰到break则会跳过else分支。
+示例：
+In [1]: fruits = [&#39;apple&#39;, &#39;banana&#39;, &#39;mango&#39;] ...: for fruit in fruits: ...: print(fruit.capitalize()) ...: else: ...: print(&#39;watermelon&#39;) ...: Apple Banana Mango watermelon In [2]: for n in range(2, 10): ...: for x in range(2, n): ...: if n % x == 0: ...: print( n, &#39;equals&#39;, x, &#39;*&#39;, n//x) ...: break ...: else: ...: # loop fell through without finding a factor ...: print(n, &#39;is a prime number&#39;) .</description>
+    </item>
+    
+    <item>
+      <title>如何写出漂亮优雅的Python代码</title>
+      <link>https://neo0moriarty.github.io/how-to-write-elegant-python/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/how-to-write-elegant-python/</guid>
+      <description>不少人觉得Python语法简单，学几天就会了。殊不知，要写出漂亮优雅的Python代码，不下苦功夫钻研和大量的实践是不可能的，除非是天才。写出漂亮的Python代码，需要对语言本身精通，谈何容易。
+怎么写好？捷径之一当然是看高手和大师们是怎么写的，多学习和实践。下面有一些大师的演讲和示例，示范如何写出漂亮优雅的Python代码。
+Raymond Hettinger 2013年在PyCon US 上的一个演讲分享：
+ Youtube视频 Github笔记  这份笔记整理得很好，得反复琢磨和学习。
+另外，pyvideo.org上还有Raymond Hettinger更多的分享视频：
+ Raymond Hettinger@pyvideo.org  Jeﬀ Knupp在2013年写的小册子Writing Idiomatic Python：
+ Writing Idiomatic Python 百度云下载  这个小册子写得很好，可以跟上面的笔记相互对比着看，都是很好的学习和借鉴资料。
+更多进阶指导：
+ Effective Python: 59 Specific Ways to Write Better Python The Hitchhiker&amp;rsquo;s Guide to Python Code Like a Pythonista: Idiomatic Python How to think like a Pythonista Python Best Practices: 5 Tips For Better Code Writing clean, testable, high quality code in Python writing-idiomatic-python-ebook activestate.</description>
+    </item>
+    
+    <item>
+      <title>用pylab模式开启iPython</title>
+      <link>https://neo0moriarty.github.io/python-pylad-ipython/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-pylad-ipython/</guid>
+      <description>在iPython中pandas的一些调用matplotlib的函数需要pylab方式打开。
+打开方式：
+ 终端命令行下输入 ipython --pylab 在iPython中输入 %pylab  </description>
+    </item>
+    
+    <item>
+      <title>json.dump和pickle.dump的对比</title>
+      <link>https://neo0moriarty.github.io/jsondump-pickledump/</link>
+      <pubDate>Sat, 23 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/jsondump-pickledump/</guid>
+      <description>&lt;p&gt;Python的json和pickle模块实现了数据的序列和反序列化。基本上功能使用没有太大区别，方法也同样是dumps/dump和loads/load。&lt;/p&gt;
+
+&lt;p&gt;以实际使用示例对比json.dump和pickle.dump的序列的效率和区别。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python遍历列表并修改元素的值</title>
+      <link>https://neo0moriarty.github.io/python-walk-through/</link>
+      <pubDate>Sat, 23 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-walk-through/</guid>
+      <description>&lt;p&gt;怎样Python遍历列表并修改元素的值？
+Python是一门灵活的语言，这个问题，不同人的习惯写法可能不同。
+&lt;strong&gt;但有时不同的写法效率可以相差两万倍，甚至更多，这点需要时刻警惕。&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>计算Python对象的大小</title>
+      <link>https://neo0moriarty.github.io/python-cal-object/</link>
+      <pubDate>Sat, 23 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-cal-object/</guid>
+      <description>&lt;p&gt;怎样获得Python对象占用内存的大小呢？
+利用sys模块中getsizeof函数。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>豆瓣影视信息的一些简单分析</title>
+      <link>https://neo0moriarty.github.io/douban-movie-stati/</link>
+      <pubDate>Sat, 23 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/douban-movie-stati/</guid>
+      <description>&lt;p&gt;之前把&lt;a href=&#34;https://movie.douban.com/&#34;&gt;豆瓣电影&lt;/a&gt;下的影视信息抓取了一遍，现在可以进行一些简单的分析。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python3中的格式化</title>
+      <link>https://neo0moriarty.github.io/python3-format/</link>
+      <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python3-format/</guid>
+      <description>&lt;p&gt;Python3和Python2的格式化是不同的，Python3中主要使用内置的format和str.format函数。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中@classmethod和@staticmethod</title>
+      <link>https://neo0moriarty.github.io/python-classmethod/</link>
+      <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-classmethod/</guid>
+      <description>&lt;p&gt;Python中classmethod 、staticmethod 、abstract method
+类的方法类型有：普通方法、类方法、静态方法、抽象方法等&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Scrapy抓取日本乐天的前五大品牌洗衣机的评论</title>
+      <link>https://neo0moriarty.github.io/scrapy-rakuten/</link>
+      <pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/scrapy-rakuten/</guid>
+      <description>&lt;p&gt;rakuten.co.jp是日本比较老牌的电商网站，跟日本亚马逊差不多，是日本用得比较多的电商购物网站。
+不过跟中国的京东和淘宝天猫比起来就是小巫见大巫了。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Scrapy断点续爬</title>
+      <link>https://neo0moriarty.github.io/scrapy-restart/</link>
+      <pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/scrapy-restart/</guid>
+      <description>&lt;p&gt;有的爬虫程序跑完花费的时间特别长，可能几个月甚至更久。
+暂停然后继续爬的需求油然而生。
+Scrapy已经自带了这个功能。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>两本爬虫相关的书籍</title>
+      <link>https://neo0moriarty.github.io/two-crawler-books/</link>
+      <pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/two-crawler-books/</guid>
+      <description>&lt;p&gt;今年想看的书单越积累越长，优先级也处于不断调整的状态。
+最近业余时间阅读了两本爬虫的书籍，也写了一些爬虫代码。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>查看端口占用进程并kill掉</title>
+      <link>https://neo0moriarty.github.io/kill-port-pid/</link>
+      <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/kill-port-pid/</guid>
+      <description>&lt;p&gt;Linux和Mac下查看端口占用、kill掉占用进程&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用nload查看实时网络流量和带宽使用</title>
+      <link>https://neo0moriarty.github.io/linux-nload/</link>
+      <pubDate>Sun, 17 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/linux-nload/</guid>
+      <description>&lt;p&gt;Linux查看网络流量和带宽使用情况的工具和命令很多，nload是其中一种方式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Scrapy抓取结果汇总分析</title>
+      <link>https://neo0moriarty.github.io/scrapy-sum/</link>
+      <pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/scrapy-sum/</guid>
+      <description>&lt;p&gt;Scrapy是一个功能非常强大的爬虫框架，功能上基本是应有尽有。
+Scrapy抓取完之后会有一个汇总结果。以抓取豆瓣电影TOP250简单解读一下汇总结果分析。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>抓取瓣所有电影详情页并统计豆瓣收录的电影的数量</title>
+      <link>https://neo0moriarty.github.io/douban-movie-count/</link>
+      <pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/douban-movie-count/</guid>
+      <description>&lt;p&gt;豆瓣是中国的&lt;a href=&#34;http://www.imdb.com&#34;&gt;imdb&lt;/a&gt;，国内最权威的电影信息收录和影评平台之一。
+豆瓣总共收录了多少部电影呢？以抓取豆瓣所有的电影详情为例，回答这个问题。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用builtwith识别网站使用的相关技术</title>
+      <link>https://neo0moriarty.github.io/python-builtwith-module/</link>
+      <pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-builtwith-module/</guid>
+      <description>&lt;p&gt;怎么判断一个网站使用了哪些技术哪些框架呢？
+Python有个工具builtwith可以用来识别部分网站所采用的相关技术。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用robotparser解析网站的robots.txt</title>
+      <link>https://neo0moriarty.github.io/python-robotparser/</link>
+      <pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-robotparser/</guid>
+      <description>&lt;p&gt;robotparser是Python2中的自带模块，Python3中则是集成在urllib自带模块中。
+可以用来解析网站的robots.txt，判断要抓取的url和user-agent是否被网站所建议禁用。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MongoDB常用语法和命令</title>
+      <link>https://neo0moriarty.github.io/mongodb-note/</link>
+      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mongodb-note/</guid>
+      <description>&lt;p&gt;MongoDB常用语法和命令记录集合&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Scrapy将抓取结果写入MongoDB数据库</title>
+      <link>https://neo0moriarty.github.io/scrapy-to-mongo/</link>
+      <pubDate>Fri, 15 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/scrapy-to-mongo/</guid>
+      <description>&lt;p&gt;爬虫抓取网页数据，一般字段很多，而且经常更新和变动，用非关系数据库会舒畅很多。
+Scrapy写入MongoDB示例代码，并对比MySQL的方式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQL replace into</title>
+      <link>https://neo0moriarty.github.io/mysql-replace-into/</link>
+      <pubDate>Thu, 07 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mysql-replace-into/</guid>
+      <description>&lt;p&gt;Mysql提供了replace into，是insert into增强版&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MySQLdb报错解决</title>
+      <link>https://neo0moriarty.github.io/fix-mysqldb-error/</link>
+      <pubDate>Thu, 07 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/fix-mysqldb-error/</guid>
+      <description>&lt;p&gt;Library not loaded: libmysqlclient.18.dylib
+_mysql.so image not found&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python使用traceback获取详细的异常信息</title>
+      <link>https://neo0moriarty.github.io/python-traceback/</link>
+      <pubDate>Thu, 07 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-traceback/</guid>
+      <description>&lt;p&gt;使用traceback可以获取详细的异常信息，是很有用的工具&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Scrapy将抓取结果写入MySQL数据库</title>
+      <link>https://neo0moriarty.github.io/scrapy-to-mysql/</link>
+      <pubDate>Thu, 07 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/scrapy-to-mysql/</guid>
+      <description>&lt;p&gt;Scrapy中pipelines.py是用来处理Item存储的，可以写入文件或数据库。
+以代码示例Scrapy写入MySQL数据库。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python模拟登录CSDN</title>
+      <link>https://neo0moriarty.github.io/python-csdn/</link>
+      <pubDate>Wed, 06 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-csdn/</guid>
+      <description>&lt;p&gt;用Scrapy模拟登录CSDN，并进入个人中心抓取数据&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mac配置MongoDB开发测试环境</title>
+      <link>https://neo0moriarty.github.io/mac-mongodb/</link>
+      <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-mongodb/</guid>
+      <description>&lt;p&gt;Mac下MongoDB配置记录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mac配置Redis开发测试环境</title>
+      <link>https://neo0moriarty.github.io/mac-redis/</link>
+      <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-redis/</guid>
+      <description>&lt;p&gt;Mac下Redis配置记录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python抓取IMDB电影Top250排行</title>
+      <link>https://neo0moriarty.github.io/python-douban-top250/</link>
+      <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-douban-top250/</guid>
+      <description>&lt;p&gt;用Scrapy抓取IMDB电影Top250排行&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python抓取豆瓣电影Top250排行</title>
+      <link>https://neo0moriarty.github.io/crawl-douban-top250/</link>
+      <pubDate>Tue, 05 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/crawl-douban-top250/</guid>
+      <description>&lt;p&gt;用Scrapy抓取豆瓣电影Top250排行&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中的引用与复制简单示例</title>
+      <link>https://neo0moriarty.github.io/python-copy/</link>
+      <pubDate>Sat, 02 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-copy/</guid>
+      <description>&lt;p&gt;Python中的赋值=和函数传参用的是引用。
+Python中的复制默认是浅复制，以示例表明浅复制与深复制之间的区别。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Tmux常用命令</title>
+      <link>https://neo0moriarty.github.io/tmux-cli/</link>
+      <pubDate>Sat, 02 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/tmux-cli/</guid>
+      <description>&lt;p&gt;tmux是一个非常实用的终端工具，用于在一个终端窗口中运行多个终端会话。由于 tmux 允许随时随地断开或重新接入会话（Session），所以最大的作用就是&lt;strong&gt;在远程服务器上持久地保存工作状态&lt;/strong&gt;。由于网络的不稳定会经常造成远程连接断开，这个工具保存会话状态的功能非常实用！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python实现简单的装饰器</title>
+      <link>https://neo0moriarty.github.io/python-decorator/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-decorator/</guid>
+      <description>&lt;p&gt;Python的装饰器是一种嵌套函数，一种闭包。是很好用的工具，利用得好，让代码锦上添花、如虎添翼。
+本文介绍简单的装饰器的实现，以及三个好用的Python自带装饰器：functools.wraps、functools.lru_cache、functools.singledispatch&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux安全防火墙iptables</title>
+      <link>https://neo0moriarty.github.io/linux-iptables/</link>
+      <pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/linux-iptables/</guid>
+      <description>&lt;p&gt;Centos为例，iptables命令相关&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux开机启动服务</title>
+      <link>https://neo0moriarty.github.io/linux-init/</link>
+      <pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/linux-init/</guid>
+      <description>&lt;p&gt;Linux服务器重启后，有些服务是不会自动重启的，可以设置为开机自启。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中策略模式的应用：以电商购物车的打折策略为例</title>
+      <link>https://neo0moriarty.github.io/python-strategy-order-discount/</link>
+      <pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-strategy-order-discount/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://baike.baidu.com/item/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/646307?fr=aladdin&#34;&gt;策略模式&lt;/a&gt;是常见的设计模式之一。本文探讨Python中关于策略模式的应用，以电商购物车的不同打折策略的实现为例，并&lt;strong&gt;示范怎么逐步优化代码的实现&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python的virtualenv使用</title>
+      <link>https://neo0moriarty.github.io/python-virtualenv/</link>
+      <pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-virtualenv/</guid>
+      <description>&lt;p&gt;virtualenv是Python中用来创建隔离的Python环境，用来解决一台机器下不同的项目不同的Python版本依赖问题。很好用的工具。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python的作用域与闭包浅析</title>
+      <link>https://neo0moriarty.github.io/python-closure/</link>
+      <pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-closure/</guid>
+      <description>&lt;p&gt;以示例阐述Python中的作用域和闭包&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>命令行下的接口调试工具httpie</title>
+      <link>https://neo0moriarty.github.io/httpie/</link>
+      <pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/httpie/</guid>
+      <description>&lt;p&gt;常用的开发接口调试工具有postman等。
+命令行下可以用curl、wget，以及更好用的httpie。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中map、filter和reduce的替代品</title>
+      <link>https://neo0moriarty.github.io/python-map-filter/</link>
+      <pubDate>Wed, 29 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-map-filter/</guid>
+      <description>&lt;p&gt;支持函数式的语言通常会提供 map、filter 和 reduce 三个高阶函数。在Python 中，能不用就不用它们！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>查看Python帮助文档的几种方式</title>
+      <link>https://neo0moriarty.github.io/python-manual-help/</link>
+      <pubDate>Wed, 29 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-manual-help/</guid>
+      <description>&lt;p&gt;查看Python帮助文档，可以用官方自带的：dir、help、&lt;code&gt;__doc__&lt;/code&gt;。
+查看对象属性，最佳方案不是dir，是一个开源替代工具pdir。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>NumPy和SciPy简介</title>
+      <link>https://neo0moriarty.github.io/python-numpy-scipy/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-numpy-scipy/</guid>
+      <description>&lt;p&gt;如果利用数组来做高级的数字处理是你的日常工作，那么 NumPy 和 SciPy 应该是你的常用武器。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python3中的内存视图memoryview</title>
+      <link>https://neo0moriarty.github.io/python-memoryview/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-memoryview/</guid>
+      <description>&lt;p&gt;memoryview 是Python 3 的一个内置类&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python3中的字符编码和解码示例</title>
+      <link>https://neo0moriarty.github.io/python3-unicode/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python3-unicode/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;人类使用文本，计算机使用字节序列。&lt;/strong&gt;
+Python 3 明确区分了人类可读的文本字符串和原始的字节序列。
+隐式地把字节序列转换成 Unicode 文本已成过去。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python3的文件编码</title>
+      <link>https://neo0moriarty.github.io/python3-file-encode/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python3-file-encode/</guid>
+      <description>&lt;p&gt;Python 3 默认使用 UTF-8 编码源码，Python 2（从 2.5 开始）则默认使用 ASCII。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中bisect和insort的应用示例</title>
+      <link>https://neo0moriarty.github.io/python-bisect-insort/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-bisect-insort/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;已排序的序列&lt;/strong&gt;可以用来进行快速搜索，而&lt;strong&gt;标准库的 bisect 模块&lt;/strong&gt;给我们提供了&lt;strong&gt;二分查找算法&lt;/strong&gt;。bisect 模块包含两个主要函数，bisect 和 insort，两个函数都利用二分查找算法来&lt;strong&gt;在有序序列中查找或插入元素&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中具名元组namedtuple的应用示例</title>
+      <link>https://neo0moriarty.github.io/python-namedtuple/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-namedtuple/</guid>
+      <description>&lt;p&gt;自Python 2.6开始，namedtuple就加入到Python里，&lt;strong&gt;用以构建只有少数属性但是没有方法的对象&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;用namedtuple实现扑克牌类和记录城市信息的示例。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中双向队列deque使用示例</title>
+      <link>https://neo0moriarty.github.io/python-deque/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-deque/</guid>
+      <description>&lt;p&gt;利用 .append 和 .pop 方法，我们&lt;strong&gt;可以把列表当作栈或者队列来用&lt;/strong&gt;（比如，把 .append 和 .pop(0) 合起来用，就能模拟栈的“先进后出”的特点）。但是删除列表的第一个元素（抑或是在第一个元素之前添加一个元素）之类的操作是很耗时的，因为&lt;strong&gt;这些操作会牵扯到移动列表里的所有元素&lt;/strong&gt;。频繁在首尾增减元素应该使用双向队列。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中的字典和集合以及它们背后的散列表</title>
+      <link>https://neo0moriarty.github.io/python-dict-hash/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-dict-hash/</guid>
+      <description>&lt;p&gt;字典（dict）这个数据结构在Python里无处不在，不但在各种程序里广泛使用，它也是 Python 语言的基石。模块的命名空间、实例的属性和函数的关键字参数中都可以看到字典的身影。&lt;strong&gt;正是因为字典至关重要，Python 对它的实现做了高度优化，而散列表则是字典类型性能出众的根本原因。&lt;/strong&gt;集合（set）的实现也同样依赖于&lt;strong&gt;散列表&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中的数组浅析</title>
+      <link>https://neo0moriarty.github.io/python-array/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-array/</guid>
+      <description>&lt;p&gt;数组并不是Python内置的数据类型，是标准库array模块里面的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python序列的&#43;、*、&#43;=、*=</title>
+      <link>https://neo0moriarty.github.io/python-serial/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-serial/</guid>
+      <description>&lt;p&gt;序列是支持 + 、 &lt;code&gt;*&lt;/code&gt; 、+=、*=操作的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用dis模块把Python代码反编译为字节码</title>
+      <link>https://neo0moriarty.github.io/python-dis-module/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-dis-module/</guid>
+      <description>&lt;p&gt;Python标准库&lt;a href=&#34;https://docs.python.org/2/library/dis.html&#34;&gt;dis&lt;/a&gt; — Disassembler for Python bytecode，作用是把python代码反汇编为字节码指令&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>利用chardet检测文件的编码</title>
+      <link>https://neo0moriarty.github.io/python-chardet/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-chardet/</guid>
+      <description>&lt;p&gt;我们不能根据特定的模式来 100% 确定二进制文件的编码。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>处理文本文件的最佳实践</title>
+      <link>https://neo0moriarty.github.io/python-deal-with-text/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-deal-with-text/</guid>
+      <description>&lt;p&gt;处理文本的最佳实践是 &amp;ldquo;Unicode三明治&amp;rdquo;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中setdefault和defaultdict的应用示例</title>
+      <link>https://neo0moriarty.github.io/python-setdefault/</link>
+      <pubDate>Mon, 27 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-setdefault/</guid>
+      <description>&lt;p&gt;也许每个 Python 程序员都知道可以用 d.get(k, default) 来代替 d[k]，给找不到的键一个默认的返回值（这比处理 KeyError 要方便不少）。&lt;/p&gt;
+
+&lt;p&gt;但是要更&lt;strong&gt;新某个键对应的值的时候&lt;/strong&gt;，不管使用 &lt;code&gt;__getitem__&lt;/code&gt; 还是 get 都会不自然，而且效率低。&lt;/p&gt;
+
+&lt;p&gt;dict.get 并不是处理找不到的键的最好方法。而是应该&lt;strong&gt;用setdefault或defaultdict处理找不到的键&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python判断计算机是大端还是小端</title>
+      <link>https://neo0moriarty.github.io/python-big-little-end/</link>
+      <pubDate>Mon, 27 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-big-little-end/</guid>
+      <description>&lt;p&gt;little endian（小端）和big endian（大端）之分
+用python判断大端还是小端&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python生成千万行的文本并测试numpy运算性能</title>
+      <link>https://neo0moriarty.github.io/python-generate-floats/</link>
+      <pubDate>Mon, 27 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-generate-floats/</guid>
+      <description>&lt;p&gt;Python生成千万行的浮点数文本文件
+测试numpy运算性能&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>文件读取方式r&#43;、w&#43;、a&#43;的区别</title>
+      <link>https://neo0moriarty.github.io/python-read-write/</link>
+      <pubDate>Mon, 27 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-read-write/</guid>
+      <description>&lt;p&gt;文件读取方式有 r、w、a 与 +、b 的组合&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python相关的网站收集</title>
+      <link>https://neo0moriarty.github.io/python-study-website/</link>
+      <pubDate>Sat, 25 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-study-website/</guid>
+      <description>&lt;p&gt;Python相关的网站/网址收集&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Sublime Text 3 快捷键和常用配置</title>
+      <link>https://neo0moriarty.github.io/subl-config/</link>
+      <pubDate>Sat, 25 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/subl-config/</guid>
+      <description>&lt;p&gt;Mac sublime text 3 常用快捷键和配置记录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《流畅的Python》</title>
+      <link>https://neo0moriarty.github.io/fluent-python/</link>
+      <pubDate>Sat, 25 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/fluent-python/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://book.douban.com/subject/27028517/&#34;&gt;《流畅的Python》中文版&lt;/a&gt;2017年出版，豆瓣评分9.2。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>print vs print()</title>
+      <link>https://neo0moriarty.github.io/python-print/</link>
+      <pubDate>Fri, 24 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-print/</guid>
+      <description>&lt;p&gt;Python2.x中print是一个语句，因此print是一个关键字或保留字；
+Python3.x中print是一个内置函数。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中的yield生成器</title>
+      <link>https://neo0moriarty.github.io/python-yield/</link>
+      <pubDate>Fri, 24 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-yield/</guid>
+      <description>&lt;p&gt;Python中的yield用法示例，代码示例在Python3下运行。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>快排python实现</title>
+      <link>https://neo0moriarty.github.io/python-quick-sort/</link>
+      <pubDate>Fri, 24 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-quick-sort/</guid>
+      <description>&lt;p&gt;快排，python递归实现&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>学习算法实现</title>
+      <link>https://neo0moriarty.github.io/python-pla-learn/</link>
+      <pubDate>Wed, 22 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-pla-learn/</guid>
+      <description>&lt;p&gt;一些学习算法实现练习&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>app = Flask(__name__)</title>
+      <link>https://neo0moriarty.github.io/python-flask-demo/</link>
+      <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-flask-demo/</guid>
+      <description>&lt;p&gt;最简单的web服务示例&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>centos添加swap</title>
+      <link>https://neo0moriarty.github.io/centos-add-swap/</link>
+      <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/centos-add-swap/</guid>
+      <description>&lt;p&gt;在阿里云服务器setup superset时初始化数据报错，原因是内存不够用，自己添加swap解决。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx配置nginx.conf</title>
+      <link>https://neo0moriarty.github.io/nginx-config/</link>
+      <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/nginx-config/</guid>
+      <description>&lt;p&gt;阿里云 nginx.conf&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中的 *args 和 **kwargs</title>
+      <link>https://neo0moriarty.github.io/python-args/</link>
+      <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-args/</guid>
+      <description>&lt;p&gt;&lt;code&gt;*&lt;/code&gt;args 表示任何多个无名参数，它是一个tuple
+**kwargs 表示关键字参数，它是一个dict&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《Neural Networks and Deep Learning》</title>
+      <link>https://neo0moriarty.github.io/neural-network/</link>
+      <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/neural-network/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://neuralnetworksanddeeplearning.com/&#34;&gt;neuralnetworksanddeeplearning.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;一本免费公开的英文电子书。3blue1brown的教学视频里推荐看的入门书。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python简介与入门引导</title>
+      <link>https://neo0moriarty.github.io/intro-python/</link>
+      <pubDate>Fri, 17 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/intro-python/</guid>
+      <description>&lt;p&gt;文字 + 图片 + 代码示例 + 学习资料&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《机器学习》</title>
+      <link>https://neo0moriarty.github.io/machine-learning/</link>
+      <pubDate>Thu, 16 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/machine-learning/</guid>
+      <description>&lt;p&gt;周志华 ——《机器学习》 2016年1月第一版 豆瓣评分：8.8&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《深度学习》</title>
+      <link>https://neo0moriarty.github.io/deep-learning/</link>
+      <pubDate>Thu, 16 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/deep-learning/</guid>
+      <description>&lt;p&gt;Ian Goodfellow  Yoshua Bengio  Aaron Courville —— 《Deep Learning》&lt;/p&gt;
+
+&lt;p&gt;2017年第一版  豆瓣评分：8.7&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《统计学习方法》</title>
+      <link>https://neo0moriarty.github.io/machine-learning-stati/</link>
+      <pubDate>Thu, 16 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/machine-learning-stati/</guid>
+      <description>&lt;p&gt;李航 ——《统计学习方法》 2012年3月第一版  豆瓣评分：8.9&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>七月在线学习记录</title>
+      <link>https://neo0moriarty.github.io/julyedu/</link>
+      <pubDate>Tue, 14 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/julyedu/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.julyedu.com&#34;&gt;https://www.julyedu.com&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《数学之美》</title>
+      <link>https://neo0moriarty.github.io/beauty-math/</link>
+      <pubDate>Mon, 13 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/beauty-math/</guid>
+      <description>&lt;p&gt;吴军 ——《数学之美》2012年6月第一版 豆瓣评分： 第一版 8.7  第二版 9.0&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;数学在IT技术中的美&lt;/strong&gt;，特别是语音识别和搜索引擎方面的美。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>趣味学习高等数学</title>
+      <link>https://neo0moriarty.github.io/fun-math/</link>
+      <pubDate>Sun, 12 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/fun-math/</guid>
+      <description>&lt;p&gt;发现趣味学习高等数学的一系列视频，超赞
+深入浅出、直观明了地分享数学之美&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo草稿箱</title>
+      <link>https://neo0moriarty.github.io/hexo-trash/</link>
+      <pubDate>Thu, 09 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-trash/</guid>
+      <description>&lt;p&gt;Hexo草稿箱用法&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>机器学习数学预备知识学习</title>
+      <link>https://neo0moriarty.github.io/machine-learning-math-basic/</link>
+      <pubDate>Wed, 08 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/machine-learning-math-basic/</guid>
+      <description>&lt;p&gt;机器学习数学基础学习资料清单 &amp;amp; 学习计划&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《写给大家看的机器学习书》</title>
+      <link>https://neo0moriarty.github.io/everyone-machine-learning/</link>
+      <pubDate>Tue, 07 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/everyone-machine-learning/</guid>
+      <description>&lt;p&gt;知乎专栏: &lt;a href=&#34;https://zhuanlan.zhihu.com/machine-learning-book&#34;&gt;写给大家看的机器学习书&lt;/a&gt; 链接与摘录笔记&lt;/p&gt;
+
+&lt;p&gt;第1、2篇      机器学习基础概念
+第4、5、6篇   机器学习可行性
+第3篇         PLA感知机学习算法
+第7、8篇      线性回归&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>最大似然估计</title>
+      <link>https://neo0moriarty.github.io/maximum-likelihood-estimation/</link>
+      <pubDate>Tue, 07 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/maximum-likelihood-estimation/</guid>
+      <description>&lt;p&gt;关于&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%9C%80%E5%A4%A7%E4%BC%BC%E7%84%B6%E4%BC%B0%E8%AE%A1&#34;&gt;最大似然估计&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>最小二乘法</title>
+      <link>https://neo0moriarty.github.io/least-squares-method/</link>
+      <pubDate>Tue, 07 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/least-squares-method/</guid>
+      <description>&lt;p&gt;关于&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95&#34;&gt;最小二乘法&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>贝叶斯定理</title>
+      <link>https://neo0moriarty.github.io/bayesian-method/</link>
+      <pubDate>Tue, 31 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/bayesian-method/</guid>
+      <description>&lt;p&gt;关于&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86&#34;&gt;贝叶斯定理&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python链接impala</title>
+      <link>https://neo0moriarty.github.io/python-impala/</link>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-impala/</guid>
+      <description>&lt;p&gt;Python连接impala记录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>机器学习笔记</title>
+      <link>https://neo0moriarty.github.io/machine-learning-note/</link>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/machine-learning-note/</guid>
+      <description>&lt;p&gt;机器学习中一些笔记和截图&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>deeplearning.ai 神经网络和深度学习</title>
+      <link>https://neo0moriarty.github.io/deep-learning-course/</link>
+      <pubDate>Tue, 24 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/deep-learning-course/</guid>
+      <description>&lt;p&gt;deeplearning.ai深度学习5个入门课程的第一门课。&lt;/p&gt;
+
+&lt;p&gt;这门课将为你介绍深度学习的基础知识。学完这门课，你将能够：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;理解驱动深度学习的主要技术趋势。&lt;/li&gt;
+&lt;li&gt;能够搭建、训练并且运用全连接的深层神经网络。&lt;/li&gt;
+&lt;li&gt;了解如何实现高效的（向量化）的神经网络。&lt;/li&gt;
+&lt;li&gt;理解神经网络架构中的关键参数。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这门课将会详尽地介绍深度学习的基本原理，而不仅仅只进行理论概述。&lt;/p&gt;
+
+&lt;p&gt;当你完成这门微专业之后，你就能够将深度学习运用到你的个人应用中，调教出属于你自己的AI。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>deeplearning.ai 深度学习5个入门课程</title>
+      <link>https://neo0moriarty.github.io/5-deep-learning-courses/</link>
+      <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/5-deep-learning-courses/</guid>
+      <description>&lt;p&gt;由 deeplearning.ai 出品，网易引进的正版授权中文版深度学习工程师微专业课程，让你在了解丰富的人工智能应用案例的同时，学会在实践中搭建出最先进的神经网络模型，训练出属于你自己的 AI。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mac Pycharm 2017.2 破解激活</title>
+      <link>https://neo0moriarty.github.io/pycharm2017/</link>
+      <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/pycharm2017/</guid>
+      <description>&lt;p&gt;Mac版Pycharm 2017.2.3 下载 &amp;amp; 破解激活&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>编译安装svn(subversion)支持sasl</title>
+      <link>https://neo0moriarty.github.io/install-subversion-sasl/</link>
+      <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/install-subversion-sasl/</guid>
+      <description>&lt;p&gt;系统默认的svn不支持sasl加密。若svn服务器开启sasl加密的话将报错：Cannot negotiate authentication mechanism。需重新编译安装。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Jupyter Notebook</title>
+      <link>https://neo0moriarty.github.io/python-jupyter-notebook/</link>
+      <pubDate>Wed, 18 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-jupyter-notebook/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://jupyter.org/&#34;&gt;Jupyter Notebook&lt;/a&gt; 原来叫做Ipython Notebook，是开源的web应用，一个交互式网页笔记本，支持运行 40 多种编程语言。可以用来创建和共享文学化程序文档，支持实时代码调试运行，数学方程，可视化和 markdown。 用途包括：数据清理和转换，数值模拟，统计建模，机器学习等等。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Scikit-learn</title>
+      <link>https://neo0moriarty.github.io/python-scikit-learn/</link>
+      <pubDate>Wed, 18 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-scikit-learn/</guid>
+      <description>&lt;p&gt;Scikit-learn是基于Python的开源机器学习框架，这里是安装教程、简介和学习资料收集&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>斯坦福大学公开课 ：吴恩达机器学习课程</title>
+      <link>https://neo0moriarty.github.io/standford-course/</link>
+      <pubDate>Wed, 18 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/standford-course/</guid>
+      <description>&lt;p&gt;Andrew Ng（吴恩达）机器学习课程资料收集&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux下用Squid搭建网络代理服务器</title>
+      <link>https://neo0moriarty.github.io/squid-proxy/</link>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/squid-proxy/</guid>
+      <description>&lt;p&gt;Squid可以用来搭建代理服务器，用来代理客户端联网。
+Linux下搭建Squid服务很简单，在此记录squid服务安装配置过程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>机器学习资料</title>
+      <link>https://neo0moriarty.github.io/machine-learning-resource/</link>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/machine-learning-resource/</guid>
+      <description>&lt;p&gt;机器学习资料收集&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python教程</title>
+      <link>https://neo0moriarty.github.io/python-tutorial/</link>
+      <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-tutorial/</guid>
+      <description>&lt;p&gt;网上有很多Python学习教程，收集汇总在本篇博问。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python的GIL与多线程、多进程</title>
+      <link>https://neo0moriarty.github.io/python-gil/</link>
+      <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-gil/</guid>
+      <description>&lt;p&gt;GIL是什么，Python中什么时候用多线程，什么时候用多进程？
+本篇博文主要是摘录汇总对以上问题的解答。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>并发与并行</title>
+      <link>https://neo0moriarty.github.io/concurrency-parallelism/</link>
+      <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/concurrency-parallelism/</guid>
+      <description>&lt;p&gt;参考了一些资料，摘录汇总并发（concurrency）和并行（parallelism）的联系和区别。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>一个很棒的英语学习网站</title>
+      <link>https://neo0moriarty.github.io/study-english/</link>
+      <pubDate>Sat, 14 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/study-english/</guid>
+      <description>&lt;p&gt;一个很棒的英语（美语）学习网站。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>很好用的视频下载工具downie</title>
+      <link>https://neo0moriarty.github.io/downie/</link>
+      <pubDate>Sat, 14 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/downie/</guid>
+      <description>&lt;p&gt;一款很好用的视频下载工具&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>美语发音练习课程</title>
+      <link>https://neo0moriarty.github.io/learn-usa-accent/</link>
+      <pubDate>Sat, 14 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/learn-usa-accent/</guid>
+      <description>&lt;p&gt;之前搜索了挺多关于&lt;strong&gt;美式英语发音&lt;/strong&gt;的教程，找到了一个比较详细地道的视频教程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>英语口音纠正课程</title>
+      <link>https://neo0moriarty.github.io/correct-pronunciation/</link>
+      <pubDate>Sat, 14 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/correct-pronunciation/</guid>
+      <description>&lt;p&gt;一个很棒的美式英语口语发音教学视频。视频很长，三个半小时。。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>pip常用命令</title>
+      <link>https://neo0moriarty.github.io/python-pip-version/</link>
+      <pubDate>Fri, 13 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-pip-version/</guid>
+      <description>&lt;p&gt;Python pip的使用，如指定安装版本、指定安装源&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Superset Demo</title>
+      <link>https://neo0moriarty.github.io/superset-demo/</link>
+      <pubDate>Fri, 13 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/superset-demo/</guid>
+      <description>&lt;p&gt;在阿里云服务器上搭了一个&lt;a href=&#34;http://superset.apache.org/&#34;&gt;Superset&lt;/a&gt;的demo。访问地址是:&lt;a href=&#34;http://superset.molock.cn/&#34;&gt;http://superset.molock.cn&lt;/a&gt; 登录账号和密码都是:admin&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://molock.cn/upload/supersetdemo.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo博文置顶</title>
+      <link>https://neo0moriarty.github.io/hexo-top/</link>
+      <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-top/</guid>
+      <description>&lt;p&gt;Hexo博客首页博文置顶&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux查看剩余容量大小</title>
+      <link>https://neo0moriarty.github.io/check-disk-available/</link>
+      <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/check-disk-available/</guid>
+      <description>&lt;p&gt;Linux中关于查看剩余容量大小的命令&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo开启站内搜索功能</title>
+      <link>https://neo0moriarty.github.io/hexo-internal-search/</link>
+      <pubDate>Wed, 11 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-internal-search/</guid>
+      <description>&lt;p&gt;根据关键字搜索博文，站内搜索的功能很实用。hexo开启站内搜索很方便，已经有现成的插件可以使用。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python实现删除当前目录下重复文件</title>
+      <link>https://neo0moriarty.github.io/python-delete-duplicate-files/</link>
+      <pubDate>Wed, 11 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-delete-duplicate-files/</guid>
+      <description>&lt;p&gt;用Python实现删除当前目录下重复文件：&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>替换rm命令防止误删除</title>
+      <link>https://neo0moriarty.github.io/stop-rm/</link>
+      <pubDate>Wed, 11 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/stop-rm/</guid>
+      <description>&lt;p&gt;mac和linux使用rm命令行删除，默认是不会放到回收站/废纸篓里面的，容易误删除，尤其是root用户下。利用alias把rm命令重定向到新的shell脚本，把删除的文件移到指定的目录下，可以一定程度缓解误删除的操作。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用nvm方便地切换node.js版本</title>
+      <link>https://neo0moriarty.github.io/nvm-python-version/</link>
+      <pubDate>Wed, 11 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/nvm-python-version/</guid>
+      <description>&lt;p&gt;安装和切换node.js版本最便捷的方式——使用nvm&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Superset介绍</title>
+      <link>https://neo0moriarty.github.io/superset-intro/</link>
+      <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/superset-intro/</guid>
+      <description>&lt;p&gt;Superset的简单介绍&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>插入排序python实现</title>
+      <link>https://neo0moriarty.github.io/python-insert-sort/</link>
+      <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-insert-sort/</guid>
+      <description>&lt;p&gt;排序算法之插入排序，用Python实现。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Google开源项目风格指南</title>
+      <link>https://neo0moriarty.github.io/google-code-style/</link>
+      <pubDate>Wed, 04 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/google-code-style/</guid>
+      <description>&lt;p&gt;Google 开源项目风格指南&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python开发风格指南</title>
+      <link>https://neo0moriarty.github.io/python-dev-code-style/</link>
+      <pubDate>Wed, 04 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-dev-code-style/</guid>
+      <description>&lt;p&gt;Python开发风格指南&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>centos安装python3</title>
+      <link>https://neo0moriarty.github.io/centos-install-python3/</link>
+      <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/centos-install-python3/</guid>
+      <description>&lt;p&gt;Centos上编译安装Python3记录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Flask实现随机返回图片url的接口</title>
+      <link>https://neo0moriarty.github.io/flask-return-random-files/</link>
+      <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/flask-return-random-files/</guid>
+      <description>&lt;p&gt;Flask实现随机返回图片url的接口，下图就是随机返回的图片，每次刷新都会从图库中随机返回一张图片。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://molock.cn/random?id=55327&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux下sudo用户设置</title>
+      <link>https://neo0moriarty.github.io/set-sudo/</link>
+      <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/set-sudo/</guid>
+      <description>&lt;p&gt;Linux下将普通用户加入sudo用户设置方法&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx&#43;gunicorn&#43;upstart方式部署flask</title>
+      <link>https://neo0moriarty.github.io/python-flask/</link>
+      <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-flask/</guid>
+      <description>&lt;p&gt;Linux下flask web项目的部署，也是本博客在阿里云服务器上的部署方式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python下载图片</title>
+      <link>https://neo0moriarty.github.io/python-download-pictures/</link>
+      <pubDate>Sun, 01 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-download-pictures/</guid>
+      <description>&lt;p&gt;Python下载图片代码示例&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python获取当前文件路径</title>
+      <link>https://neo0moriarty.github.io/python-get-current-dir/</link>
+      <pubDate>Sun, 01 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-get-current-dir/</guid>
+      <description>&lt;p&gt;Python获取当前文件路径的几种方式。
+os.getcwd()与os.path.dirname()的区别。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>我的vim配置文件vimrc</title>
+      <link>https://neo0moriarty.github.io/vimrc/</link>
+      <pubDate>Sun, 01 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/vimrc/</guid>
+      <description>&lt;p&gt;我的vim配置文件，使用Vundle管理插件&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux显示当前目录下文件和文件夹的数目</title>
+      <link>https://neo0moriarty.github.io/list-current-dir/</link>
+      <pubDate>Sat, 30 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/list-current-dir/</guid>
+      <description>&lt;p&gt;Linux显示当前目录下文件和文件夹的数目命令&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Centos定时任务crontab使用</title>
+      <link>https://neo0moriarty.github.io/centos-crontab/</link>
+      <pubDate>Fri, 29 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/centos-crontab/</guid>
+      <description>&lt;p&gt;Centos下定时任务crontab的使用&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo文章目录样式调整</title>
+      <link>https://neo0moriarty.github.io/hexo-change-css/</link>
+      <pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-change-css/</guid>
+      <description>&lt;p&gt;Hexo博客侧边栏文章目录的样式调整&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo瘦身插件all_minifier</title>
+      <link>https://neo0moriarty.github.io/hexo-minimal/</link>
+      <pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-minimal/</guid>
+      <description>&lt;p&gt;使用插件对Hexo博客代码压缩，静态文件压缩&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx开启gzip压缩</title>
+      <link>https://neo0moriarty.github.io/nginx-gzip/</link>
+      <pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/nginx-gzip/</guid>
+      <description>&lt;p&gt;Nginx开启gzip静态文件压缩配置&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>博客迁移到阿里云并启用https访问</title>
+      <link>https://neo0moriarty.github.io/hexo-to-aliyun/</link>
+      <pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-to-aliyun/</guid>
+      <description>&lt;p&gt;本博客的迁移和搭建&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo博客SEO优化</title>
+      <link>https://neo0moriarty.github.io/hexo-seo/</link>
+      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-seo/</guid>
+      <description>&lt;p&gt;记录一些Hexo博客SEO优化操作&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo去掉码市跳转页</title>
+      <link>https://neo0moriarty.github.io/hexo-no-redirect-coding/</link>
+      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-no-redirect-coding/</guid>
+      <description>&lt;p&gt;去掉码市coding.net pages服务的广告跳转页&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>SSH免密码远程登录</title>
+      <link>https://neo0moriarty.github.io/ssh-no-passwd/</link>
+      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/ssh-no-passwd/</guid>
+      <description>&lt;p&gt;实现SSH免密码登录服务器&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用七牛云图床并实现快速贴图</title>
+      <link>https://neo0moriarty.github.io/use-qiqiu-paste-picture/</link>
+      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/use-qiqiu-paste-picture/</guid>
+      <description>&lt;p&gt;七牛存储可以作为图床，存放一些静态资源，介绍一种快速贴图的方式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Git日常常用命令汇总</title>
+      <link>https://neo0moriarty.github.io/git-github-note/</link>
+      <pubDate>Fri, 22 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/git-github-note/</guid>
+      <description>&lt;p&gt;记录git日常常用命令&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo博客主动提交链接给百度</title>
+      <link>https://neo0moriarty.github.io/hexo-commit-to-baidu/</link>
+      <pubDate>Fri, 22 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-commit-to-baidu/</guid>
+      <description>&lt;p&gt;Hexo博客部署到服务器的时候顺便提交新url链接给百度收录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo博客首页显示摘要</title>
+      <link>https://neo0moriarty.github.io/hexo-display-summary/</link>
+      <pubDate>Fri, 22 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-display-summary/</guid>
+      <description>&lt;p&gt;Hexo博客首页不直接显示全文，只显示摘要的方法&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo博客搭建教程</title>
+      <link>https://neo0moriarty.github.io/hexo-blog-build/</link>
+      <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-blog-build/</guid>
+      <description>&lt;p&gt;Hexo博客搭建教程简要记录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo绑定独立域名并解析</title>
+      <link>https://neo0moriarty.github.io/hexo-bind-domain/</link>
+      <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-bind-domain/</guid>
+      <description>&lt;p&gt;Hexo博客部署绑定域名教程&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Markdown编辑器Mweb</title>
+      <link>https://neo0moriarty.github.io/mac-mweb-markdown/</link>
+      <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-mweb-markdown/</guid>
+      <description>&lt;p&gt;Mac下一款很好用的Markdow编辑软件&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

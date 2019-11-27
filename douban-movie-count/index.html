@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.59.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>抓取瓣所有电影详情页并统计豆瓣收录的电影的数量 | neo0moriarty</title>
+    <meta property="og:title" content="抓取瓣所有电影详情页并统计豆瓣收录的电影的数量 - neo0moriarty">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2017-12-16T00:00:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2017-12-16T00:00:00&#43;08:00">
+        
+    <meta name="Keywords" content="[豆瓣收录的电影的数量 豆瓣所有电影详情页的抓取记录]">
+    <meta name="description" content="抓取瓣所有电影详情页并统计豆瓣收录的电影的数量">
+        
+    <meta name="author" content="neo0moriarty">
+    <meta property="og:url" content="https://neo0moriarty.github.io/douban-movie-count/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://neo0moriarty.github.io/">
+                        neo0moriarty
+                    </a>
+                
+                <p class="description">o(╯□╰)o  (゜-゜)つロ  o(╯□╰)o</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://neo0moriarty.github.io/">首页</a>
+                    
+                    <a  href="https://neo0moriarty.github.io/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">抓取瓣所有电影详情页并统计豆瓣收录的电影的数量</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2017年12月16日
+                        </date>
+                        
+                        
+                        
+                        <div class="post-content">
+                            <p>豆瓣是中国的<a href="http://www.imdb.com">imdb</a>，国内最权威的电影信息收录和影评平台之一。
+豆瓣总共收录了多少部电影呢？以抓取豆瓣所有的电影详情为例，回答这个问题。</p>
+
+<hr />
+
+<p><a href="https://movie.douban.com/">豆瓣电影</a>自己已经列出了所有电影的总列表。
+网址是这个选影视的入口: <a href="https://movie.douban.com/tag/">https://movie.douban.com/tag/</a></p>
+
+<p>经过分析，可知豆瓣自己给出了所有的电影的列表的获取接口：
+<a href="https://movie.douban.com/j/new_search_subjects?tags=电影&amp;range=0,10&amp;start=0">https://movie.douban.com/j/new_search_subjects?tags=电影&amp;range=0,10&amp;start=0</a></p>
+
+<p>再经过分析可知这个接口从start=0开始，分页，每页20条，一直往下翻页，但累计翻到start=9980返回数据就为空了。
+显然是豆瓣故意设置的。这个数并不准确。</p>
+
+<p>经过尝试知道这个url有个关键的range，从0分到10分的评分；也尝试出range支持小数。自然地想到可以通过设置起始同一个数来获取一个评分的分页。如：range=9.0,9.0</p>
+
+<p>经过不完整的尝试，发现每一个评分应该是不超过9980条的。(这里可以通过抓取url数据去真正地判断的。如果不判断，假定不超过，ps：后面经过程序跑，发现暂时每个评分的电影条数都不超过9980，至于以后如果超过了，应该有别的解决方式的。豆瓣应该也是假定了所有电影数量不超过100万条吧，感觉可能是这样所以才设置了翻页数量最多为9960这个数，也可能是别的原因，无所谓，不妨碍接下来的探索。)</p>
+
+<p>到此，已经分析出所有电影列表的所有url。要估算出所有电影的数量，只要遍历跑完所有url的翻页，将数量累加即可知道。</p>
+
+<p>代码实现也并不难。</p>
+
+<p>但还要顺便把每一部的电影详情页的主要信息抓下来，方便以后的查询和分析。</p>
+
+<p>所以在遍历所有url时，顺便把电影详情页的信息也抓了。</p>
+
+<p>用Scrapy实现了以上的想法。</p>
+
+<p>程序跑了一天一夜，终于跑完了。</p>
+
+<p>截图如下：</p>
+
+<p><img src="https://molock.cn/upload/posts/scrapy_douban_result.jpg" alt="" /></p>
+
+<p>所有电影的详情信息存入MongoDB，总数如下图所示：</p>
+
+<p><img src="https://molock.cn/upload/posts/scrapy_mongodb.jpg" alt="" /></p>
+
+<p>可见，本次抓取，成功完整的保存到MongoDB里面的电影总条数是57188条。
+绝大多数的抓取是成功的，也保存到了数据库。归功于强大的Scrapy框架。当然，还有ip代理，没有ip代理一下子就被封ip了。</p>
+
+<p>抓取中发现豆瓣电影有一些电影的详情页是404，比如熔炉、杀人回忆、电锯惊魂等等等等，其中有一些隔一段时间又恢复正常，不知道是不是豆瓣的BUG，这个不正常。</p>
+
+<p><strong>综上，排除掉个别404的电影，排除掉个别抓取失败或者存不进去数据库。根据豆瓣自己的电影分类，豆瓣总共收录的电影数量是5万多条，截止2017年12月份。</strong></p>
+
+<p><strong>如果豆瓣的电影分类是准确的，那么这个数字的误差是很小的，可信度相当高。</strong>
+但，通过不完整的翻查，发现有一些音乐类的分类下面，有一些并不能算是电影，比如演唱会、MV制作，一些短片等等。所以，如果以此来说豆瓣的电影分类并不准确的话，豆瓣电影的数量真实要比这个数字要小一些的，具体小多少，暂时不好估算。<strong>对于电影的准确定义和分类相信也不会有一个很严格的标准。所以还是可以认为豆瓣的分类是较为准确的吧。保险的说法是，豆瓣收录的电影数量级是几万级别的。</strong></p>
+
+<p><strong>有了以上这些数据，后面就可以对这些数据做进一步的特定分析了。</strong></p>
+
+<p>豆瓣上有个问题跟这个相关，<a href="https://www.zhihu.com/question/20072525">豆瓣一共收录了多少部电影？</a>。</p>
+
+<p>其中冰糖雪梨的的回答跟以上的思路是一致的。我认为他的回答最为贴切。朱俊的回答也接近，不过并没说具体是怎么得来的。说15万多的估计是有很多其他的分类冗余了，比如电视剧之类的视频。按照豆瓣官方提供的接口来算就是5万多这个数。</p>
+
+<p>最后附上部分实现代码：</p>
+
+<pre><code>import urllib
+import re
+import json
+from random import choice
+from scrapy.spiders import Spider
+from scrapy.http import FormRequest
+from scrapy import Request
+
+from .lib import  lib_parse_movie_detail
+
+class DoubanMovieSubject(Spider):
+
+    def __init__(self, score=2.1,
+        fmt_str='https://movie.douban.com/j/new_search_subjects?tags=电影&amp;range=%.1f,%.1f&amp;start=0'):
+        self.subject_set = set()
+        self.url_list = []
+        self.fmt_str = fmt_str
+        self.score = score
+        while self.score &lt;= 9.8:
+            url = self.fmt_str % (self.score, self.score)
+            self.url_list.append(url)
+            self.score += 0.1
+
+    name = 'movie_subject'
+
+    def start_requests(self):
+        self.logger.warning(&quot;start_request 请求入口&quot;)
+        self.logger.warning(self.url_list)
+        for url in self.url_list:
+            yield Request(url)
+
+
+    def parse(self, response):
+        if response.status == 200:
+            url = response.url
+            res = json.loads(response.body_as_unicode())
+            data = res.get('data')
+            if data:
+                for d in data:
+                    subject_id = d.get('id')
+                    self.subject_set.add(subject_id)
+                    detail_url = d.get('url')
+                    item = {'detail_url': detail_url, 'subject_id': subject_id}
+                    yield Request(
+                            detail_url,
+                            callback=self.parse_movie_detail,
+                            meta={'item': item},
+                            dont_filter=True)
+                # 翻页
+                url = url.split('=')
+                url[-1] = str(int(url[-1]) + 20)
+                url = '='.join(url)
+                yield Request(url)
+            else:
+                self.logger.warning('没有数据：{}'.format(url))
+        else:
+            self.logger.error(response.url)
+            self.logger.error('parse_movie_detail 状态码为：{}'.format(response.status))
+
+    def parse_movie_detail(self, response):
+        return lib_parse_movie_detail(self, response)
+
+</code></pre>
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://neo0moriarty.github.io/">neo0moriarty</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://neo0moriarty.github.io/douban-movie-count/">https://neo0moriarty.github.io/douban-movie-count/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/scrapy-sum/">Scrapy抓取结果汇总分析</a></li>
+        
+        <li><a href="/scrapy-to-mongo/">Scrapy将抓取结果写入MongoDB数据库</a></li>
+        
+        <li><a href="/scrapy-to-mysql/">Scrapy将抓取结果写入MySQL数据库</a></li>
+        
+        <li><a href="/python-csdn/">Python模拟登录CSDN</a></li>
+        
+        <li><a href="/python-douban-top250/">Python抓取IMDB电影Top250排行</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://neo0moriarty.github.io/tags/crawler">crawler</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://neo0moriarty.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-hugo-blog-record/" title="Mac下Hugo搭建记录">Mac下Hugo搭建记录</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-usb-iso/" title="Mac下格式化U盘并制作iso系统启动">Mac下格式化U盘并制作iso系统启动</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/ubuntu-mount-exfat/" title="ubuntu挂载exfat格式的硬盘">ubuntu挂载exfat格式的硬盘</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-neovim/" title="Neovim安装">Neovim安装</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-full-vim/" title="Mac 安装最完整的 Vim">Mac 安装最完整的 Vim</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-website/" title="Python相关网址收集">Python相关网址收集</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-round/" title="Python中使用round函数要注意的事">Python中使用round函数要注意的事</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-binary-tree/" title="Python实现和遍历二叉树">Python实现和遍历二叉树</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/practical-vim/" title="Vim实用技巧总结">Vim实用技巧总结</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/make-zsh-default/" title="配置zsh默认编辑器">配置zsh默认编辑器</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://neo0moriarty.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/blog/">blog</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/book/">book</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/crawler/">crawler</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/dev/">dev</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/os/">os</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/python/">python</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/study/">study</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://coolshell.cn/" title="酷壳 – CoolShell.cn">酷壳 – CoolShell.cn</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.flysnow.org" title="飞雪无情的博客">飞雪无情的博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>

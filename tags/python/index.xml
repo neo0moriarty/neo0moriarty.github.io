@@ -1,0 +1,789 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python on neo0moriarty</title>
+    <link>https://neo0moriarty.github.io/tags/python/</link>
+    <description>Recent content in python on neo0moriarty</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Sat, 20 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://neo0moriarty.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python相关网址收集</title>
+      <link>https://neo0moriarty.github.io/python-website/</link>
+      <pubDate>Sat, 20 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-website/</guid>
+      <description>&lt;p&gt;将&lt;strong&gt;Python&lt;/strong&gt;相关的&lt;strong&gt;学习资源和网址&lt;/strong&gt;收集于此，主要是一些学习文档、博客、电子书主页、github等等。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中使用round函数要注意的事</title>
+      <link>https://neo0moriarty.github.io/python-round/</link>
+      <pubDate>Fri, 19 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-round/</guid>
+      <description>&lt;p&gt;使用round函数的时候发现了「奇怪」的现象。&lt;strong&gt;一直觉得round函数就是四舍五入，结果却不一定。&lt;/strong&gt;一般如果觉得奇怪，那就是没弄懂其本质的运作原理，所以深入了解了下round函数。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python实现和遍历二叉树</title>
+      <link>https://neo0moriarty.github.io/python-binary-tree/</link>
+      <pubDate>Thu, 18 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-binary-tree/</guid>
+      <description>&lt;p&gt;先思考：&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;怎么表示一棵树(如二叉树)&lt;/li&gt;
+&lt;li&gt;树有哪几种遍历方式，怎么实现&lt;/li&gt;
+&lt;li&gt;给定其中N种遍历结果，如何还原树&lt;/li&gt;
+&lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>Sanic学习</title>
+      <link>https://neo0moriarty.github.io/python-sanic/</link>
+      <pubDate>Thu, 11 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-sanic/</guid>
+      <description>&lt;p&gt;Sanic学习笔记、练手记录。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Sanic实现WebSocket</title>
+      <link>https://neo0moriarty.github.io/python-sanic-websocket/</link>
+      <pubDate>Thu, 11 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-sanic-websocket/</guid>
+      <description>&lt;p&gt;Sanic除了利用Python原生的asyncio等异步特性，还可以方便地实现websocket接口。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Pycharm中Console的使用</title>
+      <link>https://neo0moriarty.github.io/pycharm-console/</link>
+      <pubDate>Sat, 06 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/pycharm-console/</guid>
+      <description>&lt;p&gt;Pycharm是很专业的Python开发IDE，功能特别强大，Console也不例外，比直接用iTerm2终端要好用。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用logging替换print</title>
+      <link>https://neo0moriarty.github.io/python-logging/</link>
+      <pubDate>Sat, 06 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-logging/</guid>
+      <description>&lt;p&gt;平时在学习和工作中，为了调试和检查，经常会用到打印变量结果等信息，习惯用print。这是不好的习惯，尤其是在Web相关的项目中。很小的脚本文件中用print是比较方便的，在稍微大点的Web项目中应该用logging模块彻底替换print，养成习惯。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python的代码性能测试工具</title>
+      <link>https://neo0moriarty.github.io/python-perf-counter/</link>
+      <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-perf-counter/</guid>
+      <description>&lt;p&gt;Python有挺多代码性能测试的工具，分CPU和内存的性能测试。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python 3.6 新特性一窥</title>
+      <link>https://neo0moriarty.github.io/python36-features/</link>
+      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python36-features/</guid>
+      <description>&lt;p&gt;Python3.6 在2016.12.23正式发布。发布一年多了，现在最新版本是3.6.4。
+3.6是Python的一个重要版本，巩固和新增了很多Python 3.x 的新特性。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python增强解释器Bpython</title>
+      <link>https://neo0moriarty.github.io/python-bpython/</link>
+      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-bpython/</guid>
+      <description>&lt;p&gt;Python默认的解释器是Cpython，不大好用。Ipython是一个交互比较好的增强解释器。此外，还有另一个增强解释器是Bpython。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python代码规范检查工具</title>
+      <link>https://neo0moriarty.github.io/python-pycodestyle/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-pycodestyle/</guid>
+      <description>&lt;p&gt;Python代码规范检查工具汇总。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python自定义异常类</title>
+      <link>https://neo0moriarty.github.io/python-exception/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-exception/</guid>
+      <description>&lt;p&gt;Python自定义异常可以通过继承自带的异常类来实现。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python的上下文管理器</title>
+      <link>https://neo0moriarty.github.io/python-contextor/</link>
+      <pubDate>Sun, 31 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-contextor/</guid>
+      <description>&lt;p&gt;Python读写文件最好的写法是「 with open(filename, mode) as f 」这种方式。
+这里的with使用的就是自带的上下文管理。本篇内容介绍Python的上下文管理器(contextor)。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python str VS repr</title>
+      <link>https://neo0moriarty.github.io/python-str-repr/</link>
+      <pubDate>Sat, 30 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-str-repr/</guid>
+      <description>&lt;p&gt;Python中字符串的格式化一般使用str和repr，str和repr调用的底层特殊函数是&lt;code&gt;__str__&lt;/code&gt;和&lt;code&gt;__repr__&lt;/code&gt;。用示例展示它们之间的区别。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>当True、False和数字作为dict的key时</title>
+      <link>https://neo0moriarty.github.io/python-dict-key/</link>
+      <pubDate>Sat, 30 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-dict-key/</guid>
+      <description>&lt;p&gt;Python的字典(dict)是很常用的，但字典的key的选用是需要注意的，并不是所有数据类型都可以作为字典的key；当True、False和数字作为dict的key时会发生「诡异」的事。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Pycharm配置pylint和pytest</title>
+      <link>https://neo0moriarty.github.io/pycharm-config-pylint/</link>
+      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/pycharm-config-pylint/</guid>
+      <description>&lt;p&gt;配置Pycharm支持pylint和pytest的快捷使用，方法是添加到右键的「External Tools」中。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python几个主流单元测试工具基本使用示例</title>
+      <link>https://neo0moriarty.github.io/python-unittest-tools/</link>
+      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-unittest-tools/</guid>
+      <description>&lt;p&gt;对比记录Python几个主流单元测试工具的基本使用示例。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python单元测试相关的模块和工具</title>
+      <link>https://neo0moriarty.github.io/python-unit-test/</link>
+      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-unit-test/</guid>
+      <description>&lt;p&gt;任何语言，要想编写足够健壮的程序，都要配合完善的单元测试，尤其是大型项目，在实践中这也是容易被忽略或不重视的一个环节。在此收集单元测试相关的模块和学习书籍、阅读资料等。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>asyncio uvloop sanic</title>
+      <link>https://neo0moriarty.github.io/python-asyncio/</link>
+      <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-asyncio/</guid>
+      <description>最近有空就去翻看Youtube的视频，看了很多Python相关的视频，主要是一些Python核心开发者的技术演讲视频。了解一些Python最前沿的技术分享。仰望众多大神，除了感到渺小和自卑外，还是能学到不少东西的。很受教，应该坚持。
+这两三年来Python3最主要和最受关注的feature莫过于asyncio，得益于node.js和高并发编程这几年的火热，异步编程和异步IO的概念更加受关注。这是好事，网络的传输一直是瓶颈，异步IO是达到高并发的有效手段。Python的asyncio的出现让Python更加焕发生机，尤其是web开发，大家一直认为这是趋势，越来越受关注。asyncio的开发者之一Yury Selivanov大神开发了uvloop，测试了asyncio+uvloop的性能，测试结果证明是可以媲美golang的性能，把node.js甩在身后，可见asyncio的潜力，具体可以参照这篇博文。现在还是起步不久，相信不久会有更令人瞩目的进步空间。
+之前写过一年左右的node.js，学到了不少异步编程的知识，node.js的纯异步编程很难有好的编程体验，相比Python，体验差了不止是几条街。现在Python+异步Python IO解决方案asyncio，让我顿时有了强烈的兴趣，接下来会持续关注和深入学习Python的web框架sanic和asyncio、uvloop等等，并实践之。
+一些asyncio阅读资料：
+ asyncio官方文档 Raymond Hettinger, Keynote on Concurrency, PyBay Asynchronous I/O With Python 3  Stay hungry. Stay foolish.</description>
+    </item>
+    
+    <item>
+      <title>Jupyter notebook添加Python 3</title>
+      <link>https://neo0moriarty.github.io/jupyter-notebook-python3/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/jupyter-notebook-python3/</guid>
+      <description>原来机器里装的是 anaconda2，默认的Python是2.7版本，默认的 jupyter notebook 也是基于Python 2内核的。
+添加Python 3 的命令：
+➜ ~ ipython3 kernelspec install-self [TerminalIPythonApp] WARNING | Subcommand `ipython kernelspec` is deprecated and will be removed in future versions. [TerminalIPythonApp] WARNING | You likely want to use `jupyter kernelspec` in the future [InstallNativeKernelSpec] WARNING | `jupyter kernelspec install-self` is DEPRECATED as of 4.0. You probably want `ipython kernel install` to install the IPython kernelspec. [InstallNativeKernelSpec] Installed kernelspec python3 in /usr/local/share/jupyter/kernels/python3  机器上安装了两个iPython。ipython3是基于Python 3 的。 报了警告，但jupyter notebook 中已经有了Python 3 的选项了，上面的命令好使。</description>
+    </item>
+    
+    <item>
+      <title>PyCon学习资源</title>
+      <link>https://neo0moriarty.github.io/python-pycon/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-pycon/</guid>
+      <description>PyCon是Python每年举行的Python实践分享大会，除了主会，还有很多地区性的PyCon大会。 PyCon是关于Python的高质量且前沿的技术分享，有很多分享视频，是学习和了解Python开发和实践的非常好用的学习资料。
+国内的PyCon规模小影响力弱，质量貌似也变味了，可以参考这篇文章。
+当然，国外的PyCon才是「正宗」的。基本上在Youtube上可以找到每年相应的PyCon分享视频。
+PyCon官方主页：https://www.pycon.org/
+Youtube频道：
+ PyCon2017 PyCon2016 PyCon2015 PyCon2014  更多的相关视频可以直接搜索Youtube，上面有不计其数的学习视频。</description>
+    </item>
+    
+    <item>
+      <title>Python 2 生命倒计时</title>
+      <link>https://neo0moriarty.github.io/python2-end/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python2-end/</guid>
+      <description>Python 2 早已不再被官方重视和重点维护，这已是众所周知的事。 官方希望在2020年的时候彻底抛弃Python 2。
+Python Clock是Python 2 生命倒计时网站。
+这是好事，Python 3 各方面都比Python 2 要好，新增了很多新特性新功能，Python 3 可以写出比Python 2 更简洁优雅同时又高效的代码。大势所趋。
+Python 3.0 是2008年12月发布的，到2020年，十几年的过渡时间可谓是很长了。
+现在，绝大多数(95%)的Python主流包或工具库都已经完成Python 3 的迁移。 详情请参照这个网站。</description>
+    </item>
+    
+    <item>
+      <title>Python is not installed as a framework 报错解决</title>
+      <link>https://neo0moriarty.github.io/python-is-not-installed-as-a-framework/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-is-not-installed-as-a-framework/</guid>
+      <description>&lt;p&gt;在iPython中 from matplotlib import pyplot 报错解决方法。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中的 for else</title>
+      <link>https://neo0moriarty.github.io/python-forelse/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-forelse/</guid>
+      <description>Python中的for循环是有else的可选用法的。
+for后面加了else后，for循环结束后(没有break)会进入else执行语句；如果碰到break则会跳过else分支。
+示例：
+In [1]: fruits = [&#39;apple&#39;, &#39;banana&#39;, &#39;mango&#39;] ...: for fruit in fruits: ...: print(fruit.capitalize()) ...: else: ...: print(&#39;watermelon&#39;) ...: Apple Banana Mango watermelon In [2]: for n in range(2, 10): ...: for x in range(2, n): ...: if n % x == 0: ...: print( n, &#39;equals&#39;, x, &#39;*&#39;, n//x) ...: break ...: else: ...: # loop fell through without finding a factor ...: print(n, &#39;is a prime number&#39;) .</description>
+    </item>
+    
+    <item>
+      <title>如何写出漂亮优雅的Python代码</title>
+      <link>https://neo0moriarty.github.io/how-to-write-elegant-python/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/how-to-write-elegant-python/</guid>
+      <description>不少人觉得Python语法简单，学几天就会了。殊不知，要写出漂亮优雅的Python代码，不下苦功夫钻研和大量的实践是不可能的，除非是天才。写出漂亮的Python代码，需要对语言本身精通，谈何容易。
+怎么写好？捷径之一当然是看高手和大师们是怎么写的，多学习和实践。下面有一些大师的演讲和示例，示范如何写出漂亮优雅的Python代码。
+Raymond Hettinger 2013年在PyCon US 上的一个演讲分享：
+ Youtube视频 Github笔记  这份笔记整理得很好，得反复琢磨和学习。
+另外，pyvideo.org上还有Raymond Hettinger更多的分享视频：
+ Raymond Hettinger@pyvideo.org  Jeﬀ Knupp在2013年写的小册子Writing Idiomatic Python：
+ Writing Idiomatic Python 百度云下载  这个小册子写得很好，可以跟上面的笔记相互对比着看，都是很好的学习和借鉴资料。
+更多进阶指导：
+ Effective Python: 59 Specific Ways to Write Better Python The Hitchhiker&amp;rsquo;s Guide to Python Code Like a Pythonista: Idiomatic Python How to think like a Pythonista Python Best Practices: 5 Tips For Better Code Writing clean, testable, high quality code in Python writing-idiomatic-python-ebook activestate.</description>
+    </item>
+    
+    <item>
+      <title>用pylab模式开启iPython</title>
+      <link>https://neo0moriarty.github.io/python-pylad-ipython/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-pylad-ipython/</guid>
+      <description>在iPython中pandas的一些调用matplotlib的函数需要pylab方式打开。
+打开方式：
+ 终端命令行下输入 ipython --pylab 在iPython中输入 %pylab  </description>
+    </item>
+    
+    <item>
+      <title>json.dump和pickle.dump的对比</title>
+      <link>https://neo0moriarty.github.io/jsondump-pickledump/</link>
+      <pubDate>Sat, 23 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/jsondump-pickledump/</guid>
+      <description>&lt;p&gt;Python的json和pickle模块实现了数据的序列和反序列化。基本上功能使用没有太大区别，方法也同样是dumps/dump和loads/load。&lt;/p&gt;
+
+&lt;p&gt;以实际使用示例对比json.dump和pickle.dump的序列的效率和区别。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python遍历列表并修改元素的值</title>
+      <link>https://neo0moriarty.github.io/python-walk-through/</link>
+      <pubDate>Sat, 23 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-walk-through/</guid>
+      <description>&lt;p&gt;怎样Python遍历列表并修改元素的值？
+Python是一门灵活的语言，这个问题，不同人的习惯写法可能不同。
+&lt;strong&gt;但有时不同的写法效率可以相差两万倍，甚至更多，这点需要时刻警惕。&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>计算Python对象的大小</title>
+      <link>https://neo0moriarty.github.io/python-cal-object/</link>
+      <pubDate>Sat, 23 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-cal-object/</guid>
+      <description>&lt;p&gt;怎样获得Python对象占用内存的大小呢？
+利用sys模块中getsizeof函数。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python3中的格式化</title>
+      <link>https://neo0moriarty.github.io/python3-format/</link>
+      <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python3-format/</guid>
+      <description>&lt;p&gt;Python3和Python2的格式化是不同的，Python3中主要使用内置的format和str.format函数。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中@classmethod和@staticmethod</title>
+      <link>https://neo0moriarty.github.io/python-classmethod/</link>
+      <pubDate>Fri, 22 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-classmethod/</guid>
+      <description>&lt;p&gt;Python中classmethod 、staticmethod 、abstract method
+类的方法类型有：普通方法、类方法、静态方法、抽象方法等&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用builtwith识别网站使用的相关技术</title>
+      <link>https://neo0moriarty.github.io/python-builtwith-module/</link>
+      <pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-builtwith-module/</guid>
+      <description>&lt;p&gt;怎么判断一个网站使用了哪些技术哪些框架呢？
+Python有个工具builtwith可以用来识别部分网站所采用的相关技术。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用robotparser解析网站的robots.txt</title>
+      <link>https://neo0moriarty.github.io/python-robotparser/</link>
+      <pubDate>Sat, 16 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-robotparser/</guid>
+      <description>&lt;p&gt;robotparser是Python2中的自带模块，Python3中则是集成在urllib自带模块中。
+可以用来解析网站的robots.txt，判断要抓取的url和user-agent是否被网站所建议禁用。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python使用traceback获取详细的异常信息</title>
+      <link>https://neo0moriarty.github.io/python-traceback/</link>
+      <pubDate>Thu, 07 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-traceback/</guid>
+      <description>&lt;p&gt;使用traceback可以获取详细的异常信息，是很有用的工具&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中的引用与复制简单示例</title>
+      <link>https://neo0moriarty.github.io/python-copy/</link>
+      <pubDate>Sat, 02 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-copy/</guid>
+      <description>&lt;p&gt;Python中的赋值=和函数传参用的是引用。
+Python中的复制默认是浅复制，以示例表明浅复制与深复制之间的区别。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python实现简单的装饰器</title>
+      <link>https://neo0moriarty.github.io/python-decorator/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-decorator/</guid>
+      <description>&lt;p&gt;Python的装饰器是一种嵌套函数，一种闭包。是很好用的工具，利用得好，让代码锦上添花、如虎添翼。
+本文介绍简单的装饰器的实现，以及三个好用的Python自带装饰器：functools.wraps、functools.lru_cache、functools.singledispatch&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中策略模式的应用：以电商购物车的打折策略为例</title>
+      <link>https://neo0moriarty.github.io/python-strategy-order-discount/</link>
+      <pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-strategy-order-discount/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://baike.baidu.com/item/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/646307?fr=aladdin&#34;&gt;策略模式&lt;/a&gt;是常见的设计模式之一。本文探讨Python中关于策略模式的应用，以电商购物车的不同打折策略的实现为例，并&lt;strong&gt;示范怎么逐步优化代码的实现&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python的virtualenv使用</title>
+      <link>https://neo0moriarty.github.io/python-virtualenv/</link>
+      <pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-virtualenv/</guid>
+      <description>&lt;p&gt;virtualenv是Python中用来创建隔离的Python环境，用来解决一台机器下不同的项目不同的Python版本依赖问题。很好用的工具。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python的作用域与闭包浅析</title>
+      <link>https://neo0moriarty.github.io/python-closure/</link>
+      <pubDate>Thu, 30 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-closure/</guid>
+      <description>&lt;p&gt;以示例阐述Python中的作用域和闭包&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中map、filter和reduce的替代品</title>
+      <link>https://neo0moriarty.github.io/python-map-filter/</link>
+      <pubDate>Wed, 29 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-map-filter/</guid>
+      <description>&lt;p&gt;支持函数式的语言通常会提供 map、filter 和 reduce 三个高阶函数。在Python 中，能不用就不用它们！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>查看Python帮助文档的几种方式</title>
+      <link>https://neo0moriarty.github.io/python-manual-help/</link>
+      <pubDate>Wed, 29 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-manual-help/</guid>
+      <description>&lt;p&gt;查看Python帮助文档，可以用官方自带的：dir、help、&lt;code&gt;__doc__&lt;/code&gt;。
+查看对象属性，最佳方案不是dir，是一个开源替代工具pdir。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python3中的内存视图memoryview</title>
+      <link>https://neo0moriarty.github.io/python-memoryview/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-memoryview/</guid>
+      <description>&lt;p&gt;memoryview 是Python 3 的一个内置类&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python3中的字符编码和解码示例</title>
+      <link>https://neo0moriarty.github.io/python3-unicode/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python3-unicode/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;人类使用文本，计算机使用字节序列。&lt;/strong&gt;
+Python 3 明确区分了人类可读的文本字符串和原始的字节序列。
+隐式地把字节序列转换成 Unicode 文本已成过去。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python3的文件编码</title>
+      <link>https://neo0moriarty.github.io/python3-file-encode/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python3-file-encode/</guid>
+      <description>&lt;p&gt;Python 3 默认使用 UTF-8 编码源码，Python 2（从 2.5 开始）则默认使用 ASCII。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中bisect和insort的应用示例</title>
+      <link>https://neo0moriarty.github.io/python-bisect-insort/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-bisect-insort/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;已排序的序列&lt;/strong&gt;可以用来进行快速搜索，而&lt;strong&gt;标准库的 bisect 模块&lt;/strong&gt;给我们提供了&lt;strong&gt;二分查找算法&lt;/strong&gt;。bisect 模块包含两个主要函数，bisect 和 insort，两个函数都利用二分查找算法来&lt;strong&gt;在有序序列中查找或插入元素&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中具名元组namedtuple的应用示例</title>
+      <link>https://neo0moriarty.github.io/python-namedtuple/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-namedtuple/</guid>
+      <description>&lt;p&gt;自Python 2.6开始，namedtuple就加入到Python里，&lt;strong&gt;用以构建只有少数属性但是没有方法的对象&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;用namedtuple实现扑克牌类和记录城市信息的示例。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中双向队列deque使用示例</title>
+      <link>https://neo0moriarty.github.io/python-deque/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-deque/</guid>
+      <description>&lt;p&gt;利用 .append 和 .pop 方法，我们&lt;strong&gt;可以把列表当作栈或者队列来用&lt;/strong&gt;（比如，把 .append 和 .pop(0) 合起来用，就能模拟栈的“先进后出”的特点）。但是删除列表的第一个元素（抑或是在第一个元素之前添加一个元素）之类的操作是很耗时的，因为&lt;strong&gt;这些操作会牵扯到移动列表里的所有元素&lt;/strong&gt;。频繁在首尾增减元素应该使用双向队列。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中的字典和集合以及它们背后的散列表</title>
+      <link>https://neo0moriarty.github.io/python-dict-hash/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-dict-hash/</guid>
+      <description>&lt;p&gt;字典（dict）这个数据结构在Python里无处不在，不但在各种程序里广泛使用，它也是 Python 语言的基石。模块的命名空间、实例的属性和函数的关键字参数中都可以看到字典的身影。&lt;strong&gt;正是因为字典至关重要，Python 对它的实现做了高度优化，而散列表则是字典类型性能出众的根本原因。&lt;/strong&gt;集合（set）的实现也同样依赖于&lt;strong&gt;散列表&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中的数组浅析</title>
+      <link>https://neo0moriarty.github.io/python-array/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-array/</guid>
+      <description>&lt;p&gt;数组并不是Python内置的数据类型，是标准库array模块里面的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python序列的&#43;、*、&#43;=、*=</title>
+      <link>https://neo0moriarty.github.io/python-serial/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-serial/</guid>
+      <description>&lt;p&gt;序列是支持 + 、 &lt;code&gt;*&lt;/code&gt; 、+=、*=操作的。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用dis模块把Python代码反编译为字节码</title>
+      <link>https://neo0moriarty.github.io/python-dis-module/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-dis-module/</guid>
+      <description>&lt;p&gt;Python标准库&lt;a href=&#34;https://docs.python.org/2/library/dis.html&#34;&gt;dis&lt;/a&gt; — Disassembler for Python bytecode，作用是把python代码反汇编为字节码指令&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>利用chardet检测文件的编码</title>
+      <link>https://neo0moriarty.github.io/python-chardet/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-chardet/</guid>
+      <description>&lt;p&gt;我们不能根据特定的模式来 100% 确定二进制文件的编码。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>处理文本文件的最佳实践</title>
+      <link>https://neo0moriarty.github.io/python-deal-with-text/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-deal-with-text/</guid>
+      <description>&lt;p&gt;处理文本的最佳实践是 &amp;ldquo;Unicode三明治&amp;rdquo;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中setdefault和defaultdict的应用示例</title>
+      <link>https://neo0moriarty.github.io/python-setdefault/</link>
+      <pubDate>Mon, 27 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-setdefault/</guid>
+      <description>&lt;p&gt;也许每个 Python 程序员都知道可以用 d.get(k, default) 来代替 d[k]，给找不到的键一个默认的返回值（这比处理 KeyError 要方便不少）。&lt;/p&gt;
+
+&lt;p&gt;但是要更&lt;strong&gt;新某个键对应的值的时候&lt;/strong&gt;，不管使用 &lt;code&gt;__getitem__&lt;/code&gt; 还是 get 都会不自然，而且效率低。&lt;/p&gt;
+
+&lt;p&gt;dict.get 并不是处理找不到的键的最好方法。而是应该&lt;strong&gt;用setdefault或defaultdict处理找不到的键&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python判断计算机是大端还是小端</title>
+      <link>https://neo0moriarty.github.io/python-big-little-end/</link>
+      <pubDate>Mon, 27 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-big-little-end/</guid>
+      <description>&lt;p&gt;little endian（小端）和big endian（大端）之分
+用python判断大端还是小端&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python生成千万行的文本并测试numpy运算性能</title>
+      <link>https://neo0moriarty.github.io/python-generate-floats/</link>
+      <pubDate>Mon, 27 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-generate-floats/</guid>
+      <description>&lt;p&gt;Python生成千万行的浮点数文本文件
+测试numpy运算性能&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>文件读取方式r&#43;、w&#43;、a&#43;的区别</title>
+      <link>https://neo0moriarty.github.io/python-read-write/</link>
+      <pubDate>Mon, 27 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-read-write/</guid>
+      <description>&lt;p&gt;文件读取方式有 r、w、a 与 +、b 的组合&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python相关的网站收集</title>
+      <link>https://neo0moriarty.github.io/python-study-website/</link>
+      <pubDate>Sat, 25 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-study-website/</guid>
+      <description>&lt;p&gt;Python相关的网站/网址收集&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《流畅的Python》</title>
+      <link>https://neo0moriarty.github.io/fluent-python/</link>
+      <pubDate>Sat, 25 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/fluent-python/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://book.douban.com/subject/27028517/&#34;&gt;《流畅的Python》中文版&lt;/a&gt;2017年出版，豆瓣评分9.2。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>print vs print()</title>
+      <link>https://neo0moriarty.github.io/python-print/</link>
+      <pubDate>Fri, 24 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-print/</guid>
+      <description>&lt;p&gt;Python2.x中print是一个语句，因此print是一个关键字或保留字；
+Python3.x中print是一个内置函数。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中的yield生成器</title>
+      <link>https://neo0moriarty.github.io/python-yield/</link>
+      <pubDate>Fri, 24 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-yield/</guid>
+      <description>&lt;p&gt;Python中的yield用法示例，代码示例在Python3下运行。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>快排python实现</title>
+      <link>https://neo0moriarty.github.io/python-quick-sort/</link>
+      <pubDate>Fri, 24 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-quick-sort/</guid>
+      <description>&lt;p&gt;快排，python递归实现&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>app = Flask(__name__)</title>
+      <link>https://neo0moriarty.github.io/python-flask-demo/</link>
+      <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-flask-demo/</guid>
+      <description>&lt;p&gt;最简单的web服务示例&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python中的 *args 和 **kwargs</title>
+      <link>https://neo0moriarty.github.io/python-args/</link>
+      <pubDate>Tue, 21 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-args/</guid>
+      <description>&lt;p&gt;&lt;code&gt;*&lt;/code&gt;args 表示任何多个无名参数，它是一个tuple
+**kwargs 表示关键字参数，它是一个dict&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python简介与入门引导</title>
+      <link>https://neo0moriarty.github.io/intro-python/</link>
+      <pubDate>Fri, 17 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/intro-python/</guid>
+      <description>&lt;p&gt;文字 + 图片 + 代码示例 + 学习资料&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python链接impala</title>
+      <link>https://neo0moriarty.github.io/python-impala/</link>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-impala/</guid>
+      <description>&lt;p&gt;Python连接impala记录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Jupyter Notebook</title>
+      <link>https://neo0moriarty.github.io/python-jupyter-notebook/</link>
+      <pubDate>Wed, 18 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-jupyter-notebook/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://jupyter.org/&#34;&gt;Jupyter Notebook&lt;/a&gt; 原来叫做Ipython Notebook，是开源的web应用，一个交互式网页笔记本，支持运行 40 多种编程语言。可以用来创建和共享文学化程序文档，支持实时代码调试运行，数学方程，可视化和 markdown。 用途包括：数据清理和转换，数值模拟，统计建模，机器学习等等。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Scikit-learn</title>
+      <link>https://neo0moriarty.github.io/python-scikit-learn/</link>
+      <pubDate>Wed, 18 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-scikit-learn/</guid>
+      <description>&lt;p&gt;Scikit-learn是基于Python的开源机器学习框架，这里是安装教程、简介和学习资料收集&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python教程</title>
+      <link>https://neo0moriarty.github.io/python-tutorial/</link>
+      <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-tutorial/</guid>
+      <description>&lt;p&gt;网上有很多Python学习教程，收集汇总在本篇博问。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python的GIL与多线程、多进程</title>
+      <link>https://neo0moriarty.github.io/python-gil/</link>
+      <pubDate>Mon, 16 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-gil/</guid>
+      <description>&lt;p&gt;GIL是什么，Python中什么时候用多线程，什么时候用多进程？
+本篇博文主要是摘录汇总对以上问题的解答。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>pip常用命令</title>
+      <link>https://neo0moriarty.github.io/python-pip-version/</link>
+      <pubDate>Fri, 13 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-pip-version/</guid>
+      <description>&lt;p&gt;Python pip的使用，如指定安装版本、指定安装源&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python实现删除当前目录下重复文件</title>
+      <link>https://neo0moriarty.github.io/python-delete-duplicate-files/</link>
+      <pubDate>Wed, 11 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-delete-duplicate-files/</guid>
+      <description>&lt;p&gt;用Python实现删除当前目录下重复文件：&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>插入排序python实现</title>
+      <link>https://neo0moriarty.github.io/python-insert-sort/</link>
+      <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-insert-sort/</guid>
+      <description>&lt;p&gt;排序算法之插入排序，用Python实现。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python开发风格指南</title>
+      <link>https://neo0moriarty.github.io/python-dev-code-style/</link>
+      <pubDate>Wed, 04 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-dev-code-style/</guid>
+      <description>&lt;p&gt;Python开发风格指南&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>centos安装python3</title>
+      <link>https://neo0moriarty.github.io/centos-install-python3/</link>
+      <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/centos-install-python3/</guid>
+      <description>&lt;p&gt;Centos上编译安装Python3记录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Flask实现随机返回图片url的接口</title>
+      <link>https://neo0moriarty.github.io/flask-return-random-files/</link>
+      <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/flask-return-random-files/</guid>
+      <description>&lt;p&gt;Flask实现随机返回图片url的接口，下图就是随机返回的图片，每次刷新都会从图库中随机返回一张图片。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://molock.cn/random?id=55327&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Nginx&#43;gunicorn&#43;upstart方式部署flask</title>
+      <link>https://neo0moriarty.github.io/python-flask/</link>
+      <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-flask/</guid>
+      <description>&lt;p&gt;Linux下flask web项目的部署，也是本博客在阿里云服务器上的部署方式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python下载图片</title>
+      <link>https://neo0moriarty.github.io/python-download-pictures/</link>
+      <pubDate>Sun, 01 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-download-pictures/</guid>
+      <description>&lt;p&gt;Python下载图片代码示例&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python获取当前文件路径</title>
+      <link>https://neo0moriarty.github.io/python-get-current-dir/</link>
+      <pubDate>Sun, 01 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-get-current-dir/</guid>
+      <description>&lt;p&gt;Python获取当前文件路径的几种方式。
+os.getcwd()与os.path.dirname()的区别。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

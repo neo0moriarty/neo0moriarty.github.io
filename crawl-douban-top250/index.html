@@ -1,0 +1,2389 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.59.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Python抓取豆瓣电影Top250排行 | neo0moriarty</title>
+    <meta property="og:title" content="Python抓取豆瓣电影Top250排行 - neo0moriarty">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2017-12-05T00:00:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2017-12-05T00:00:00&#43;08:00">
+        
+    <meta name="Keywords" content="[抓取豆瓣top250排行]">
+    <meta name="description" content="Python抓取豆瓣电影Top250排行">
+        
+    <meta name="author" content="neo0moriarty">
+    <meta property="og:url" content="https://neo0moriarty.github.io/crawl-douban-top250/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://neo0moriarty.github.io/">
+                        neo0moriarty
+                    </a>
+                
+                <p class="description">o(╯□╰)o  (゜-゜)つロ  o(╯□╰)o</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://neo0moriarty.github.io/">首页</a>
+                    
+                    <a  href="https://neo0moriarty.github.io/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Python抓取豆瓣电影Top250排行</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2017年12月5日
+                        </date>
+                        
+                        
+                        
+                        <div class="post-content">
+                            <p>用Scrapy抓取豆瓣电影Top250排行</p>
+
+<hr />
+
+<p>scrapy主代码：</p>
+
+<pre><code># 抓取主代码
+import scrapy
+import re
+from douban.items import DoubanTopItem
+
+class MoviesInfo(scrapy.Spider):
+
+    def __init__(self):
+        self.start = 0
+
+    name = &quot;movies_info&quot;
+    allowed_domains = [&quot;douban.com&quot;]
+    start_urls = [
+        'https://movie.douban.com/top250?start=0', # 豆瓣top250
+    ]
+
+    def parse(self, response):
+        item = DoubanTopItem()
+        res_infos = response.css('div.info')
+
+        for res in res_infos:
+            tmp = {}
+            hd = res.css('div.hd') # 电影名称
+            movie_title_list = hd.css('span::text').extract()
+            # &quot;&quot;.join(m.split()) 去除\xa0(也就是&amp;nbsp;)
+            item['title'] = ''.join(''.join(m.split()) for m in movie_title_list[:-1]) 
+            bd = res.css('div.bd') # 电影评分和评分人数
+            score_and_count = bd.css('div.star span::text').extract()
+            score = score_and_count[0]
+            count = score_and_count[1]
+            item['score'] = float(score)
+            regex = re.compile('^[0-9]*')
+            count_str = regex.findall(count)[0] # 取出数字字符串
+            item['count'] = int(count_str)
+            yield item
+
+        self.start += 25
+        while self.start &lt;= 225:
+            next_page = 'https://movie.douban.com/top250?start=' + str(self.start)
+            yield scrapy.Request(next_page, callback=self.parse)
+            
+# 将结果写入markdown
+class FilePipeline:
+
+    def __init__(self):
+        self.id = 1
+
+    def process_item(self, item, spider):
+        with open('top250.md', 'a+', encoding='utf-8') as f:
+            title = item.get('title')
+            score = item.get('score')
+            count = item.get('count')
+            f.write('|' + str(self.id) + '|' + title.split('/')[0] + '|' + 
+                str(score) + '|' + str(count) + '|\n')
+            self.id += 1
+        return item     
+
+</code></pre>
+
+<p>2017.12.12更新代码：</p>
+
+<pre><code>import scrapy
+import urllib
+import re
+import time
+from random import choice
+from scrapy.spiders import Spider
+from scrapy.http import FormRequest
+from douban.items import DoubanMovieTop250Item
+
+
+class DoubanGetInfoNoDetail(Spider):
+
+    def __init__(self, username, nickname, password):
+        self.top_num = 0
+        self.username = username
+        self.nickname = nickname
+        self.password = password
+
+    name = 'douban_get_info_no_detail'
+
+    start_urls = ['https://movie.douban.com/top250?start=' + str(i)
+                    for i in range(250) if i % 25 == 0]
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(
+            username = crawler.settings.get('DOUBAN_USERNAME'),
+            nickname = crawler.settings.get('DOUBAN_NICKNAME'),
+            password = crawler.settings.get('DOUBAN_PASSWORD')
+        )
+
+    def parse(self, response):
+        self.logger.warning(&quot;进入parse处理&quot;)
+        res_infos = response.css('div.info')
+        for res in res_infos:
+            item = DoubanMovieTop250Item()
+            hd = res.css('div.hd') # 电影名称
+            movie_title_list = hd.css('span::text').extract()
+            # &quot;&quot;.join(m.split()) 去除\xa0(也就是&amp;nbsp;)
+            item['full_name'] = ''.join(&quot;&quot;.join(m.split()) for m in movie_title_list[:-1])
+            item['name'] = item['full_name'].split('/')[0]
+            bd = res.css('div.bd') # 电影评分和评分人数
+            score_and_count = bd.css('div.star span::text').extract()
+            score = score_and_count[0]
+            count = score_and_count[1]
+            item['score'] = float(score)
+            regex = re.compile('^[0-9]*')
+            count_str = regex.findall(count)[0] # 取出数字字符串
+            item['count'] = int(count_str)
+            self.top_num += 1
+            item['top_num'] = self.top_num
+            item['movie_intro'] = ''
+            item['detail_url'] = ''
+            yield item
+</code></pre>
+
+<p>附加详情页的代码:</p>
+
+<pre><code>import scrapy
+import urllib
+import re
+import time
+from random import choice
+from scrapy.spiders import Spider
+from scrapy.http import FormRequest
+from douban.items import DoubanMovieTop250Item, DoubanMovieDetail
+
+
+class DoubanGetInfo(Spider):
+
+    def __init__(self, username, nickname, password):
+        self.top_num = 0
+        self.username = username
+        self.nickname = nickname
+        self.password = password
+
+    name = 'douban_get_info'
+
+    start_urls = ['https://movie.douban.com/top250?start=' + str(i)
+                    for i in range(250) if i % 25 == 0]
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(
+            username = crawler.settings.get('DOUBAN_USERNAME'),
+            nickname = crawler.settings.get('DOUBAN_NICKNAME'),
+            password = crawler.settings.get('DOUBAN_PASSWORD')
+        )
+
+    def parse(self, response):
+        self.logger.warning(&quot;进入parse处理&quot;)
+
+        res_infos = response.css('div.info')
+        for res in res_infos:
+            item = {}
+            tmp = {}
+            # 电影详情页的url
+            url_con_str = res.css('a').extract_first()
+            url_re = re.compile('&quot;(.*?)&quot;')
+            url = url_re.findall(url_con_str)
+            item['detail_url'] = url[0]
+            hd = res.css('div.hd') # 电影名称
+            movie_title_list = hd.css('span::text').extract()
+            # &quot;&quot;.join(m.split()) 去除\xa0(也就是&amp;nbsp;)
+            item['full_name'] = ''.join(&quot;&quot;.join(m.split()) for m in movie_title_list[:-1])
+            item['name'] = item['full_name'].split('/')[0]
+            bd = res.css('div.bd') # 电影评分和评分人数
+            score_and_count = bd.css('div.star span::text').extract()
+            score = score_and_count[0]
+            count = score_and_count[1]
+            item['score'] = float(score)
+            regex = re.compile('^[0-9]*')
+            count_str = regex.findall(count)[0] # 取出数字字符串
+            item['count'] = int(count_str)
+            self.top_num += 1
+            item['top_num'] = self.top_num
+            if item['detail_url']:
+                yield scrapy.Request(
+                    item['detail_url'],
+                    callback=self.parse_movie_detail,
+                    meta={'item': item},
+                    dont_filter=True
+                    )
+
+    def parse_movie_detail(self, response):
+        self.logger.warning(&quot;进入parse_movie_detail处理&quot;)
+        item = DoubanMovieTop250Item()
+        d = response.meta['item']
+
+        movie_intro = ''
+        if response.status == 200:
+            x_str = '//*[@id=&quot;link-report&quot;]//span[@property=&quot;v:summary&quot;]/text()'
+            movie_intro = response.xpath(x_str).extract_first()
+            if movie_intro:
+                movie_intro = movie_intro.strip().replace('&quot;', '\&quot;').replace(&quot;'&quot;, &quot;\'&quot;)
+        else:
+            self.logger.error(response.url)
+            self.logger.error('parse_movie_detail 状态码为：{}'.format(response.status))
+
+        d['movie_intro'] = movie_intro
+        item = d
+        self.logger.warning(item)
+        yield item
+</code></pre>
+
+<p>附加登录的代码：</p>
+
+<pre><code>import scrapy
+import urllib
+import re
+import time
+from random import choice
+from scrapy.spiders import Spider
+from scrapy.http import FormRequest
+from douban.items import DoubanMovieTop250Item, DoubanMovieDetail
+
+
+class DoubanLoginInfo(Spider):
+
+    def __init__(self, username, nickname, password):
+        self.top_num = 0
+        self.username = username
+        self.nickname = nickname
+        self.password = password
+
+    name = 'douban_login_and_get_info'
+
+    @classmethod
+    def from_crawler(cls, crawler):
+        return cls(
+            username = crawler.settings.get('DOUBAN_USERNAME'),
+            nickname = crawler.settings.get('DOUBAN_NICKNAME'),
+            password = crawler.settings.get('DOUBAN_PASSWORD')
+        )
+
+    def start_requests(self):
+        self.logger.warning(&quot;start_request 请求入口&quot;)
+        login_url = 'https://www.douban.com/accounts/login'
+        return [scrapy.Request(login_url, meta={'cookiejar': 1}, callback=self.post_login)]
+
+    def post_login(self, response):
+        self.logger.warning(&quot;提交参数模拟登录&quot;)
+        html = urllib.request.urlopen(response.url).read().decode('utf-8')
+        # 验证码图片地址
+        search_str = '&lt;img id=&quot;captcha_image&quot; src=&quot;(.+?)&quot; alt=&quot;captcha&quot; class=&quot;captcha_image&quot;/&gt;'
+        imgurl = re.search(search_str, html)
+        if imgurl:
+            url = imgurl.group(1)
+            # 将图片保存至同目录下
+            res = urllib.request.urlretrieve(url, 'v.jpg')
+            # 获取captcha-id参数
+            search_str2 = '&lt;input type=&quot;hidden&quot; name=&quot;captcha-id&quot; value=&quot;(.+?)&quot;/&gt;'
+            captcha = re.search(search_str2, html)
+            if captcha:
+                vcode = input('请输入图片上的验证码：')
+                return [FormRequest.from_response(response,
+                          meta={'cookiejar': response.meta['cookiejar']},
+                          formdata={
+                              'source': 'index_nav',
+                              'form_email': self.username,
+                              'form_password': self.password,
+                              'captcha-solution': vcode,
+                              'captcha-id': captcha.group(1)
+                          },
+                          callback=self.after_login,
+                          dont_filter=True)
+                        ]
+        return [FormRequest.from_response(response,
+                  meta={'cookiejar': response.meta['cookiejar']},
+                  formdata={
+                      'source': 'index_nav',
+                      'form_email': self.username,
+                      'form_password': self.password
+                  },
+                  callback=self.after_login,
+                  dont_filter=True)
+                ]
+
+
+    def after_login(self, response):
+        self.logger.warning(&quot;模拟登录结束&quot;)
+        urls = ['https://movie.douban.com/top250?start=' + str(i)
+                    for i in range(250) if i % 25 == 0]
+        for url in urls:
+            time.sleep(1)
+            yield scrapy.Request(url, meta={'cookiejar': response.meta['cookiejar']})
+
+
+    def parse(self, response):
+        self.logger.warning(&quot;进入parse处理&quot;)
+
+        # unicode_body = response.body_as_unicode()
+        # if self.nickname in unicode_body:
+        #     self.logger.warning(&quot;模拟登录成功&quot;)
+        # else:
+        #     self.logger.warning(&quot;模拟登录失败&quot;)
+
+        res_infos = response.css('div.info')
+        for res in res_infos:
+            item = {}
+            tmp = {}
+            # 电影详情页的url
+            url_con_str = res.css('a').extract_first()
+            url_re = re.compile('&quot;(.*?)&quot;')
+            url = url_re.findall(url_con_str)
+            item['detail_url'] = url[0]
+            hd = res.css('div.hd') # 电影名称
+            movie_title_list = hd.css('span::text').extract()
+            # &quot;&quot;.join(m.split()) 去除\xa0(也就是&amp;nbsp;)
+            item['full_name'] = ''.join(&quot;&quot;.join(m.split()) for m in movie_title_list[:-1])
+            item['name'] = item['full_name'].split('/')[0]
+            bd = res.css('div.bd') # 电影评分和评分人数
+            score_and_count = bd.css('div.star span::text').extract()
+            score = score_and_count[0]
+            count = score_and_count[1]
+            item['score'] = float(score)
+            regex = re.compile('^[0-9]*')
+            count_str = regex.findall(count)[0] # 取出数字字符串
+            item['count'] = int(count_str)
+            self.top_num += 1
+            item['top_num'] = self.top_num
+            time.sleep(choice(range(3)))
+            yield scrapy.Request(
+                item['detail_url'],
+                callback=self.parse_movie_detail,
+                meta={'item': item, 'cookiejar': response.meta['cookiejar']},
+                dont_filter=True
+            )
+
+
+    def parse_movie_detail(self, response):
+        self.logger.warning(&quot;进入parse_movie_detail处理&quot;)
+        item = DoubanMovieTop250Item()
+        d = response.meta['item']
+
+        movie_intro = ''
+        if response.status == 200:
+            x_str = '//*[@id=&quot;link-report&quot;]//span[@property=&quot;v:summary&quot;]/text()'
+            movie_intro = response.xpath(x_str).extract_first()
+            if movie_intro:
+                movie_intro = movie_intro.strip().replace('&quot;', '\&quot;').replace(&quot;'&quot;, &quot;\'&quot;)
+        else:
+            self.logger.error(response.url)
+            self.logger.error('parse_movie_detail 状态码为：{}'.format(response.status))
+
+        d['movie_intro'] = movie_intro
+        item = d
+        self.logger.warning(item)
+        yield item
+</code></pre>
+
+<p>结果如下，豆瓣top250的排序算法并不是简单的计算评分和评分人数，而是用<a href="https://www.douban.com/group/topic/49721552/">一种综合的排序算法</a>。</p>
+
+<table>
+<thead>
+<tr>
+<th align="center">排名</th>
+<th align="left">电影名</th>
+<th align="center">评分</th>
+<th align="center">评分人数</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="left">肖申克的救赎</td>
+<td align="center">9.6</td>
+<td align="center">917921</td>
+</tr>
+
+<tr>
+<td align="center">2</td>
+<td align="left">霸王别姬</td>
+<td align="center">9.5</td>
+<td align="center">662297</td>
+</tr>
+
+<tr>
+<td align="center">3</td>
+<td align="left">这个杀手不太冷</td>
+<td align="center">9.4</td>
+<td align="center">871714</td>
+</tr>
+
+<tr>
+<td align="center">4</td>
+<td align="left">阿甘正传</td>
+<td align="center">9.4</td>
+<td align="center">741643</td>
+</tr>
+
+<tr>
+<td align="center">5</td>
+<td align="left">美丽人生</td>
+<td align="center">9.5</td>
+<td align="center">432994</td>
+</tr>
+
+<tr>
+<td align="center">6</td>
+<td align="left">千与千寻</td>
+<td align="center">9.2</td>
+<td align="center">691880</td>
+</tr>
+
+<tr>
+<td align="center">7</td>
+<td align="left">辛德勒的名单</td>
+<td align="center">9.4</td>
+<td align="center">397953</td>
+</tr>
+
+<tr>
+<td align="center">8</td>
+<td align="left">泰坦尼克号</td>
+<td align="center">9.2</td>
+<td align="center">681863</td>
+</tr>
+
+<tr>
+<td align="center">9</td>
+<td align="left">盗梦空间</td>
+<td align="center">9.3</td>
+<td align="center">790845</td>
+</tr>
+
+<tr>
+<td align="center">10</td>
+<td align="left">机器人总动员</td>
+<td align="center">9.3</td>
+<td align="center">516662</td>
+</tr>
+
+<tr>
+<td align="center">11</td>
+<td align="left">海上钢琴师</td>
+<td align="center">9.2</td>
+<td align="center">618186</td>
+</tr>
+
+<tr>
+<td align="center">12</td>
+<td align="left">三傻大闹宝莱坞</td>
+<td align="center">9.1</td>
+<td align="center">700357</td>
+</tr>
+
+<tr>
+<td align="center">13</td>
+<td align="left">忠犬八公的故事</td>
+<td align="center">9.2</td>
+<td align="center">476508</td>
+</tr>
+
+<tr>
+<td align="center">14</td>
+<td align="left">放牛班的春天</td>
+<td align="center">9.2</td>
+<td align="center">470611</td>
+</tr>
+
+<tr>
+<td align="center">15</td>
+<td align="left">大话西游之大圣娶亲</td>
+<td align="center">9.2</td>
+<td align="center">508881</td>
+</tr>
+
+<tr>
+<td align="center">16</td>
+<td align="left">教父</td>
+<td align="center">9.2</td>
+<td align="center">356590</td>
+</tr>
+
+<tr>
+<td align="center">17</td>
+<td align="left">龙猫</td>
+<td align="center">9.1</td>
+<td align="center">434269</td>
+</tr>
+
+<tr>
+<td align="center">18</td>
+<td align="left">楚门的世界</td>
+<td align="center">9.1</td>
+<td align="center">477106</td>
+</tr>
+
+<tr>
+<td align="center">19</td>
+<td align="left">乱世佳人</td>
+<td align="center">9.2</td>
+<td align="center">279806</td>
+</tr>
+
+<tr>
+<td align="center">20</td>
+<td align="left">熔炉</td>
+<td align="center">9.2</td>
+<td align="center">275535</td>
+</tr>
+
+<tr>
+<td align="center">21</td>
+<td align="left">天堂电影院</td>
+<td align="center">9.1</td>
+<td align="center">318889</td>
+</tr>
+
+<tr>
+<td align="center">22</td>
+<td align="left">触不可及</td>
+<td align="center">9.1</td>
+<td align="center">379917</td>
+</tr>
+
+<tr>
+<td align="center">23</td>
+<td align="left">当幸福来敲门</td>
+<td align="center">8.9</td>
+<td align="center">558406</td>
+</tr>
+
+<tr>
+<td align="center">24</td>
+<td align="left">无间道</td>
+<td align="center">9.0</td>
+<td align="center">416178</td>
+</tr>
+
+<tr>
+<td align="center">25</td>
+<td align="left">星际穿越</td>
+<td align="center">9.1</td>
+<td align="center">505230</td>
+</tr>
+
+<tr>
+<td align="center">26</td>
+<td align="left">十二怒汉</td>
+<td align="center">9.4</td>
+<td align="center">177829</td>
+</tr>
+
+<tr>
+<td align="center">27</td>
+<td align="left">搏击俱乐部</td>
+<td align="center">9.0</td>
+<td align="center">414340</td>
+</tr>
+
+<tr>
+<td align="center">28</td>
+<td align="left">怦然心动</td>
+<td align="center">8.9</td>
+<td align="center">571366</td>
+</tr>
+
+<tr>
+<td align="center">29</td>
+<td align="left">指环王3：王者无敌</td>
+<td align="center">9.1</td>
+<td align="center">293516</td>
+</tr>
+
+<tr>
+<td align="center">30</td>
+<td align="left">少年派的奇幻漂流</td>
+<td align="center">9.0</td>
+<td align="center">596488</td>
+</tr>
+
+<tr>
+<td align="center">31</td>
+<td align="left">鬼子来了</td>
+<td align="center">9.2</td>
+<td align="center">238023</td>
+</tr>
+
+<tr>
+<td align="center">32</td>
+<td align="left">天空之城</td>
+<td align="center">9.0</td>
+<td align="center">343687</td>
+</tr>
+
+<tr>
+<td align="center">33</td>
+<td align="left">蝙蝠侠：黑暗骑士</td>
+<td align="center">9.0</td>
+<td align="center">334512</td>
+</tr>
+
+<tr>
+<td align="center">34</td>
+<td align="left">活着</td>
+<td align="center">9.1</td>
+<td align="center">278372</td>
+</tr>
+
+<tr>
+<td align="center">35</td>
+<td align="left">罗马假日</td>
+<td align="center">8.9</td>
+<td align="center">397195</td>
+</tr>
+
+<tr>
+<td align="center">36</td>
+<td align="left">大话西游之月光宝盒</td>
+<td align="center">8.9</td>
+<td align="center">410764</td>
+</tr>
+
+<tr>
+<td align="center">37</td>
+<td align="left">飞屋环游记</td>
+<td align="center">8.9</td>
+<td align="center">512003</td>
+</tr>
+
+<tr>
+<td align="center">38</td>
+<td align="left">两杆大烟枪</td>
+<td align="center">9.0</td>
+<td align="center">280532</td>
+</tr>
+
+<tr>
+<td align="center">39</td>
+<td align="left">窃听风暴</td>
+<td align="center">9.1</td>
+<td align="center">230217</td>
+</tr>
+
+<tr>
+<td align="center">40</td>
+<td align="left">飞越疯人院</td>
+<td align="center">9.0</td>
+<td align="center">284605</td>
+</tr>
+
+<tr>
+<td align="center">41</td>
+<td align="left">海豚湾</td>
+<td align="center">9.3</td>
+<td align="center">185681</td>
+</tr>
+
+<tr>
+<td align="center">42</td>
+<td align="left">闻香识女人</td>
+<td align="center">8.9</td>
+<td align="center">330817</td>
+</tr>
+
+<tr>
+<td align="center">43</td>
+<td align="left">V字仇杀队</td>
+<td align="center">8.8</td>
+<td align="center">428489</td>
+</tr>
+
+<tr>
+<td align="center">44</td>
+<td align="left">控方证人</td>
+<td align="center">9.6</td>
+<td align="center">94380</td>
+</tr>
+
+<tr>
+<td align="center">45</td>
+<td align="left">哈尔的移动城堡</td>
+<td align="center">8.9</td>
+<td align="center">359524</td>
+</tr>
+
+<tr>
+<td align="center">46</td>
+<td align="left">教父2</td>
+<td align="center">9.1</td>
+<td align="center">191890</td>
+</tr>
+
+<tr>
+<td align="center">47</td>
+<td align="left">美丽心灵</td>
+<td align="center">8.9</td>
+<td align="center">311949</td>
+</tr>
+
+<tr>
+<td align="center">48</td>
+<td align="left">死亡诗社</td>
+<td align="center">8.9</td>
+<td align="center">285591</td>
+</tr>
+
+<tr>
+<td align="center">49</td>
+<td align="left">指环王2：双塔奇兵</td>
+<td align="center">8.9</td>
+<td align="center">276714</td>
+</tr>
+
+<tr>
+<td align="center">50</td>
+<td align="left">指环王1：魔戒再现</td>
+<td align="center">8.9</td>
+<td align="center">309437</td>
+</tr>
+
+<tr>
+<td align="center">51</td>
+<td align="left">辩护人</td>
+<td align="center">9.1</td>
+<td align="center">211584</td>
+</tr>
+
+<tr>
+<td align="center">52</td>
+<td align="left">情书</td>
+<td align="center">8.8</td>
+<td align="center">384170</td>
+</tr>
+
+<tr>
+<td align="center">53</td>
+<td align="left">疯狂动物城</td>
+<td align="center">9.2</td>
+<td align="center">512226</td>
+</tr>
+
+<tr>
+<td align="center">54</td>
+<td align="left">美国往事</td>
+<td align="center">9.1</td>
+<td align="center">179095</td>
+</tr>
+
+<tr>
+<td align="center">55</td>
+<td align="left">饮食男女</td>
+<td align="center">9.1</td>
+<td align="center">203861</td>
+</tr>
+
+<tr>
+<td align="center">56</td>
+<td align="left">天使爱美丽</td>
+<td align="center">8.7</td>
+<td align="center">491128</td>
+</tr>
+
+<tr>
+<td align="center">57</td>
+<td align="left">钢琴家</td>
+<td align="center">9.0</td>
+<td align="center">206819</td>
+</tr>
+
+<tr>
+<td align="center">58</td>
+<td align="left">狮子王</td>
+<td align="center">8.9</td>
+<td align="center">287197</td>
+</tr>
+
+<tr>
+<td align="center">59</td>
+<td align="left">七宗罪</td>
+<td align="center">8.7</td>
+<td align="center">443280</td>
+</tr>
+
+<tr>
+<td align="center">60</td>
+<td align="left">被嫌弃的松子的一生</td>
+<td align="center">8.9</td>
+<td align="center">290905</td>
+</tr>
+
+<tr>
+<td align="center">61</td>
+<td align="left">致命魔术</td>
+<td align="center">8.8</td>
+<td align="center">350602</td>
+</tr>
+
+<tr>
+<td align="center">62</td>
+<td align="left">小鞋子</td>
+<td align="center">9.2</td>
+<td align="center">139974</td>
+</tr>
+
+<tr>
+<td align="center">63</td>
+<td align="left">勇敢的心</td>
+<td align="center">8.8</td>
+<td align="center">299554</td>
+</tr>
+
+<tr>
+<td align="center">64</td>
+<td align="left">剪刀手爱德华</td>
+<td align="center">8.7</td>
+<td align="center">491709</td>
+</tr>
+
+<tr>
+<td align="center">65</td>
+<td align="left">音乐之声</td>
+<td align="center">8.9</td>
+<td align="center">235417</td>
+</tr>
+
+<tr>
+<td align="center">66</td>
+<td align="left">素媛</td>
+<td align="center">9.1</td>
+<td align="center">184255</td>
+</tr>
+
+<tr>
+<td align="center">67</td>
+<td align="left">低俗小说</td>
+<td align="center">8.8</td>
+<td align="center">340274</td>
+</tr>
+
+<tr>
+<td align="center">68</td>
+<td align="left">本杰明·巴顿奇事</td>
+<td align="center">8.7</td>
+<td align="center">399737</td>
+</tr>
+
+<tr>
+<td align="center">69</td>
+<td align="left">黑客帝国</td>
+<td align="center">8.8</td>
+<td align="center">285511</td>
+</tr>
+
+<tr>
+<td align="center">70</td>
+<td align="left">沉默的羔羊</td>
+<td align="center">8.7</td>
+<td align="center">358494</td>
+</tr>
+
+<tr>
+<td align="center">71</td>
+<td align="left">入殓师</td>
+<td align="center">8.8</td>
+<td align="center">322538</td>
+</tr>
+
+<tr>
+<td align="center">72</td>
+<td align="left">拯救大兵瑞恩</td>
+<td align="center">8.9</td>
+<td align="center">241324</td>
+</tr>
+
+<tr>
+<td align="center">73</td>
+<td align="left">西西里的美丽传说</td>
+<td align="center">8.7</td>
+<td align="center">353893</td>
+</tr>
+
+<tr>
+<td align="center">74</td>
+<td align="left">蝴蝶效应</td>
+<td align="center">8.7</td>
+<td align="center">386793</td>
+</tr>
+
+<tr>
+<td align="center">75</td>
+<td align="left">玛丽和马克思</td>
+<td align="center">8.9</td>
+<td align="center">234455</td>
+</tr>
+
+<tr>
+<td align="center">76</td>
+<td align="left">春光乍泄</td>
+<td align="center">8.8</td>
+<td align="center">249437</td>
+</tr>
+
+<tr>
+<td align="center">77</td>
+<td align="left">让子弹飞</td>
+<td align="center">8.7</td>
+<td align="center">629840</td>
+</tr>
+
+<tr>
+<td align="center">78</td>
+<td align="left">心灵捕手</td>
+<td align="center">8.7</td>
+<td align="center">273988</td>
+</tr>
+
+<tr>
+<td align="center">79</td>
+<td align="left">大闹天宫</td>
+<td align="center">9.2</td>
+<td align="center">100076</td>
+</tr>
+
+<tr>
+<td align="center">80</td>
+<td align="left">幽灵公主</td>
+<td align="center">8.8</td>
+<td align="center">237210</td>
+</tr>
+
+<tr>
+<td align="center">81</td>
+<td align="left">阳光灿烂的日子</td>
+<td align="center">8.7</td>
+<td align="center">273092</td>
+</tr>
+
+<tr>
+<td align="center">82</td>
+<td align="left">第六感</td>
+<td align="center">8.8</td>
+<td align="center">237390</td>
+</tr>
+
+<tr>
+<td align="center">83</td>
+<td align="left">重庆森林</td>
+<td align="center">8.7</td>
+<td align="center">333493</td>
+</tr>
+
+<tr>
+<td align="center">84</td>
+<td align="left">大鱼</td>
+<td align="center">8.7</td>
+<td align="center">254869</td>
+</tr>
+
+<tr>
+<td align="center">85</td>
+<td align="left">射雕英雄传之东成西就</td>
+<td align="center">8.7</td>
+<td align="center">278488</td>
+</tr>
+
+<tr>
+<td align="center">86</td>
+<td align="left">禁闭岛</td>
+<td align="center">8.6</td>
+<td align="center">362782</td>
+</tr>
+
+<tr>
+<td align="center">87</td>
+<td align="left">甜蜜蜜</td>
+<td align="center">8.8</td>
+<td align="center">234600</td>
+</tr>
+
+<tr>
+<td align="center">88</td>
+<td align="left">阳光姐妹淘</td>
+<td align="center">8.8</td>
+<td align="center">270511</td>
+</tr>
+
+<tr>
+<td align="center">89</td>
+<td align="left">一一</td>
+<td align="center">8.9</td>
+<td align="center">157403</td>
+</tr>
+
+<tr>
+<td align="center">90</td>
+<td align="left">狩猎</td>
+<td align="center">9.0</td>
+<td align="center">129399</td>
+</tr>
+
+<tr>
+<td align="center">91</td>
+<td align="left">致命ID</td>
+<td align="center">8.6</td>
+<td align="center">321100</td>
+</tr>
+
+<tr>
+<td align="center">92</td>
+<td align="left">上帝之城</td>
+<td align="center">8.9</td>
+<td align="center">159268</td>
+</tr>
+
+<tr>
+<td align="center">93</td>
+<td align="left">末代皇帝</td>
+<td align="center">8.9</td>
+<td align="center">166962</td>
+</tr>
+
+<tr>
+<td align="center">94</td>
+<td align="left">告白</td>
+<td align="center">8.7</td>
+<td align="center">345121</td>
+</tr>
+
+<tr>
+<td align="center">95</td>
+<td align="left">看不见的客人</td>
+<td align="center">8.7</td>
+<td align="center">277410</td>
+</tr>
+
+<tr>
+<td align="center">96</td>
+<td align="left">布达佩斯大饭店</td>
+<td align="center">8.7</td>
+<td align="center">311302</td>
+</tr>
+
+<tr>
+<td align="center">97</td>
+<td align="left">断背山</td>
+<td align="center">8.6</td>
+<td align="center">320282</td>
+</tr>
+
+<tr>
+<td align="center">98</td>
+<td align="left">加勒比海盗</td>
+<td align="center">8.6</td>
+<td align="center">345627</td>
+</tr>
+
+<tr>
+<td align="center">99</td>
+<td align="left">猫鼠游戏</td>
+<td align="center">8.7</td>
+<td align="center">225259</td>
+</tr>
+
+<tr>
+<td align="center">100</td>
+<td align="left">哈利·波特与魔法石</td>
+<td align="center">8.7</td>
+<td align="center">254863</td>
+</tr>
+
+<tr>
+<td align="center">101</td>
+<td align="left">摩登时代</td>
+<td align="center">9.2</td>
+<td align="center">88835</td>
+</tr>
+
+<tr>
+<td align="center">102</td>
+<td align="left">爱在黎明破晓前</td>
+<td align="center">8.7</td>
+<td align="center">221335</td>
+</tr>
+
+<tr>
+<td align="center">103</td>
+<td align="left">阿凡达</td>
+<td align="center">8.6</td>
+<td align="center">530809</td>
+</tr>
+
+<tr>
+<td align="center">104</td>
+<td align="left">风之谷</td>
+<td align="center">8.8</td>
+<td align="center">176673</td>
+</tr>
+
+<tr>
+<td align="center">105</td>
+<td align="left">爱在日落黄昏时</td>
+<td align="center">8.7</td>
+<td align="center">199227</td>
+</tr>
+
+<tr>
+<td align="center">106</td>
+<td align="left">穿条纹睡衣的男孩</td>
+<td align="center">8.9</td>
+<td align="center">144638</td>
+</tr>
+
+<tr>
+<td align="center">107</td>
+<td align="left">侧耳倾听</td>
+<td align="center">8.8</td>
+<td align="center">168385</td>
+</tr>
+
+<tr>
+<td align="center">108</td>
+<td align="left">消失的爱人</td>
+<td align="center">8.7</td>
+<td align="center">355302</td>
+</tr>
+
+<tr>
+<td align="center">109</td>
+<td align="left">萤火虫之墓</td>
+<td align="center">8.7</td>
+<td align="center">203925</td>
+</tr>
+
+<tr>
+<td align="center">110</td>
+<td align="left">超脱</td>
+<td align="center">8.8</td>
+<td align="center">172750</td>
+</tr>
+
+<tr>
+<td align="center">111</td>
+<td align="left">驯龙高手</td>
+<td align="center">8.7</td>
+<td align="center">284471</td>
+</tr>
+
+<tr>
+<td align="center">112</td>
+<td align="left">倩女幽魂</td>
+<td align="center">8.6</td>
+<td align="center">249750</td>
+</tr>
+
+<tr>
+<td align="center">113</td>
+<td align="left">恐怖直播</td>
+<td align="center">8.7</td>
+<td align="center">219034</td>
+</tr>
+
+<tr>
+<td align="center">114</td>
+<td align="left">菊次郎的夏天</td>
+<td align="center">8.7</td>
+<td align="center">181604</td>
+</tr>
+
+<tr>
+<td align="center">115</td>
+<td align="left">红辣椒</td>
+<td align="center">8.9</td>
+<td align="center">133425</td>
+</tr>
+
+<tr>
+<td align="center">116</td>
+<td align="left">幸福终点站</td>
+<td align="center">8.6</td>
+<td align="center">225096</td>
+</tr>
+
+<tr>
+<td align="center">117</td>
+<td align="left">海洋</td>
+<td align="center">9.0</td>
+<td align="center">99087</td>
+</tr>
+
+<tr>
+<td align="center">118</td>
+<td align="left">七武士</td>
+<td align="center">9.2</td>
+<td align="center">77254</td>
+</tr>
+
+<tr>
+<td align="center">119</td>
+<td align="left">岁月神偷</td>
+<td align="center">8.6</td>
+<td align="center">307209</td>
+</tr>
+
+<tr>
+<td align="center">120</td>
+<td align="left">神偷奶爸</td>
+<td align="center">8.5</td>
+<td align="center">374250</td>
+</tr>
+
+<tr>
+<td align="center">121</td>
+<td align="left">借东西的小人阿莉埃蒂</td>
+<td align="center">8.7</td>
+<td align="center">215816</td>
+</tr>
+
+<tr>
+<td align="center">122</td>
+<td align="left">电锯惊魂</td>
+<td align="center">8.7</td>
+<td align="center">198556</td>
+</tr>
+
+<tr>
+<td align="center">123</td>
+<td align="left">谍影重重3</td>
+<td align="center">8.7</td>
+<td align="center">180295</td>
+</tr>
+
+<tr>
+<td align="center">124</td>
+<td align="left">杀人回忆</td>
+<td align="center">8.6</td>
+<td align="center">209457</td>
+</tr>
+
+<tr>
+<td align="center">125</td>
+<td align="left">贫民窟的百万富翁</td>
+<td align="center">8.5</td>
+<td align="center">395490</td>
+</tr>
+
+<tr>
+<td align="center">126</td>
+<td align="left">真爱至上</td>
+<td align="center">8.5</td>
+<td align="center">307314</td>
+</tr>
+
+<tr>
+<td align="center">127</td>
+<td align="left">雨人</td>
+<td align="center">8.6</td>
+<td align="center">209650</td>
+</tr>
+
+<tr>
+<td align="center">128</td>
+<td align="left">燃情岁月</td>
+<td align="center">8.7</td>
+<td align="center">148718</td>
+</tr>
+
+<tr>
+<td align="center">129</td>
+<td align="left">东邪西毒</td>
+<td align="center">8.6</td>
+<td align="center">248951</td>
+</tr>
+
+<tr>
+<td align="center">130</td>
+<td align="left">记忆碎片</td>
+<td align="center">8.5</td>
+<td align="center">278637</td>
+</tr>
+
+<tr>
+<td align="center">131</td>
+<td align="left">小森林夏秋篇</td>
+<td align="center">8.9</td>
+<td align="center">127859</td>
+</tr>
+
+<tr>
+<td align="center">132</td>
+<td align="left">喜宴</td>
+<td align="center">8.8</td>
+<td align="center">138928</td>
+</tr>
+
+<tr>
+<td align="center">133</td>
+<td align="left">喜剧之王</td>
+<td align="center">8.5</td>
+<td align="center">310302</td>
+</tr>
+
+<tr>
+<td align="center">134</td>
+<td align="left">虎口脱险</td>
+<td align="center">8.9</td>
+<td align="center">106893</td>
+</tr>
+
+<tr>
+<td align="center">135</td>
+<td align="left">怪兽电力公司</td>
+<td align="center">8.6</td>
+<td align="center">238042</td>
+</tr>
+
+<tr>
+<td align="center">136</td>
+<td align="left">疯狂原始人</td>
+<td align="center">8.7</td>
+<td align="center">368331</td>
+</tr>
+
+<tr>
+<td align="center">137</td>
+<td align="left">黑天鹅</td>
+<td align="center">8.5</td>
+<td align="center">415127</td>
+</tr>
+
+<tr>
+<td align="center">138</td>
+<td align="left">卢旺达饭店</td>
+<td align="center">8.8</td>
+<td align="center">118759</td>
+</tr>
+
+<tr>
+<td align="center">139</td>
+<td align="left">英雄本色</td>
+<td align="center">8.7</td>
+<td align="center">159531</td>
+</tr>
+
+<tr>
+<td align="center">140</td>
+<td align="left">猜火车</td>
+<td align="center">8.5</td>
+<td align="center">247758</td>
+</tr>
+
+<tr>
+<td align="center">141</td>
+<td align="left">穿越时空的少女</td>
+<td align="center">8.6</td>
+<td align="center">184599</td>
+</tr>
+
+<tr>
+<td align="center">142</td>
+<td align="left">恋恋笔记本</td>
+<td align="center">8.5</td>
+<td align="center">279594</td>
+</tr>
+
+<tr>
+<td align="center">143</td>
+<td align="left">魂断蓝桥</td>
+<td align="center">8.8</td>
+<td align="center">128620</td>
+</tr>
+
+<tr>
+<td align="center">144</td>
+<td align="left">雨中曲</td>
+<td align="center">8.9</td>
+<td align="center">92616</td>
+</tr>
+
+<tr>
+<td align="center">145</td>
+<td align="left">傲慢与偏见</td>
+<td align="center">8.4</td>
+<td align="center">298827</td>
+</tr>
+
+<tr>
+<td align="center">146</td>
+<td align="left">教父3</td>
+<td align="center">8.7</td>
+<td align="center">128691</td>
+</tr>
+
+<tr>
+<td align="center">147</td>
+<td align="left">完美的世界</td>
+<td align="center">9.0</td>
+<td align="center">79062</td>
+</tr>
+
+<tr>
+<td align="center">148</td>
+<td align="left">纵横四海</td>
+<td align="center">8.7</td>
+<td align="center">143336</td>
+</tr>
+
+<tr>
+<td align="center">149</td>
+<td align="left">萤火之森</td>
+<td align="center">8.7</td>
+<td align="center">154799</td>
+</tr>
+
+<tr>
+<td align="center">150</td>
+<td align="left">玩具总动员3</td>
+<td align="center">8.8</td>
+<td align="center">190258</td>
+</tr>
+
+<tr>
+<td align="center">151</td>
+<td align="left">7号房的礼物</td>
+<td align="center">8.7</td>
+<td align="center">172463</td>
+</tr>
+
+<tr>
+<td align="center">152</td>
+<td align="left">哈利·波特与死亡圣器(下)</td>
+<td align="center">8.6</td>
+<td align="center">270337</td>
+</tr>
+
+<tr>
+<td align="center">153</td>
+<td align="left">花样年华</td>
+<td align="center">8.5</td>
+<td align="center">244543</td>
+</tr>
+
+<tr>
+<td align="center">154</td>
+<td align="left">海边的曼彻斯特</td>
+<td align="center">8.6</td>
+<td align="center">168536</td>
+</tr>
+
+<tr>
+<td align="center">155</td>
+<td align="left">荒蛮故事</td>
+<td align="center">8.7</td>
+<td align="center">134232</td>
+</tr>
+
+<tr>
+<td align="center">156</td>
+<td align="left">二十二</td>
+<td align="center">8.8</td>
+<td align="center">84396</td>
+</tr>
+
+<tr>
+<td align="center">157</td>
+<td align="left">我是山姆</td>
+<td align="center">8.8</td>
+<td align="center">102061</td>
+</tr>
+
+<tr>
+<td align="center">158</td>
+<td align="left">人工智能</td>
+<td align="center">8.6</td>
+<td align="center">188074</td>
+</tr>
+
+<tr>
+<td align="center">159</td>
+<td align="left">浪潮</td>
+<td align="center">8.7</td>
+<td align="center">130968</td>
+</tr>
+
+<tr>
+<td align="center">160</td>
+<td align="left">香水</td>
+<td align="center">8.4</td>
+<td align="center">273368</td>
+</tr>
+
+<tr>
+<td align="center">161</td>
+<td align="left">小森林冬春篇</td>
+<td align="center">8.9</td>
+<td align="center">110034</td>
+</tr>
+
+<tr>
+<td align="center">162</td>
+<td align="left">冰川时代</td>
+<td align="center">8.4</td>
+<td align="center">267098</td>
+</tr>
+
+<tr>
+<td align="center">163</td>
+<td align="left">朗读者</td>
+<td align="center">8.5</td>
+<td align="center">275954</td>
+</tr>
+
+<tr>
+<td align="center">164</td>
+<td align="left">追随</td>
+<td align="center">8.9</td>
+<td align="center">81074</td>
+</tr>
+
+<tr>
+<td align="center">165</td>
+<td align="left">时空恋旅人</td>
+<td align="center">8.6</td>
+<td align="center">195315</td>
+</tr>
+
+<tr>
+<td align="center">166</td>
+<td align="left">撞车</td>
+<td align="center">8.6</td>
+<td align="center">172775</td>
+</tr>
+
+<tr>
+<td align="center">167</td>
+<td align="left">唐伯虎点秋香</td>
+<td align="center">8.4</td>
+<td align="center">317780</td>
+</tr>
+
+<tr>
+<td align="center">168</td>
+<td align="left">心迷宫</td>
+<td align="center">8.6</td>
+<td align="center">157838</td>
+</tr>
+
+<tr>
+<td align="center">169</td>
+<td align="left">罗生门</td>
+<td align="center">8.7</td>
+<td align="center">123123</td>
+</tr>
+
+<tr>
+<td align="center">170</td>
+<td align="left">超能陆战队</td>
+<td align="center">8.6</td>
+<td align="center">361565</td>
+</tr>
+
+<tr>
+<td align="center">171</td>
+<td align="left">一次别离</td>
+<td align="center">8.7</td>
+<td align="center">130646</td>
+</tr>
+
+<tr>
+<td align="center">172</td>
+<td align="left">蝙蝠侠：黑暗骑士崛起</td>
+<td align="center">8.5</td>
+<td align="center">290876</td>
+</tr>
+
+<tr>
+<td align="center">173</td>
+<td align="left">战争之王</td>
+<td align="center">8.5</td>
+<td align="center">172730</td>
+</tr>
+
+<tr>
+<td align="center">174</td>
+<td align="left">可可西里</td>
+<td align="center">8.7</td>
+<td align="center">127284</td>
+</tr>
+
+<tr>
+<td align="center">175</td>
+<td align="left">梦之安魂曲</td>
+<td align="center">8.7</td>
+<td align="center">110423</td>
+</tr>
+
+<tr>
+<td align="center">176</td>
+<td align="left">未麻的部屋</td>
+<td align="center">8.8</td>
+<td align="center">94719</td>
+</tr>
+
+<tr>
+<td align="center">177</td>
+<td align="left">地球上的星星</td>
+<td align="center">8.8</td>
+<td align="center">82879</td>
+</tr>
+
+<tr>
+<td align="center">178</td>
+<td align="left">爆裂鼓手</td>
+<td align="center">8.6</td>
+<td align="center">232902</td>
+</tr>
+
+<tr>
+<td align="center">179</td>
+<td align="left">碧海蓝天</td>
+<td align="center">8.7</td>
+<td align="center">107119</td>
+</tr>
+
+<tr>
+<td align="center">180</td>
+<td align="left">恐怖游轮</td>
+<td align="center">8.3</td>
+<td align="center">315844</td>
+</tr>
+
+<tr>
+<td align="center">181</td>
+<td align="left">秒速5厘米</td>
+<td align="center">8.3</td>
+<td align="center">290066</td>
+</tr>
+
+<tr>
+<td align="center">182</td>
+<td align="left">阿飞正传</td>
+<td align="center">8.5</td>
+<td align="center">177894</td>
+</tr>
+
+<tr>
+<td align="center">183</td>
+<td align="left">达拉斯买家俱乐部</td>
+<td align="center">8.6</td>
+<td align="center">164993</td>
+</tr>
+
+<tr>
+<td align="center">184</td>
+<td align="left">牯岭街少年杀人事件</td>
+<td align="center">8.7</td>
+<td align="center">104726</td>
+</tr>
+
+<tr>
+<td align="center">185</td>
+<td align="left">谍影重重2</td>
+<td align="center">8.5</td>
+<td align="center">156698</td>
+</tr>
+
+<tr>
+<td align="center">186</td>
+<td align="left">谍影重重</td>
+<td align="center">8.5</td>
+<td align="center">188923</td>
+</tr>
+
+<tr>
+<td align="center">187</td>
+<td align="left">海盗电台</td>
+<td align="center">8.6</td>
+<td align="center">163551</td>
+</tr>
+
+<tr>
+<td align="center">188</td>
+<td align="left">惊魂记</td>
+<td align="center">8.9</td>
+<td align="center">81160</td>
+</tr>
+
+<tr>
+<td align="center">189</td>
+<td align="left">被解救的姜戈</td>
+<td align="center">8.5</td>
+<td align="center">255194</td>
+</tr>
+
+<tr>
+<td align="center">190</td>
+<td align="left">魔女宅急便</td>
+<td align="center">8.4</td>
+<td align="center">190312</td>
+</tr>
+
+<tr>
+<td align="center">191</td>
+<td align="left">再次出发之纽约遇见你</td>
+<td align="center">8.5</td>
+<td align="center">164016</td>
+</tr>
+
+<tr>
+<td align="center">192</td>
+<td align="left">东京物语</td>
+<td align="center">9.2</td>
+<td align="center">49448</td>
+</tr>
+
+<tr>
+<td align="center">193</td>
+<td align="left">绿里奇迹</td>
+<td align="center">8.7</td>
+<td align="center">104619</td>
+</tr>
+
+<tr>
+<td align="center">194</td>
+<td align="left">青蛇</td>
+<td align="center">8.4</td>
+<td align="center">216092</td>
+</tr>
+
+<tr>
+<td align="center">195</td>
+<td align="left">末路狂花</td>
+<td align="center">8.7</td>
+<td align="center">102574</td>
+</tr>
+
+<tr>
+<td align="center">196</td>
+<td align="left">勇闯夺命岛</td>
+<td align="center">8.5</td>
+<td align="center">139687</td>
+</tr>
+
+<tr>
+<td align="center">197</td>
+<td align="left">哪吒闹海</td>
+<td align="center">8.8</td>
+<td align="center">78090</td>
+</tr>
+
+<tr>
+<td align="center">198</td>
+<td align="left">迁徙的鸟</td>
+<td align="center">9.1</td>
+<td align="center">51207</td>
+</tr>
+
+<tr>
+<td align="center">199</td>
+<td align="left">忠犬八公物语</td>
+<td align="center">9.0</td>
+<td align="center">56110</td>
+</tr>
+
+<tr>
+<td align="center">200</td>
+<td align="left">荒野生存</td>
+<td align="center">8.6</td>
+<td align="center">124838</td>
+</tr>
+
+<tr>
+<td align="center">201</td>
+<td align="left">终结者2：审判日</td>
+<td align="center">8.5</td>
+<td align="center">138314</td>
+</tr>
+
+<tr>
+<td align="center">202</td>
+<td align="left">卡萨布兰卡</td>
+<td align="center">8.6</td>
+<td align="center">122382</td>
+</tr>
+
+<tr>
+<td align="center">203</td>
+<td align="left">这个男人来自地球</td>
+<td align="center">8.5</td>
+<td align="center">175342</td>
+</tr>
+
+<tr>
+<td align="center">204</td>
+<td align="left">源代码</td>
+<td align="center">8.3</td>
+<td align="center">401270</td>
+</tr>
+
+<tr>
+<td align="center">205</td>
+<td align="left">变脸</td>
+<td align="center">8.4</td>
+<td align="center">210264</td>
+</tr>
+
+<tr>
+<td align="center">206</td>
+<td align="left">新龙门客栈</td>
+<td align="center">8.4</td>
+<td align="center">178999</td>
+</tr>
+
+<tr>
+<td align="center">207</td>
+<td align="left">燕尾蝶</td>
+<td align="center">8.6</td>
+<td align="center">106557</td>
+</tr>
+
+<tr>
+<td align="center">208</td>
+<td align="left">黑客帝国3：矩阵革命</td>
+<td align="center">8.5</td>
+<td align="center">151903</td>
+</tr>
+
+<tr>
+<td align="center">209</td>
+<td align="left">黄金三镖客</td>
+<td align="center">9.1</td>
+<td align="center">50232</td>
+</tr>
+
+<tr>
+<td align="center">210</td>
+<td align="left">E.T.外星人</td>
+<td align="center">8.5</td>
+<td align="center">149442</td>
+</tr>
+
+<tr>
+<td align="center">211</td>
+<td align="left">英国病人</td>
+<td align="center">8.4</td>
+<td align="center">171462</td>
+</tr>
+
+<tr>
+<td align="center">212</td>
+<td align="left">城市之光</td>
+<td align="center">9.2</td>
+<td align="center">42529</td>
+</tr>
+
+<tr>
+<td align="center">213</td>
+<td align="left">发条橙</td>
+<td align="center">8.4</td>
+<td align="center">183066</td>
+</tr>
+
+<tr>
+<td align="center">214</td>
+<td align="left">美国丽人</td>
+<td align="center">8.4</td>
+<td align="center">181838</td>
+</tr>
+
+<tr>
+<td align="center">215</td>
+<td align="left">无耻混蛋</td>
+<td align="center">8.4</td>
+<td align="center">219016</td>
+</tr>
+
+<tr>
+<td align="center">216</td>
+<td align="left">叫我第一名</td>
+<td align="center">8.6</td>
+<td align="center">106674</td>
+</tr>
+
+<tr>
+<td align="center">217</td>
+<td align="left">模仿游戏</td>
+<td align="center">8.5</td>
+<td align="center">247823</td>
+</tr>
+
+<tr>
+<td align="center">218</td>
+<td align="left">穆赫兰道</td>
+<td align="center">8.3</td>
+<td align="center">230100</td>
+</tr>
+
+<tr>
+<td align="center">219</td>
+<td align="left">非常嫌疑犯</td>
+<td align="center">8.6</td>
+<td align="center">113832</td>
+</tr>
+
+<tr>
+<td align="center">220</td>
+<td align="left">初恋这件小事</td>
+<td align="center">8.3</td>
+<td align="center">448543</td>
+</tr>
+
+<tr>
+<td align="center">221</td>
+<td align="left">勇士</td>
+<td align="center">8.9</td>
+<td align="center">86010</td>
+</tr>
+
+<tr>
+<td align="center">222</td>
+<td align="left">上帝也疯狂</td>
+<td align="center">8.6</td>
+<td align="center">94219</td>
+</tr>
+
+<tr>
+<td align="center">223</td>
+<td align="left">房间</td>
+<td align="center">8.8</td>
+<td align="center">144850</td>
+</tr>
+
+<tr>
+<td align="center">224</td>
+<td align="left">头脑特工队</td>
+<td align="center">8.7</td>
+<td align="center">216349</td>
+</tr>
+
+<tr>
+<td align="center">225</td>
+<td align="left">爱在午夜降临前</td>
+<td align="center">8.8</td>
+<td align="center">112043</td>
+</tr>
+
+<tr>
+<td align="center">226</td>
+<td align="left">蓝色大门</td>
+<td align="center">8.3</td>
+<td align="center">268653</td>
+</tr>
+
+<tr>
+<td align="center">227</td>
+<td align="left">无敌破坏王</td>
+<td align="center">8.6</td>
+<td align="center">180242</td>
+</tr>
+
+<tr>
+<td align="center">228</td>
+<td align="left">爱·回家</td>
+<td align="center">9.0</td>
+<td align="center">46339</td>
+</tr>
+
+<tr>
+<td align="center">229</td>
+<td align="left">血钻</td>
+<td align="center">8.5</td>
+<td align="center">127549</td>
+</tr>
+
+<tr>
+<td align="center">230</td>
+<td align="left">疯狂的石头</td>
+<td align="center">8.2</td>
+<td align="center">304124</td>
+</tr>
+
+<tr>
+<td align="center">231</td>
+<td align="left">国王的演讲</td>
+<td align="center">8.3</td>
+<td align="center">331001</td>
+</tr>
+
+<tr>
+<td align="center">232</td>
+<td align="left">大卫·戈尔的一生</td>
+<td align="center">8.6</td>
+<td align="center">89209</td>
+</tr>
+
+<tr>
+<td align="center">233</td>
+<td align="left">枪火</td>
+<td align="center">8.6</td>
+<td align="center">97282</td>
+</tr>
+
+<tr>
+<td align="center">234</td>
+<td align="left">麦兜故事</td>
+<td align="center">8.5</td>
+<td align="center">124728</td>
+</tr>
+
+<tr>
+<td align="center">235</td>
+<td align="left">千钧一发</td>
+<td align="center">8.7</td>
+<td align="center">82796</td>
+</tr>
+
+<tr>
+<td align="center">236</td>
+<td align="left">暖暖内含光</td>
+<td align="center">8.4</td>
+<td align="center">141289</td>
+</tr>
+
+<tr>
+<td align="center">237</td>
+<td align="left">曾经</td>
+<td align="center">8.3</td>
+<td align="center">198973</td>
+</tr>
+
+<tr>
+<td align="center">238</td>
+<td align="left">遗愿清单</td>
+<td align="center">8.5</td>
+<td align="center">123454</td>
+</tr>
+
+<tr>
+<td align="center">239</td>
+<td align="left">荒岛余生</td>
+<td align="center">8.5</td>
+<td align="center">129463</td>
+</tr>
+
+<tr>
+<td align="center">240</td>
+<td align="left">步履不停</td>
+<td align="center">8.8</td>
+<td align="center">65412</td>
+</tr>
+
+<tr>
+<td align="center">241</td>
+<td align="left">一个叫欧维的男人决定去死</td>
+<td align="center">8.7</td>
+<td align="center">107018</td>
+</tr>
+
+<tr>
+<td align="center">242</td>
+<td align="left">彗星来的那一夜</td>
+<td align="center">8.4</td>
+<td align="center">167051</td>
+</tr>
+
+<tr>
+<td align="center">243</td>
+<td align="left">蝴蝶</td>
+<td align="center">8.6</td>
+<td align="center">93544</td>
+</tr>
+
+<tr>
+<td align="center">244</td>
+<td align="left">我爱你</td>
+<td align="center">9.0</td>
+<td align="center">54629</td>
+</tr>
+
+<tr>
+<td align="center">245</td>
+<td align="left">巴黎淘气帮</td>
+<td align="center">8.6</td>
+<td align="center">102794</td>
+</tr>
+
+<tr>
+<td align="center">246</td>
+<td align="left">月球</td>
+<td align="center">8.5</td>
+<td align="center">139947</td>
+</tr>
+
+<tr>
+<td align="center">247</td>
+<td align="left">与狼共舞</td>
+<td align="center">8.9</td>
+<td align="center">54908</td>
+</tr>
+
+<tr>
+<td align="center">248</td>
+<td align="left">偷拐抢骗</td>
+<td align="center">8.5</td>
+<td align="center">113664</td>
+</tr>
+
+<tr>
+<td align="center">249</td>
+<td align="left">无人知晓</td>
+<td align="center">9.0</td>
+<td align="center">49374</td>
+</tr>
+
+<tr>
+<td align="center">250</td>
+<td align="left">寿司之神</td>
+<td align="center">8.8</td>
+<td align="center">80264</td>
+</tr>
+</tbody>
+</table>
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://neo0moriarty.github.io/">neo0moriarty</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://neo0moriarty.github.io/crawl-douban-top250/">https://neo0moriarty.github.io/crawl-douban-top250/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/python-douban-top250/">Python抓取IMDB电影Top250排行</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://neo0moriarty.github.io/tags/crawler">crawler</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://neo0moriarty.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-hugo-blog-record/" title="Mac下Hugo搭建记录">Mac下Hugo搭建记录</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-usb-iso/" title="Mac下格式化U盘并制作iso系统启动">Mac下格式化U盘并制作iso系统启动</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/ubuntu-mount-exfat/" title="ubuntu挂载exfat格式的硬盘">ubuntu挂载exfat格式的硬盘</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-neovim/" title="Neovim安装">Neovim安装</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-full-vim/" title="Mac 安装最完整的 Vim">Mac 安装最完整的 Vim</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-website/" title="Python相关网址收集">Python相关网址收集</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-round/" title="Python中使用round函数要注意的事">Python中使用round函数要注意的事</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-binary-tree/" title="Python实现和遍历二叉树">Python实现和遍历二叉树</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/practical-vim/" title="Vim实用技巧总结">Vim实用技巧总结</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/make-zsh-default/" title="配置zsh默认编辑器">配置zsh默认编辑器</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://neo0moriarty.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/blog/">blog</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/book/">book</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/crawler/">crawler</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/dev/">dev</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/os/">os</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/python/">python</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/study/">study</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://coolshell.cn/" title="酷壳 – CoolShell.cn">酷壳 – CoolShell.cn</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.flysnow.org" title="飞雪无情的博客">飞雪无情的博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>

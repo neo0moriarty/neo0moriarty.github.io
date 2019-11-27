@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.59.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>《统计学习方法》 | neo0moriarty</title>
+    <meta property="og:title" content="《统计学习方法》 - neo0moriarty">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2017-11-16T00:00:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2017-11-16T00:00:00&#43;08:00">
+        
+    <meta name="Keywords" content="[统计学习方法 李航]">
+    <meta name="description" content="《统计学习方法》">
+        
+    <meta name="author" content="neo0moriarty">
+    <meta property="og:url" content="https://neo0moriarty.github.io/machine-learning-stati/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://neo0moriarty.github.io/">
+                        neo0moriarty
+                    </a>
+                
+                <p class="description">o(╯□╰)o  (゜-゜)つロ  o(╯□╰)o</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://neo0moriarty.github.io/">首页</a>
+                    
+                    <a  href="https://neo0moriarty.github.io/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">《统计学习方法》</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2017年11月16日
+                        </date>
+                        
+                        
+                        
+                        <div class="post-content">
+                            <p>李航 ——《统计学习方法》 2012年3月第一版  豆瓣评分：8.9</p>
+
+<hr />
+
+<p>李航  日本京都大学电气工程系毕业，日本东京大学计算机科学博士。研究方向包括信息检索、自然语言处理、统计机器学习及数据挖掘。统计机器学习入门的好书，好好学习研究。</p>
+
+<p>之前读了一部分内容，以后还是把一些重要的书做一下摘要笔记和进度更新吧。
+一方面可以留下阅读记录和笔记，一方面可以监督激励自己要坚持，半途而废可不好。</p>
+
+<h2 id="前言">前言</h2>
+
+<p>智能化是计算机研究与开发的一个主要目标。<strong>近几十年来的实践</strong>表明，<strong>统计机器学习方法</strong>是实现这一目标的最有效手段，尽管它还存在着一定的局限性。</p>
+
+<p><strong>该书对统计机器学习的诸多问题有非常精辟的论述。</strong>力求系统而详细地介绍统计学习的方法，内容选取上，<strong>侧重介绍那些最重要、最常用的方法，特别是关于分类与标注问题的方法。对其他问题及方法，如聚类等，计划在今后的写作中再以介绍。</strong></p>
+
+<p>读者可以从头到尾通读，也可以选择单个章节细读。</p>
+
+<p>2017.11.16 阅读</p>
+
+<h2 id="第1章-统计学习方法概论">第1章 统计学习方法概论</h2>
+
+<p>本章简要叙述统计学习方法的一些基本概念。这<strong>是对全书内容的概括，也是全书内容的基础</strong>。首先叙述统计学习的定义、研究对象与方法；然后叙述<strong>监督学习，这是本书的主要内容。</strong>接着提出<strong>统计学习方法的三要素：模型、策略和算法</strong>；介绍模型选择，包括正则化、交叉验证与学习的泛化能力；介绍生成模型与判别模型；最后介绍监督学习方法的应用：分类问题、标注问题与回归问题。</p>
+
+<p><strong>干货满满的一章。几乎全是重点。</strong>所以不做摘要笔记了。
+今天再看一遍，貌似是第三次阅读本章内容，每一遍都有更深的认识，因为同时交叉着其它资料的阅读学习，对比之下觉得此书真是好书，没有多余的东西，都是重点不用划😶。基础和重点内容需反复琢磨消化。后面才能学得快。</p>
+
+<p>2017.11.20更新</p>
+
+<h2 id="第2章-感知机">第2章 感知机</h2>
+
+<p>线性分类模型 == 线性分类器</p>
+
+<p>f(x) = sign(w·x + b)</p>
+
+<p>线性方程 w·x + b = 0 表示超平面S，w是超平面的法向量，b是超平面的截距。</p>
+
+<p>TODO： 为什么是法向量？？</p>
+
+<p>数据集的线性可分性</p>
+
+<p>学习策略： 求模型定义经验风险函数找最小值</p>
+
+<p>关键推导：
+输入空间任意一点到超平面的距离
+误分类的点到超平面的距离、所有误分类的点到超平面的距离
+感知机学习的损失函数</p>
+
+<p>TODO： 为什么感知机的损失函数就是感知机学习的经验风险函数？？损失函数为什么要那样定义？</p>
+
+<p>最优化的方法是随机梯度下降法</p>
+
+<p>损失函数的梯度，更新w、b</p>
+
+<p>《写给大家看的机器学习书》第三章有PLA参数更新的几何直观理解，本书给出的是数学上的推导。</p>
+
+<p>训练数据集线性可分时，感知机学习算法原始形式迭代是收敛的，但感知机存在多节，依赖于初值和误分类点的选择。</p>
+
+<p>与原始形式一样，感知机学习算法的对偶形式迭代也是收敛的，存在多个解。</p>
+
+<p>TODO： 算法的实现迭代过程</p>
+
+<p>2017.11.22更新</p>
+
+<h2 id="第3章-k近邻法">第3章 k近邻法</h2>
+
+<h2 id="第4章-朴素贝叶斯法">第4章 朴素贝叶斯法</h2>
+
+<h2 id="第5章-决策树">第5章 决策树</h2>
+
+<h2 id="第6章-逻辑斯谛回归与最大熵模型">第6章 逻辑斯谛回归与最大熵模型</h2>
+
+<h2 id="第7章-支持向量机">第7章 支持向量机</h2>
+
+<h2 id="第8章-提升方法">第8章 提升方法</h2>
+
+<h2 id="第9章-em算法及其推广">第9章 EM算法及其推广</h2>
+
+<h2 id="第10章-隐马尔可夫模型">第10章 隐马尔可夫模型</h2>
+
+<h2 id="第11章-条件随机场">第11章 条件随机场</h2>
+
+<h2 id="第12章-统计学习方法总结">第12章 统计学习方法总结</h2>
+
+<h2 id="附录a-梯度下降法">附录A 梯度下降法</h2>
+
+<h2 id="附录b-牛顿法和拟牛顿法">附录B 牛顿法和拟牛顿法</h2>
+
+<h2 id="附录c-拉格朗日对偶性">附录C 拉格朗日对偶性</h2>
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://neo0moriarty.github.io/">neo0moriarty</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://neo0moriarty.github.io/machine-learning-stati/">https://neo0moriarty.github.io/machine-learning-stati/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/julyedu/">七月在线学习记录</a></li>
+        
+        <li><a href="/fun-math/">趣味学习高等数学</a></li>
+        
+        <li><a href="/machine-learning-math-basic/">机器学习数学预备知识学习</a></li>
+        
+        <li><a href="/everyone-machine-learning/">《写给大家看的机器学习书》</a></li>
+        
+        <li><a href="/least-squares-method/">最小二乘法</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://neo0moriarty.github.io/tags/study">study</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://neo0moriarty.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-hugo-blog-record/" title="Mac下Hugo搭建记录">Mac下Hugo搭建记录</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-usb-iso/" title="Mac下格式化U盘并制作iso系统启动">Mac下格式化U盘并制作iso系统启动</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/ubuntu-mount-exfat/" title="ubuntu挂载exfat格式的硬盘">ubuntu挂载exfat格式的硬盘</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-neovim/" title="Neovim安装">Neovim安装</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-full-vim/" title="Mac 安装最完整的 Vim">Mac 安装最完整的 Vim</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-website/" title="Python相关网址收集">Python相关网址收集</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-round/" title="Python中使用round函数要注意的事">Python中使用round函数要注意的事</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-binary-tree/" title="Python实现和遍历二叉树">Python实现和遍历二叉树</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/practical-vim/" title="Vim实用技巧总结">Vim实用技巧总结</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/make-zsh-default/" title="配置zsh默认编辑器">配置zsh默认编辑器</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://neo0moriarty.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/blog/">blog</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/book/">book</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/crawler/">crawler</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/dev/">dev</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/os/">os</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/python/">python</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/study/">study</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://coolshell.cn/" title="酷壳 – CoolShell.cn">酷壳 – CoolShell.cn</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.flysnow.org" title="飞雪无情的博客">飞雪无情的博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>

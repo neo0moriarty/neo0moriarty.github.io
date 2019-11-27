@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.59.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SSH免密码远程登录 | neo0moriarty</title>
+    <meta property="og:title" content="SSH免密码远程登录 - neo0moriarty">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2017-09-23T00:00:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2017-09-23T00:00:00&#43;08:00">
+        
+    <meta name="Keywords" content="[ssh远程登录 ssh免密码 ssh-keygen ssh-keygen -t rsa]">
+    <meta name="description" content="SSH免密码远程登录">
+        
+    <meta name="author" content="neo0moriarty">
+    <meta property="og:url" content="https://neo0moriarty.github.io/ssh-no-passwd/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://neo0moriarty.github.io/">
+                        neo0moriarty
+                    </a>
+                
+                <p class="description">o(╯□╰)o  (゜-゜)つロ  o(╯□╰)o</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://neo0moriarty.github.io/">首页</a>
+                    
+                    <a  href="https://neo0moriarty.github.io/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">SSH免密码远程登录</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2017年9月23日
+                        </date>
+                        
+                        
+                        
+                        <div class="post-content">
+                            <p>实现SSH免密码登录服务器</p>
+
+<hr />
+
+<h2 id="一般的ssh远程登录服务器">一般的SSH远程登录服务器</h2>
+
+<p>ssh登录使用ssh user@host 的方式，如：</p>
+
+<pre><code class="language-bash">$ ssh apps@10.3.8.150
+</code></pre>
+
+<p>这种方式比较低效，尤其是密码复杂，每次需要复制粘贴</p>
+
+<h2 id="ssh实现免输入密码登录服务器">SSH实现免输入密码登录服务器</h2>
+
+<p>客户端机器A想要远程登录目标机器B，使用ssh-keygen</p>
+
+<h3 id="机器a上的操作">机器A上的操作</h3>
+
+<p>生成私钥和公钥：</p>
+
+<pre><code class="language-bash">$ ssh-keygen -t rsa
+</code></pre>
+
+<p><img src="https://molock.cn/img/posts/1261/1.jpg" alt="" />
+提示输入密码，直接按回车就行
+生成的密钥在 ~/.ssh 下：id_rsa是私钥，id_rsa.pub是公钥</p>
+
+<h3 id="机器b上的操作">机器B上的操作</h3>
+
+<p>创建 ~/.ssh/authorized_keys 文件</p>
+
+<pre><code class="language-bash">$ touch ~/.ssh/authorized_keys
+</code></pre>
+
+<p>查看 ~/.ssh 和 authorized_keys 的权限
+<img src="https://molock.cn/img/posts/1261/2.jpg" alt="" />
+~/.ssh 的权限是700，authorized_keys的权限是600，如果权限不对需要改过来：</p>
+
+<pre><code class="language-bash">$ chmod 700 ~/.ssh
+$ chmod 600 ~/.ssh/authorized_keys
+</code></pre>
+
+<p>最后把机器A的公钥id_rsa.pub里面的内容复制到~/.ssh/authorized_keys就配置结束了，这样机器A再使用ssh user@host就自动登录到机器B。</p>
+
+<h2 id="更优雅地使用ssh">更优雅地使用SSH</h2>
+
+<h3 id="使用命令别名">使用命令别名</h3>
+
+<p>更便捷的方式是alias设置别名，只需要改shell配置文件。我使用的是zsh，修改~/.zshrc</p>
+
+<pre><code class="language-bash">$ vim ~/.zshrc
+</code></pre>
+
+<p>例如添加：
+&gt; alias 150=&ldquo;ssh idi@10.3.8.150&rdquo;</p>
+
+<p>source生效，这是很实用的小技巧，可以举一反三。</p>
+
+<pre><code class="language-bash">$ source ~/.zshrc
+</code></pre>
+
+<p>这样要想ssh登录到10.3.8.150，只需打开终端后输入150即可。</p>
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://neo0moriarty.github.io/">neo0moriarty</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://neo0moriarty.github.io/ssh-no-passwd/">https://neo0moriarty.github.io/ssh-no-passwd/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/use-qiqiu-paste-picture/">使用七牛云图床并实现快速贴图</a></li>
+        
+        <li><a href="/git-github-note/">Git日常常用命令汇总</a></li>
+        
+        <li><a href="/mac-mweb-markdown/">Markdown编辑器Mweb</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://neo0moriarty.github.io/tags/dev">dev</a></li>
+                                
+                                <li><a href="https://neo0moriarty.github.io/tags/os">os</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://neo0moriarty.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-hugo-blog-record/" title="Mac下Hugo搭建记录">Mac下Hugo搭建记录</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-usb-iso/" title="Mac下格式化U盘并制作iso系统启动">Mac下格式化U盘并制作iso系统启动</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/ubuntu-mount-exfat/" title="ubuntu挂载exfat格式的硬盘">ubuntu挂载exfat格式的硬盘</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-neovim/" title="Neovim安装">Neovim安装</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-full-vim/" title="Mac 安装最完整的 Vim">Mac 安装最完整的 Vim</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-website/" title="Python相关网址收集">Python相关网址收集</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-round/" title="Python中使用round函数要注意的事">Python中使用round函数要注意的事</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-binary-tree/" title="Python实现和遍历二叉树">Python实现和遍历二叉树</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/practical-vim/" title="Vim实用技巧总结">Vim实用技巧总结</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/make-zsh-default/" title="配置zsh默认编辑器">配置zsh默认编辑器</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://neo0moriarty.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/blog/">blog</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/book/">book</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/crawler/">crawler</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/dev/">dev</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/os/">os</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/python/">python</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/study/">study</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://coolshell.cn/" title="酷壳 – CoolShell.cn">酷壳 – CoolShell.cn</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.flysnow.org" title="飞雪无情的博客">飞雪无情的博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>

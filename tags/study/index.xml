@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>study on neo0moriarty</title>
+    <link>https://neo0moriarty.github.io/tags/study/</link>
+    <description>Recent content in study on neo0moriarty</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 18 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://neo0moriarty.github.io/tags/study/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Vim实用技巧总结</title>
+      <link>https://neo0moriarty.github.io/practical-vim/</link>
+      <pubDate>Thu, 18 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/practical-vim/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://book.douban.com/subject/25869486/&#34;&gt;《Practical Vim》(《Vim实用技巧》)&lt;/a&gt; 是关于Vim技巧最好的教程，豆瓣评分9.1。之前断断续续地看过，不过没整理笔记。这书得经常翻看并实践，以后把看书和Vim练习的笔记记录整理在此，便于反复复习和练习使用。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Jupyter notebook添加Python 3</title>
+      <link>https://neo0moriarty.github.io/jupyter-notebook-python3/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/jupyter-notebook-python3/</guid>
+      <description>原来机器里装的是 anaconda2，默认的Python是2.7版本，默认的 jupyter notebook 也是基于Python 2内核的。
+添加Python 3 的命令：
+➜ ~ ipython3 kernelspec install-self [TerminalIPythonApp] WARNING | Subcommand `ipython kernelspec` is deprecated and will be removed in future versions. [TerminalIPythonApp] WARNING | You likely want to use `jupyter kernelspec` in the future [InstallNativeKernelSpec] WARNING | `jupyter kernelspec install-self` is DEPRECATED as of 4.0. You probably want `ipython kernel install` to install the IPython kernelspec. [InstallNativeKernelSpec] Installed kernelspec python3 in /usr/local/share/jupyter/kernels/python3  机器上安装了两个iPython。ipython3是基于Python 3 的。 报了警告，但jupyter notebook 中已经有了Python 3 的选项了，上面的命令好使。</description>
+    </item>
+    
+    <item>
+      <title>两本爬虫相关的书籍</title>
+      <link>https://neo0moriarty.github.io/two-crawler-books/</link>
+      <pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/two-crawler-books/</guid>
+      <description>&lt;p&gt;今年想看的书单越积累越长，优先级也处于不断调整的状态。
+最近业余时间阅读了两本爬虫的书籍，也写了一些爬虫代码。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>NumPy和SciPy简介</title>
+      <link>https://neo0moriarty.github.io/python-numpy-scipy/</link>
+      <pubDate>Tue, 28 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-numpy-scipy/</guid>
+      <description>&lt;p&gt;如果利用数组来做高级的数字处理是你的日常工作，那么 NumPy 和 SciPy 应该是你的常用武器。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>学习算法实现</title>
+      <link>https://neo0moriarty.github.io/python-pla-learn/</link>
+      <pubDate>Wed, 22 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-pla-learn/</guid>
+      <description>&lt;p&gt;一些学习算法实现练习&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《Neural Networks and Deep Learning》</title>
+      <link>https://neo0moriarty.github.io/neural-network/</link>
+      <pubDate>Mon, 20 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/neural-network/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://neuralnetworksanddeeplearning.com/&#34;&gt;neuralnetworksanddeeplearning.com&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;一本免费公开的英文电子书。3blue1brown的教学视频里推荐看的入门书。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《统计学习方法》</title>
+      <link>https://neo0moriarty.github.io/machine-learning-stati/</link>
+      <pubDate>Thu, 16 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/machine-learning-stati/</guid>
+      <description>&lt;p&gt;李航 ——《统计学习方法》 2012年3月第一版  豆瓣评分：8.9&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>七月在线学习记录</title>
+      <link>https://neo0moriarty.github.io/julyedu/</link>
+      <pubDate>Tue, 14 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/julyedu/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.julyedu.com&#34;&gt;https://www.julyedu.com&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>趣味学习高等数学</title>
+      <link>https://neo0moriarty.github.io/fun-math/</link>
+      <pubDate>Sun, 12 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/fun-math/</guid>
+      <description>&lt;p&gt;发现趣味学习高等数学的一系列视频，超赞
+深入浅出、直观明了地分享数学之美&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>机器学习数学预备知识学习</title>
+      <link>https://neo0moriarty.github.io/machine-learning-math-basic/</link>
+      <pubDate>Wed, 08 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/machine-learning-math-basic/</guid>
+      <description>&lt;p&gt;机器学习数学基础学习资料清单 &amp;amp; 学习计划&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>《写给大家看的机器学习书》</title>
+      <link>https://neo0moriarty.github.io/everyone-machine-learning/</link>
+      <pubDate>Tue, 07 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/everyone-machine-learning/</guid>
+      <description>&lt;p&gt;知乎专栏: &lt;a href=&#34;https://zhuanlan.zhihu.com/machine-learning-book&#34;&gt;写给大家看的机器学习书&lt;/a&gt; 链接与摘录笔记&lt;/p&gt;
+
+&lt;p&gt;第1、2篇      机器学习基础概念
+第4、5、6篇   机器学习可行性
+第3篇         PLA感知机学习算法
+第7、8篇      线性回归&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>最小二乘法</title>
+      <link>https://neo0moriarty.github.io/least-squares-method/</link>
+      <pubDate>Tue, 07 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/least-squares-method/</guid>
+      <description>&lt;p&gt;关于&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E6%9C%80%E5%B0%8F%E4%BA%8C%E4%B9%98%E6%B3%95&#34;&gt;最小二乘法&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>贝叶斯定理</title>
+      <link>https://neo0moriarty.github.io/bayesian-method/</link>
+      <pubDate>Tue, 31 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/bayesian-method/</guid>
+      <description>&lt;p&gt;关于&lt;a href=&#34;https://zh.wikipedia.org/wiki/%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86&#34;&gt;贝叶斯定理&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>机器学习笔记</title>
+      <link>https://neo0moriarty.github.io/machine-learning-note/</link>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/machine-learning-note/</guid>
+      <description>&lt;p&gt;机器学习中一些笔记和截图&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>deeplearning.ai 深度学习5个入门课程</title>
+      <link>https://neo0moriarty.github.io/5-deep-learning-courses/</link>
+      <pubDate>Mon, 23 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/5-deep-learning-courses/</guid>
+      <description>&lt;p&gt;由 deeplearning.ai 出品，网易引进的正版授权中文版深度学习工程师微专业课程，让你在了解丰富的人工智能应用案例的同时，学会在实践中搭建出最先进的神经网络模型，训练出属于你自己的 AI。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Jupyter Notebook</title>
+      <link>https://neo0moriarty.github.io/python-jupyter-notebook/</link>
+      <pubDate>Wed, 18 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-jupyter-notebook/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;http://jupyter.org/&#34;&gt;Jupyter Notebook&lt;/a&gt; 原来叫做Ipython Notebook，是开源的web应用，一个交互式网页笔记本，支持运行 40 多种编程语言。可以用来创建和共享文学化程序文档，支持实时代码调试运行，数学方程，可视化和 markdown。 用途包括：数据清理和转换，数值模拟，统计建模，机器学习等等。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Scikit-learn</title>
+      <link>https://neo0moriarty.github.io/python-scikit-learn/</link>
+      <pubDate>Wed, 18 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/python-scikit-learn/</guid>
+      <description>&lt;p&gt;Scikit-learn是基于Python的开源机器学习框架，这里是安装教程、简介和学习资料收集&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>斯坦福大学公开课 ：吴恩达机器学习课程</title>
+      <link>https://neo0moriarty.github.io/standford-course/</link>
+      <pubDate>Wed, 18 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/standford-course/</guid>
+      <description>&lt;p&gt;Andrew Ng（吴恩达）机器学习课程资料收集&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>机器学习资料</title>
+      <link>https://neo0moriarty.github.io/machine-learning-resource/</link>
+      <pubDate>Tue, 17 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/machine-learning-resource/</guid>
+      <description>&lt;p&gt;机器学习资料收集&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>一个很棒的英语学习网站</title>
+      <link>https://neo0moriarty.github.io/study-english/</link>
+      <pubDate>Sat, 14 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/study-english/</guid>
+      <description>&lt;p&gt;一个很棒的英语（美语）学习网站。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>美语发音练习课程</title>
+      <link>https://neo0moriarty.github.io/learn-usa-accent/</link>
+      <pubDate>Sat, 14 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/learn-usa-accent/</guid>
+      <description>&lt;p&gt;之前搜索了挺多关于&lt;strong&gt;美式英语发音&lt;/strong&gt;的教程，找到了一个比较详细地道的视频教程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>英语口音纠正课程</title>
+      <link>https://neo0moriarty.github.io/correct-pronunciation/</link>
+      <pubDate>Sat, 14 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/correct-pronunciation/</guid>
+      <description>&lt;p&gt;一个很棒的美式英语口语发音教学视频。视频很长，三个半小时。。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Superset Demo</title>
+      <link>https://neo0moriarty.github.io/superset-demo/</link>
+      <pubDate>Fri, 13 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/superset-demo/</guid>
+      <description>&lt;p&gt;在阿里云服务器上搭了一个&lt;a href=&#34;http://superset.apache.org/&#34;&gt;Superset&lt;/a&gt;的demo。访问地址是:&lt;a href=&#34;http://superset.molock.cn/&#34;&gt;http://superset.molock.cn&lt;/a&gt; 登录账号和密码都是:admin&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://molock.cn/upload/supersetdemo.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Superset介绍</title>
+      <link>https://neo0moriarty.github.io/superset-intro/</link>
+      <pubDate>Thu, 05 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/superset-intro/</guid>
+      <description>&lt;p&gt;Superset的简单介绍&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Google开源项目风格指南</title>
+      <link>https://neo0moriarty.github.io/google-code-style/</link>
+      <pubDate>Wed, 04 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/google-code-style/</guid>
+      <description>&lt;p&gt;Google 开源项目风格指南&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Git日常常用命令汇总</title>
+      <link>https://neo0moriarty.github.io/git-github-note/</link>
+      <pubDate>Fri, 22 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/git-github-note/</guid>
+      <description>&lt;p&gt;记录git日常常用命令&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

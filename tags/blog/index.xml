@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog on neo0moriarty</title>
+    <link>https://neo0moriarty.github.io/tags/blog/</link>
+    <description>Recent content in blog on neo0moriarty</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 26 Nov 2019 02:20:53 +0800</lastBuildDate>
+    
+	<atom:link href="https://neo0moriarty.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mac下Hugo搭建记录</title>
+      <link>https://neo0moriarty.github.io/mac-hugo-blog-record/</link>
+      <pubDate>Tue, 26 Nov 2019 02:20:53 +0800</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-hugo-blog-record/</guid>
+      <description>&lt;p&gt;Mac下hugo博客的一些命令和操作、修改记录。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>用Elasticsearch作为Hexo的搜索服务</title>
+      <link>https://neo0moriarty.github.io/hexo-elasticsearch/</link>
+      <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-elasticsearch/</guid>
+      <description>&lt;p&gt;现在博客使用的搜索插件很慢，没访问缓存、第一次打开时至少要几秒钟，有时十秒或更多，实在慢。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo博客字体的调整</title>
+      <link>https://neo0moriarty.github.io/hexo-change-font/</link>
+      <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-change-font/</guid>
+      <description>&lt;p&gt;不同系统、平台的字体并不统一，在不同的平台上显示效果也不一样。
+修改Hexo博客的字体，取一个自己喜欢的折中效果。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo草稿箱</title>
+      <link>https://neo0moriarty.github.io/hexo-trash/</link>
+      <pubDate>Thu, 09 Nov 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-trash/</guid>
+      <description>&lt;p&gt;Hexo草稿箱用法&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo博文置顶</title>
+      <link>https://neo0moriarty.github.io/hexo-top/</link>
+      <pubDate>Thu, 12 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-top/</guid>
+      <description>&lt;p&gt;Hexo博客首页博文置顶&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo开启站内搜索功能</title>
+      <link>https://neo0moriarty.github.io/hexo-internal-search/</link>
+      <pubDate>Wed, 11 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-internal-search/</guid>
+      <description>&lt;p&gt;根据关键字搜索博文，站内搜索的功能很实用。hexo开启站内搜索很方便，已经有现成的插件可以使用。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo文章目录样式调整</title>
+      <link>https://neo0moriarty.github.io/hexo-change-css/</link>
+      <pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-change-css/</guid>
+      <description>&lt;p&gt;Hexo博客侧边栏文章目录的样式调整&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo瘦身插件all_minifier</title>
+      <link>https://neo0moriarty.github.io/hexo-minimal/</link>
+      <pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-minimal/</guid>
+      <description>&lt;p&gt;使用插件对Hexo博客代码压缩，静态文件压缩&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>博客迁移到阿里云并启用https访问</title>
+      <link>https://neo0moriarty.github.io/hexo-to-aliyun/</link>
+      <pubDate>Thu, 28 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-to-aliyun/</guid>
+      <description>&lt;p&gt;本博客的迁移和搭建&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo博客SEO优化</title>
+      <link>https://neo0moriarty.github.io/hexo-seo/</link>
+      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-seo/</guid>
+      <description>&lt;p&gt;记录一些Hexo博客SEO优化操作&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo去掉码市跳转页</title>
+      <link>https://neo0moriarty.github.io/hexo-no-redirect-coding/</link>
+      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-no-redirect-coding/</guid>
+      <description>&lt;p&gt;去掉码市coding.net pages服务的广告跳转页&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>使用七牛云图床并实现快速贴图</title>
+      <link>https://neo0moriarty.github.io/use-qiqiu-paste-picture/</link>
+      <pubDate>Sat, 23 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/use-qiqiu-paste-picture/</guid>
+      <description>&lt;p&gt;七牛存储可以作为图床，存放一些静态资源，介绍一种快速贴图的方式。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo博客主动提交链接给百度</title>
+      <link>https://neo0moriarty.github.io/hexo-commit-to-baidu/</link>
+      <pubDate>Fri, 22 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-commit-to-baidu/</guid>
+      <description>&lt;p&gt;Hexo博客部署到服务器的时候顺便提交新url链接给百度收录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo博客首页显示摘要</title>
+      <link>https://neo0moriarty.github.io/hexo-display-summary/</link>
+      <pubDate>Fri, 22 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-display-summary/</guid>
+      <description>&lt;p&gt;Hexo博客首页不直接显示全文，只显示摘要的方法&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo博客搭建教程</title>
+      <link>https://neo0moriarty.github.io/hexo-blog-build/</link>
+      <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-blog-build/</guid>
+      <description>&lt;p&gt;Hexo博客搭建教程简要记录&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo绑定独立域名并解析</title>
+      <link>https://neo0moriarty.github.io/hexo-bind-domain/</link>
+      <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/hexo-bind-domain/</guid>
+      <description>&lt;p&gt;Hexo博客部署绑定域名教程&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

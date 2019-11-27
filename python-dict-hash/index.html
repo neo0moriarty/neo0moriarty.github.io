@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.59.1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Python中的字典和集合以及它们背后的散列表 | neo0moriarty</title>
+    <meta property="og:title" content="Python中的字典和集合以及它们背后的散列表 - neo0moriarty">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2017-11-28T00:00:00&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2017-11-28T00:00:00&#43;08:00">
+        
+    <meta name="Keywords" content="[Python中的字典和集合以及它们背后的散列表]">
+    <meta name="description" content="Python中的字典和集合以及它们背后的散列表">
+        
+    <meta name="author" content="neo0moriarty">
+    <meta property="og:url" content="https://neo0moriarty.github.io/python-dict-hash/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="https://neo0moriarty.github.io/">
+                        neo0moriarty
+                    </a>
+                
+                <p class="description">o(╯□╰)o  (゜-゜)つロ  o(╯□╰)o</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="https://neo0moriarty.github.io/">首页</a>
+                    
+                    <a  href="https://neo0moriarty.github.io/archives/" title="归档">归档</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Python中的字典和集合以及它们背后的散列表</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2017年11月28日
+                        </date>
+                        
+                        
+                        
+                        <div class="post-content">
+                            <p>字典（dict）这个数据结构在Python里无处不在，不但在各种程序里广泛使用，它也是 Python 语言的基石。模块的命名空间、实例的属性和函数的关键字参数中都可以看到字典的身影。<strong>正是因为字典至关重要，Python 对它的实现做了高度优化，而散列表则是字典类型性能出众的根本原因。</strong>集合（set）的实现也同样依赖于<strong>散列表</strong>。</p>
+
+<hr />
+
+<h2 id="字典">字典</h2>
+
+<p><strong>标准库里的所有映射类型都是利用 dict 来实现的</strong>，因此它们有个共同的限制，即只有<strong>可散列的数据类型</strong>才能用作这些映射里的键（<strong>只有键有这个要求</strong>，值并不需要是可散列的数据类型）。</p>
+
+<p><strong>什么是可散列的数据类型：</strong>
+如果一个对象是可散列的，那么在这个对象的生命周期中，它的散列值是不变的，而且这个对象需要实现 <code>__hash__()</code> 方 法。另外可散列对象还要有 <code>__qe__()</code> 方法，这样才能跟其他键做比较。如果两个可散列对象是相等的，那么它们的散列值一定是一样的。</p>
+
+<p><strong>Python中可散列的数据类型：</strong>
+原子不可变数据类型（<strong>str、bytes 和数值类型</strong>）都是可散列类型，frozenset 也是可散列的，因为根据其定义，frozenset 里只能容纳可散列类型。<strong>元组的话，只有当一个元组包含的所有元素都是可散列类型的情况下，它才是可散列的。</strong></p>
+
+<pre><code>&gt;&gt;&gt; tt = (1, 2, (30, 40))
+&gt;&gt;&gt; hash(tt)
+8027212646858338501
+&gt;&gt;&gt; tl = (1, 2, [30, 40])
+&gt;&gt;&gt; hash(tl)
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: unhashable type: 'list'
+&gt;&gt;&gt; tf = (1, 2, frozenset([30, 40]))
+&gt;&gt;&gt; hash(tf)
+-4118419923444501110
+</code></pre>
+
+<p><strong>“Python里所有的不可变类型都是可散列的”。这个说法其实是不准确的，比如虽然元组本身是不可变序列，它里面的元素可能是其他可变类型的引用。</strong>（恍然大悟，原来自己错了好几年。。）</p>
+
+<p><strong>创建字典的不同方式：</strong></p>
+
+<pre><code>&gt;&gt;&gt; a = dict(one=1, two=2, three=3) 
+&gt;&gt;&gt; b = {'one': 1, 'two': 2, 'three': 3} 
+&gt;&gt;&gt; c = dict(zip(['one', 'two', 'three'], [1, 2, 3])) 
+&gt;&gt;&gt; d = dict([('two', 2), ('one', 1), ('three', 3)]) 
+&gt;&gt;&gt; e = dict({'three': 3, 'one': 1, 'two': 2}) 
+&gt;&gt;&gt; a == b == c == d == e 
+True
+</code></pre>
+
+<p><strong>字典推导（dict comprehension）也可以用来建造新 dict:</strong></p>
+
+<pre><code>&gt;&gt;&gt; DIAL_CODES = [
+...         (86, 'China'),
+...         (91, 'India'),
+...         (1, 'United States'),
+...         (62, 'Indonesia'),
+...         (55, 'Brazil'),
+...         (92, 'Pakistan'),
+...         (880, 'Bangladesh'),
+...         (234, 'Nigeria'),
+...         (7, 'Russia'),
+...         (81, 'Japan'),
+... ]
+&gt;&gt;&gt; country_code = {country: code for code, country in DIAL_CODES}
+&gt;&gt;&gt; country_code
+{'Pakistan': 92, 'Bangladesh': 880, 'Japan': 81, 'China': 86, 'United States': 1, 'Indonesia': 62, 'Nigeria': 234, 'Brazil': 55, 'India': 91, 'Russia': 7}
+&gt;&gt;&gt; {code: country.upper() for country, code in country_code.items() if code &lt; 66}
+{1: 'UNITED STATES', 7: 'RUSSIA', 62: 'INDONESIA', 55: 'BRAZIL'}
+</code></pre>
+
+<p>用setdefault处理找不到的键，示例见<a href="https://molock.cn/posts/13471/">这篇博客</a>。</p>
+
+<p><strong>像 k in my_dict.keys() 这种操作在 Python 3 中是很快的</strong>，而且即便映射类型对象很庞大也没关系。这是因为 dict.keys() 的返回值是一个“视图”。视图就像一个集合，而且跟字典类似的是，在视图里查找一个元素的速度很快。<strong>Python 2 的 dict.keys() 返回的是个列表</strong>，因此虽然上面的方法仍然是正确的，它在处理体积大的对象的时候效率不会太高，因为<strong>k in my_list 操作需要扫描整个列表</strong>。</p>
+
+<p>从 dict 或者其他内置类继承不好。
+colllections.UserDict 这个类其实就是把标准 dict 用纯 Python 又实现了一遍。UserDict 是让用户继承写子类的。UserDict 并不是 dict 的子类，但是 UserDict 有一个叫作 data 的属性，是 dict 的实例，这个属性实际上是 UserDict 最终存储数据的地方。
+示例：</p>
+
+<pre><code>import collections
+class StrKeyDict(collections.UserDict):
+    def __missing__(self, key):
+        if isinstance(key, str):
+            raise KeyError(key)
+        return self[str(key)]
+
+    def __contains__(self, key):
+        return str(key) in self.data
+
+    def __setitem__(self, key, item):
+        self.data[str(key)] = item
+</code></pre>
+
+<p>不可变映射类型:</p>
+
+<p><strong>从 Python 3.3 开始，types 模块中引入了一个封装类名叫 MappingProxyType。</strong>如果给这个类一个映射，它会返回一个只读的映射视图。虽然是个只读视图，但是它是动态的。这意味着如果对原映射做出了改动，我们通过这个视图可以观察到，但是无法通过这个视图对原映射做出修改。</p>
+
+<p>用 MappingProxyType 来获取字典的只读实例 mappingproxy:</p>
+
+<pre><code>&gt;&gt;&gt; from types import MappingProxyType
+&gt;&gt;&gt; d = {1:'A'}
+&gt;&gt;&gt; d_proxy = MappingProxyType(d)
+&gt;&gt;&gt; d_proxy
+mappingproxy({1: 'A'})
+&gt;&gt;&gt; d_proxy[2] = 'x'
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: 'mappingproxy' object does not support item assignment
+&gt;&gt;&gt; d[2] = 'B'
+&gt;&gt;&gt; d_proxy
+mappingproxy({1: 'A', 2: 'B'})
+&gt;&gt;&gt; d_proxy[2]
+'B'
+</code></pre>
+
+<h2 id="集合">集合</h2>
+
+<p>集合中的元素必须是可散列的，set 类型本身是不可散列的，但是 frozenset 可以。</p>
+
+<p>除了保证唯一性，集合还实现了很多基础的中缀运算符。给定两个集合 a 和 b，<strong>a | b 返回的是它们的合集，a &amp; b 得到的是交集，而 a - b 得到的是差集</strong>。合理地利用这些操作，不仅能够让代码的行数变少，还能减少 Python 程序的运行时间。这样做同时也是为了让代码更易读，从而更容易判断程序的正确性，因为利用这些运算符可以省去不必要的循环和逻辑操作。</p>
+
+<p>如果要创建一个空集，你必须用不带任何参数的构造方 法 set()。如果只是写成 {} 的形式，跟以前一样，你创建的其实是个空字典。</p>
+
+<p>像 {1, 2, 3} 这种字面量句法相比于构造方法（set([1, 2, 3])）要更快且更易读。后者的速度要慢一些，因为 Python 必须先从 set 这个名字来查询构造方法，然后新建一个列表，最后再把这个列表传入到构造方法里。但是如果是像 {1, 2, 3} 这样的字面量，Python 会利用一 个专门的叫作 BUILD_SET 的字节码来创建集合。</p>
+
+<p>用 dis.dis（<strong>反汇编函数</strong>）来看看两个方法的字节码的不同：</p>
+
+<pre><code>&gt;&gt;&gt; from dis import dis
+&gt;&gt;&gt; dis('{1}')
+&gt;&gt;&gt; dis('set([1])')
+</code></pre>
+
+<p>集合推导：</p>
+
+<pre><code>&gt;&gt;&gt; from unicodedata import name
+&gt;&gt;&gt; {chr(i) for i in range(32, 256) if 'SIGN' in name(chr(i),'')}
+{'¢', '®', '÷', '$', '§', '±', '©', '×', '%', '¬', '#', '°', '&lt;', '¥', 'µ', '¶',}
+</code></pre>
+
+<p>unicodedata 模块里导入 name 函数，用以获取字符的名字。
+把编码在 32~255 之间的字符的名字里有“SIGN”单词的挑出来，放到一个集合里。</p>
+
+<p>中缀运算符需要两侧的被操作对象都是集合类型，但是其他的所有方法则只要求所传入的参数是可迭代对象。例如，想求 4 个聚合类型 a、b、c 和 d 的合集，可以用 a.union(b, c, d)，这里 a 必须是个 set，但是 b、c 和 d 则可以是任何类型的可迭代对象。</p>
+
+<h2 id="散列表">散列表</h2>
+
+<p>所有的 Python 程序员都从经验中得出结论，认为字典和集合的速度是非常快的。实际上是非常非常快的。<strong>dict和set的查找速度是极快的，归功于背后的散列表。</strong></p>
+
+<p><strong>由于列表的背后没有散列表来支持 in 运算符，每次搜索都需要扫描一次完整的列表，导致所需的时间跟据大小呈线性增长。</strong></p>
+
+<p><strong>散列表其实是一个稀疏数组（总是有空白元素的数组称为稀疏数组）</strong>。在一般的数据结构教材中，散列表里的单元通常叫作表元（bucket）。在 dict 的散列表当中，每个键值对都占用一个表元，每个表元都有两个部分，一个是对键的引用，另一个是对值的引用。因为所有表元的大小一致，所以可以通过偏移量来读取某个表元。</p>
+
+<p><strong>因为 Python 会设法保证大概还有三分之一的表元是空的，所以在快要达到这个阈值的时候，原有的散列表会被复制到一个更大的空间里面。</strong></p>
+
+<p>两个对象在比较的时候是相等的，那它们的散列值必须相等。</p>
+
+<p><strong>由于字典使用了散列表，而散列表又必须是稀疏的，这导致它在空间上的效率低下。举例而言，如果你需要存放数量巨大的记录，那么放在由元组或是具名元组构成的列表中会是比较好的选择；最好不要根据 JSON 的风格，用由字典组成的列表来存放这些记录。用元组取代字典就能节省空间的原因有两个：其一是避免了散列表所耗费的空间，其二是无需把记录中字段的名字在每个元素里都存一遍。</strong>记住我们现在讨论的是空间优化。如果你手头有几百万个对象，而你的机器有几个 GB 的内存，那么空间的优化工作可以等到真正需要的时候再开始计划，因为优化往往是可维护性的对立面。</p>
+
+<p><strong>dict 的实现是典型的空间换时间：字典类型有着巨大的内存开销，但它们提供了无视数据量大小的快速访问——只要字典能被装 在内存里。</strong></p>
+
+<p>无论何时往字典里添加新的键，Python 解释器都可能做出为字典扩容的决定。扩容导致的结果就是要新建一个更大的散列表，并把字典里已有的元素添加到新表里。这个过程中可能会发生新的散列冲突，导致新散列表中键的次序变化。如果你在迭代一个字典的所有键的过程中同时对字典进行修改，那么这个循环很有可能会跳过一些键——甚至是跳过那些字典中已经有的键。</p>
+
+<p><strong>由此可知，不要对字典同时进行迭代和修改。如果想扫描并修改一个字典，最好分成两步来进行：首先对字典迭代，以得出需要添加的内容，把这些内容放在一个新字典里；迭代结束之后再对原有字典进行更新。</strong></p>
+
+<p><strong>在 Python 3 中，.keys()、.items() 和 .values() 方法返回的都是字典视图。也就是说，这些方法返回的值更像集合，而不是像 Python 2 那样返回列表。视图还有动态的特性，它们可以实时反馈字典的变化。</strong></p>
+
+<p>set 和 frozenset 的实现也依赖散列表，但在它们的散列表里存放的只有元素的引用（就像在字典里只存放键而没有相应的值）。在 set 加 入到 Python 之前，我们都是把字典加上无意义的值当作集合来用的。</p>
+
+<p>字典和散列表的几个特点，对集合来说几乎都是适用的：</p>
+
+<ul>
+<li>集合里的元素必须是可散列的。</li>
+<li>集合很消耗内存。</li>
+<li>可以很高效地判断元素是否存在于某个集合。</li>
+<li>元素的次序取决于被添加到集合里的次序。</li>
+<li>往集合里添加元素，可能会改变集合里已有元素的次序。</li>
+</ul>
+
+<h2 id="总结">总结</h2>
+
+<p>大多数映射类型都提供了两个很强大的方法：setdefault 和 update。<strong>setdefault 方法可以用来更新字典里存放的可变值（比如列 表），从而避免了重复的键搜索</strong>。<strong>update 方法则让批量更新成为可能，它可以用来插入新值或者更新已有键值对，它的参数可以是包含 (key, value) 这种键值对的可迭代对象，或者关键字参数</strong>。映射类型的构造方法也会利用 update 方法来让用户可以使用别的映射对象、可迭代对象或者关键字参数来创建新对象。</p>
+
+<p><strong>dict 和 set 背后的散列表效率很高，对它的了解越深入，就越能理解为什么被保存的元素会呈现出不同的顺序，以及已有的元素顺序会发生变化的原因。同时，速度是以牺牲空间为代价而换来的。</strong></p>
+
+<p><strong>Python 的特点是“简单而正确”。dict 类型正是这一特点的完美体现——对它的优化只为一个目标：更好地实现对随机键的读取。而优化的结果非常好，由于速度快而且够健壮，它大量地应用于 Python 的解释器当中。如果对排序有要求，那么还可以选择OrderedDict。然而对于映射类型来说，保持元素的顺序并不是一个常用需求，因此会把它排除在核心功能之外，而以标准库的形式提供其他衍生的类型。</strong></p>
+
+<p>由于拥有紧凑的列表和字典表达，JSON 格式可以完美地用于数据交换。</p>
+
+<p><strong>PHP 和 Ruby 的散列语法借鉴了 Perl，它们都用 =&gt; 作为键和值的连接。JavaScript 则从 Python 那儿偷师，使用了 :。而 JSON 又从 JavaScript 发展而来，它的语法正好是 Python 句法的子集。因此，除了在 true、false 和 null 这几个值的拼写上有出入之外， JSON 和 Python 是完全兼容的。于是，现在大家用来交换数据的格式全是 Python 的 dict 和 list。</strong></p>
+
+<p>整理自《流畅的Python》第3章内容。</p>
+                        </div>
+
+                        
+<div class="post-archive">
+    <ul class="post-copyright">
+        <li><strong>原文作者：</strong><a rel="author" href="https://neo0moriarty.github.io/">neo0moriarty</a></li>
+        <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://neo0moriarty.github.io/python-dict-hash/">https://neo0moriarty.github.io/python-dict-hash/</a></li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+    </ul>
+</div>
+<br/>
+
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/python-memoryview/">Python3中的内存视图memoryview</a></li>
+        
+        <li><a href="/python3-unicode/">Python3中的字符编码和解码示例</a></li>
+        
+        <li><a href="/python3-file-encode/">Python3的文件编码</a></li>
+        
+        <li><a href="/python-bisect-insort/">Python中bisect和insort的应用示例</a></li>
+        
+        <li><a href="/python-namedtuple/">Python中具名元组namedtuple的应用示例</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="https://neo0moriarty.github.io/tags/python">python</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="https://neo0moriarty.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-hugo-blog-record/" title="Mac下Hugo搭建记录">Mac下Hugo搭建记录</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/mac-usb-iso/" title="Mac下格式化U盘并制作iso系统启动">Mac下格式化U盘并制作iso系统启动</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/ubuntu-mount-exfat/" title="ubuntu挂载exfat格式的硬盘">ubuntu挂载exfat格式的硬盘</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-neovim/" title="Neovim安装">Neovim安装</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/install-full-vim/" title="Mac 安装最完整的 Vim">Mac 安装最完整的 Vim</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-website/" title="Python相关网址收集">Python相关网址收集</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-round/" title="Python中使用round函数要注意的事">Python中使用round函数要注意的事</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/python-binary-tree/" title="Python实现和遍历二叉树">Python实现和遍历二叉树</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/practical-vim/" title="Vim实用技巧总结">Vim实用技巧总结</a>
+    </li>
+    
+    <li>
+        <a href="https://neo0moriarty.github.io/make-zsh-default/" title="配置zsh默认编辑器">配置zsh默认编辑器</a>
+    </li>
+    
+</ul>
+    </section>
+
+    
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="https://neo0moriarty.github.io/tags/algorithm/">algorithm</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/blog/">blog</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/book/">book</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/crawler/">crawler</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/dev/">dev</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/os/">os</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/python/">python</a>
+    
+    <a href="https://neo0moriarty.github.io/tags/study/">study</a>
+    
+</div>
+    </section>
+
+    
+<section class="widget">
+    <h3 class="widget-title">友情链接</h3>
+    <ul class="widget-list">
+        
+        <li>
+            <a target="_blank" href="https://coolshell.cn/" title="酷壳 – CoolShell.cn">酷壳 – CoolShell.cn</a>
+        </li>
+        
+        <li>
+            <a target="_blank" href="https://www.flysnow.org" title="飞雪无情的博客">飞雪无情的博客</a>
+        </li>
+        
+    </ul>
+</section>
+
+
+    
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        
+    </div>
+</footer>
+
+
+    
+    <script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+
+
+
+</body>
+</html>
