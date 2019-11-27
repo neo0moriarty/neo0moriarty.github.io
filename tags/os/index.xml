@@ -23,6 +23,17 @@
     </item>
     
     <item>
+      <title>使用H.265视频编码压缩视频文件</title>
+      <link>https://neo0moriarty.github.io/h265-compress-video/</link>
+      <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/h265-compress-video/</guid>
+      <description>&lt;p&gt;最近电脑硬盘空间紧张，舍不得删掉珍贵的高清视频，要么加硬盘，要么想办法压缩空间。这里分享后者的一种解决方案。
+实践了一番，最终用H.265重新编码视频来间接实现压缩视频文件，这种方式可以几乎不损失清晰度，压缩效率也是相当的高。
+Mac下可以使用字幕制作软件Arctime来打开视频，然后简单配置参数后直接导出，非常方便，记录下过程。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Mac下格式化U盘并制作iso系统启动</title>
       <link>https://neo0moriarty.github.io/mac-usb-iso/</link>
       <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
