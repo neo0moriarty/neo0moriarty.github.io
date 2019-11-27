@@ -26,9 +26,7 @@
       <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/jupyter-notebook-python3/</guid>
-      <description>原来机器里装的是 anaconda2，默认的Python是2.7版本，默认的 jupyter notebook 也是基于Python 2内核的。
-添加Python 3 的命令：
-➜ ~ ipython3 kernelspec install-self [TerminalIPythonApp] WARNING | Subcommand `ipython kernelspec` is deprecated and will be removed in future versions. [TerminalIPythonApp] WARNING | You likely want to use `jupyter kernelspec` in the future [InstallNativeKernelSpec] WARNING | `jupyter kernelspec install-self` is DEPRECATED as of 4.0. You probably want `ipython kernel install` to install the IPython kernelspec. [InstallNativeKernelSpec] Installed kernelspec python3 in /usr/local/share/jupyter/kernels/python3  机器上安装了两个iPython。ipython3是基于Python 3 的。 报了警告，但jupyter notebook 中已经有了Python 3 的选项了，上面的命令好使。</description>
+      <description>&lt;p&gt;原来机器里装的是 anaconda2，默认的Python是2.7版本，默认的 jupyter notebook 也是基于Python 2内核的。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -200,35 +198,6 @@
       
       <guid>https://neo0moriarty.github.io/study-english/</guid>
       <description>&lt;p&gt;一个很棒的英语（美语）学习网站。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>美语发音练习课程</title>
-      <link>https://neo0moriarty.github.io/learn-usa-accent/</link>
-      <pubDate>Sat, 14 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://neo0moriarty.github.io/learn-usa-accent/</guid>
-      <description>&lt;p&gt;之前搜索了挺多关于&lt;strong&gt;美式英语发音&lt;/strong&gt;的教程，找到了一个比较详细地道的视频教程。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>英语口音纠正课程</title>
-      <link>https://neo0moriarty.github.io/correct-pronunciation/</link>
-      <pubDate>Sat, 14 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://neo0moriarty.github.io/correct-pronunciation/</guid>
-      <description>&lt;p&gt;一个很棒的美式英语口语发音教学视频。视频很长，三个半小时。。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Superset Demo</title>
-      <link>https://neo0moriarty.github.io/superset-demo/</link>
-      <pubDate>Fri, 13 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://neo0moriarty.github.io/superset-demo/</guid>
-      <description>&lt;p&gt;在阿里云服务器上搭了一个&lt;a href=&#34;http://superset.apache.org/&#34;&gt;Superset&lt;/a&gt;的demo。访问地址是:&lt;a href=&#34;http://superset.molock.cn/&#34;&gt;http://superset.molock.cn&lt;/a&gt; 登录账号和密码都是:admin&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://molock.cn/upload/supersetdemo.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
     </item>
     
     <item>

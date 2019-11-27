@@ -17,13 +17,7 @@
       <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/mac-usb-iso/</guid>
-      <description>查看磁盘可以用Mac自带「磁盘工具」。
-命令行查看：
-df -h fdisk -l  格式化：
-sudo diskutil eraseDisk FAT32 LGF MBRFormat /dev/disk2  LGF是磁盘命名，需大写。
-取消挂载：
-sudo diskutil umount /dev/disk2s1  使用dd命令写入iso文件，制作系统启动：
-sudo dd if=/Users/molock/Downloads/ubuntu-16.04.4-desktop-amd64.iso of=/dev/disk2 bs=4m  </description>
+      <description>&lt;p&gt;Mac制作U盘启动，直接使用dd命令即可。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -61,8 +55,7 @@ sudo apt-get install exfat-utils  重启电脑生效。</description>
       <pubDate>Tue, 16 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/make-zsh-default/</guid>
-      <description># 修改crontab默认编辑器为vim export EDITOR=vim # 设置git commit 编辑器为sublime export GIT_EDITOR=&amp;quot;subl --wait --new-window&amp;quot;  如果subl命令还未配置，需先配置：
-# Mac下配置 ln -s &amp;quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&amp;quot; /usr/local/bin/subl  </description>
+      <description>&lt;p&gt;配置终端中的默认编辑器。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -71,9 +64,7 @@ sudo apt-get install exfat-utils  重启电脑生效。</description>
       <pubDate>Sun, 14 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/mac-mds-stores/</guid>
-      <description>这两天Mac时不时提示内存不足进而整个系统卡死，只能重启解决，打开活动监视器查看，CPU和内存狂飙。占用进程是「mds」和「mds_stores」。搜索了一下，貌似是系统的Spotlight索引引起的，出这么大的bug，实在不应该。
-暂时的解决方案是关闭该功能：
-sudo mdutil -a -i off  </description>
+      <description>&lt;p&gt;这两天Mac时不时提示内存不足进而整个系统卡死，只能重启解决，打开活动监视器查看，CPU和内存狂飙。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -238,15 +229,6 @@ sudo mdutil -a -i off  </description>
       
       <guid>https://neo0moriarty.github.io/use-qiqiu-paste-picture/</guid>
       <description>&lt;p&gt;七牛存储可以作为图床，存放一些静态资源，介绍一种快速贴图的方式。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Markdown编辑器Mweb</title>
-      <link>https://neo0moriarty.github.io/mac-mweb-markdown/</link>
-      <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://neo0moriarty.github.io/mac-mweb-markdown/</guid>
-      <description>&lt;p&gt;Mac下一款很好用的Markdow编辑软件&lt;/p&gt;</description>
     </item>
     
   </channel>

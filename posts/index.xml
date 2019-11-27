@@ -26,13 +26,7 @@
       <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/mac-usb-iso/</guid>
-      <description>查看磁盘可以用Mac自带「磁盘工具」。
-命令行查看：
-df -h fdisk -l  格式化：
-sudo diskutil eraseDisk FAT32 LGF MBRFormat /dev/disk2  LGF是磁盘命名，需大写。
-取消挂载：
-sudo diskutil umount /dev/disk2s1  使用dd命令写入iso文件，制作系统启动：
-sudo dd if=/Users/molock/Downloads/ubuntu-16.04.4-desktop-amd64.iso of=/dev/disk2 bs=4m  </description>
+      <description>&lt;p&gt;Mac制作U盘启动，直接使用dd命令即可。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -112,8 +106,7 @@ sudo apt-get install exfat-utils  重启电脑生效。</description>
       <pubDate>Tue, 16 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/make-zsh-default/</guid>
-      <description># 修改crontab默认编辑器为vim export EDITOR=vim # 设置git commit 编辑器为sublime export GIT_EDITOR=&amp;quot;subl --wait --new-window&amp;quot;  如果subl命令还未配置，需先配置：
-# Mac下配置 ln -s &amp;quot;/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl&amp;quot; /usr/local/bin/subl  </description>
+      <description>&lt;p&gt;配置终端中的默认编辑器。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -122,9 +115,7 @@ sudo apt-get install exfat-utils  重启电脑生效。</description>
       <pubDate>Sun, 14 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/mac-mds-stores/</guid>
-      <description>这两天Mac时不时提示内存不足进而整个系统卡死，只能重启解决，打开活动监视器查看，CPU和内存狂飙。占用进程是「mds」和「mds_stores」。搜索了一下，貌似是系统的Spotlight索引引起的，出这么大的bug，实在不应该。
-暂时的解决方案是关闭该功能：
-sudo mdutil -a -i off  </description>
+      <description>&lt;p&gt;这两天Mac时不时提示内存不足进而整个系统卡死，只能重启解决，打开活动监视器查看，CPU和内存狂飙。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -325,11 +316,7 @@ sudo mdutil -a -i off  </description>
       <pubDate>Tue, 26 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/python-asyncio/</guid>
-      <description>最近有空就去翻看Youtube的视频，看了很多Python相关的视频，主要是一些Python核心开发者的技术演讲视频。了解一些Python最前沿的技术分享。仰望众多大神，除了感到渺小和自卑外，还是能学到不少东西的。很受教，应该坚持。
-这两三年来Python3最主要和最受关注的feature莫过于asyncio，得益于node.js和高并发编程这几年的火热，异步编程和异步IO的概念更加受关注。这是好事，网络的传输一直是瓶颈，异步IO是达到高并发的有效手段。Python的asyncio的出现让Python更加焕发生机，尤其是web开发，大家一直认为这是趋势，越来越受关注。asyncio的开发者之一Yury Selivanov大神开发了uvloop，测试了asyncio+uvloop的性能，测试结果证明是可以媲美golang的性能，把node.js甩在身后，可见asyncio的潜力，具体可以参照这篇博文。现在还是起步不久，相信不久会有更令人瞩目的进步空间。
-之前写过一年左右的node.js，学到了不少异步编程的知识，node.js的纯异步编程很难有好的编程体验，相比Python，体验差了不止是几条街。现在Python+异步Python IO解决方案asyncio，让我顿时有了强烈的兴趣，接下来会持续关注和深入学习Python的web框架sanic和asyncio、uvloop等等，并实践之。
-一些asyncio阅读资料：
- asyncio官方文档 Raymond Hettinger, Keynote on Concurrency, PyBay Asynchronous I/O With Python 3  Stay hungry. Stay foolish.</description>
+      <description>&lt;p&gt;这两三年来Python3最主要和最受关注的feature莫过于asyncio，得益于node.js和高并发编程这几年的火热，异步编程和异步IO的概念更加受关注。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -348,9 +335,7 @@ sudo mdutil -a -i off  </description>
       <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/jupyter-notebook-python3/</guid>
-      <description>原来机器里装的是 anaconda2，默认的Python是2.7版本，默认的 jupyter notebook 也是基于Python 2内核的。
-添加Python 3 的命令：
-➜ ~ ipython3 kernelspec install-self [TerminalIPythonApp] WARNING | Subcommand `ipython kernelspec` is deprecated and will be removed in future versions. [TerminalIPythonApp] WARNING | You likely want to use `jupyter kernelspec` in the future [InstallNativeKernelSpec] WARNING | `jupyter kernelspec install-self` is DEPRECATED as of 4.0. You probably want `ipython kernel install` to install the IPython kernelspec. [InstallNativeKernelSpec] Installed kernelspec python3 in /usr/local/share/jupyter/kernels/python3  机器上安装了两个iPython。ipython3是基于Python 3 的。 报了警告，但jupyter notebook 中已经有了Python 3 的选项了，上面的命令好使。</description>
+      <description>&lt;p&gt;原来机器里装的是 anaconda2，默认的Python是2.7版本，默认的 jupyter notebook 也是基于Python 2内核的。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -359,12 +344,8 @@ sudo mdutil -a -i off  </description>
       <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/python-pycon/</guid>
-      <description>PyCon是Python每年举行的Python实践分享大会，除了主会，还有很多地区性的PyCon大会。 PyCon是关于Python的高质量且前沿的技术分享，有很多分享视频，是学习和了解Python开发和实践的非常好用的学习资料。
-国内的PyCon规模小影响力弱，质量貌似也变味了，可以参考这篇文章。
-当然，国外的PyCon才是「正宗」的。基本上在Youtube上可以找到每年相应的PyCon分享视频。
-PyCon官方主页：https://www.pycon.org/
-Youtube频道：
- PyCon2017 PyCon2016 PyCon2015 PyCon2014  更多的相关视频可以直接搜索Youtube，上面有不计其数的学习视频。</description>
+      <description>&lt;p&gt;PyCon是Python每年举行的Python实践分享大会，除了主会，还有很多地区性的PyCon大会。
+PyCon是&lt;strong&gt;关于Python的高质量且前沿的技术分享&lt;/strong&gt;，有很多分享视频，是学习和了解Python开发和实践的非常好用的学习资料。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -373,11 +354,8 @@ Youtube频道：
       <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/python2-end/</guid>
-      <description>Python 2 早已不再被官方重视和重点维护，这已是众所周知的事。 官方希望在2020年的时候彻底抛弃Python 2。
-Python Clock是Python 2 生命倒计时网站。
-这是好事，Python 3 各方面都比Python 2 要好，新增了很多新特性新功能，Python 3 可以写出比Python 2 更简洁优雅同时又高效的代码。大势所趋。
-Python 3.0 是2008年12月发布的，到2020年，十几年的过渡时间可谓是很长了。
-现在，绝大多数(95%)的Python主流包或工具库都已经完成Python 3 的迁移。 详情请参照这个网站。</description>
+      <description>&lt;p&gt;Python 2 早已不再被官方重视和重点维护，这已是众所周知的事。
+官方希望在2020年的时候彻底抛弃Python 2。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -395,10 +373,9 @@ Python 3.0 是2008年12月发布的，到2020年，十几年的过渡时间可�
       <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/python-forelse/</guid>
-      <description>Python中的for循环是有else的可选用法的。
-for后面加了else后，for循环结束后(没有break)会进入else执行语句；如果碰到break则会跳过else分支。
-示例：
-In [1]: fruits = [&#39;apple&#39;, &#39;banana&#39;, &#39;mango&#39;] ...: for fruit in fruits: ...: print(fruit.capitalize()) ...: else: ...: print(&#39;watermelon&#39;) ...: Apple Banana Mango watermelon In [2]: for n in range(2, 10): ...: for x in range(2, n): ...: if n % x == 0: ...: print( n, &#39;equals&#39;, x, &#39;*&#39;, n//x) ...: break ...: else: ...: # loop fell through without finding a factor ...: print(n, &#39;is a prime number&#39;) .</description>
+      <description>&lt;p&gt;Python中的for循环是有else的可选用法的。&lt;/p&gt;
+
+&lt;p&gt;for后面加了else后，for循环结束后(没有break)会进入else执行语句；如果碰到break则会跳过else分支。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -407,15 +384,9 @@ In [1]: fruits = [&#39;apple&#39;, &#39;banana&#39;, &#39;mango&#39;] ...: for f
       <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/how-to-write-elegant-python/</guid>
-      <description>不少人觉得Python语法简单，学几天就会了。殊不知，要写出漂亮优雅的Python代码，不下苦功夫钻研和大量的实践是不可能的，除非是天才。写出漂亮的Python代码，需要对语言本身精通，谈何容易。
-怎么写好？捷径之一当然是看高手和大师们是怎么写的，多学习和实践。下面有一些大师的演讲和示例，示范如何写出漂亮优雅的Python代码。
-Raymond Hettinger 2013年在PyCon US 上的一个演讲分享：
- Youtube视频 Github笔记  这份笔记整理得很好，得反复琢磨和学习。
-另外，pyvideo.org上还有Raymond Hettinger更多的分享视频：
- Raymond Hettinger@pyvideo.org  Jeﬀ Knupp在2013年写的小册子Writing Idiomatic Python：
- Writing Idiomatic Python 百度云下载  这个小册子写得很好，可以跟上面的笔记相互对比着看，都是很好的学习和借鉴资料。
-更多进阶指导：
- Effective Python: 59 Specific Ways to Write Better Python The Hitchhiker&amp;rsquo;s Guide to Python Code Like a Pythonista: Idiomatic Python How to think like a Pythonista Python Best Practices: 5 Tips For Better Code Writing clean, testable, high quality code in Python writing-idiomatic-python-ebook activestate.</description>
+      <description>&lt;p&gt;不少人觉得Python语法简单，学几天就会了。殊不知，&lt;strong&gt;要写出漂亮优雅的Python代码，不下苦功夫钻研和大量的实践是不可能的，除非是天才&lt;/strong&gt;。写出漂亮的Python代码，需要对语言本身精通，谈何容易。&lt;/p&gt;
+
+&lt;p&gt;怎么写好？捷径之一当然是&lt;strong&gt;看高手和大师们是怎么写的，多学习和实践&lt;/strong&gt;。下面有一些大师的演讲和示例，示范如何写出漂亮优雅的Python代码。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -424,9 +395,7 @@ Raymond Hettinger 2013年在PyCon US 上的一个演讲分享：
       <pubDate>Sun, 24 Dec 2017 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/python-pylad-ipython/</guid>
-      <description>在iPython中pandas的一些调用matplotlib的函数需要pylab方式打开。
-打开方式：
- 终端命令行下输入 ipython --pylab 在iPython中输入 %pylab  </description>
+      <description>&lt;p&gt;在iPython中pandas的一些调用matplotlib的函数需要pylab方式打开。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1345,41 +1314,12 @@ Linux下搭建Squid服务很简单，在此记录squid服务安装配置过程�
     </item>
     
     <item>
-      <title>美语发音练习课程</title>
-      <link>https://neo0moriarty.github.io/learn-usa-accent/</link>
-      <pubDate>Sat, 14 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://neo0moriarty.github.io/learn-usa-accent/</guid>
-      <description>&lt;p&gt;之前搜索了挺多关于&lt;strong&gt;美式英语发音&lt;/strong&gt;的教程，找到了一个比较详细地道的视频教程。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>英语口音纠正课程</title>
-      <link>https://neo0moriarty.github.io/correct-pronunciation/</link>
-      <pubDate>Sat, 14 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://neo0moriarty.github.io/correct-pronunciation/</guid>
-      <description>&lt;p&gt;一个很棒的美式英语口语发音教学视频。视频很长，三个半小时。。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>pip常用命令</title>
       <link>https://neo0moriarty.github.io/python-pip-version/</link>
       <pubDate>Fri, 13 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/python-pip-version/</guid>
       <description>&lt;p&gt;Python pip的使用，如指定安装版本、指定安装源&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Superset Demo</title>
-      <link>https://neo0moriarty.github.io/superset-demo/</link>
-      <pubDate>Fri, 13 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://neo0moriarty.github.io/superset-demo/</guid>
-      <description>&lt;p&gt;在阿里云服务器上搭了一个&lt;a href=&#34;http://superset.apache.org/&#34;&gt;Superset&lt;/a&gt;的demo。访问地址是:&lt;a href=&#34;http://superset.molock.cn/&#34;&gt;http://superset.molock.cn&lt;/a&gt; 登录账号和密码都是:admin&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://molock.cn/upload/supersetdemo.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1479,17 +1419,6 @@ Linux下搭建Squid服务很简单，在此记录squid服务安装配置过程�
       
       <guid>https://neo0moriarty.github.io/centos-install-python3/</guid>
       <description>&lt;p&gt;Centos上编译安装Python3记录&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Flask实现随机返回图片url的接口</title>
-      <link>https://neo0moriarty.github.io/flask-return-random-files/</link>
-      <pubDate>Mon, 02 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://neo0moriarty.github.io/flask-return-random-files/</guid>
-      <description>&lt;p&gt;Flask实现随机返回图片url的接口，下图就是随机返回的图片，每次刷新都会从图库中随机返回一张图片。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://molock.cn/random?id=55327&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1671,15 +1600,6 @@ os.getcwd()与os.path.dirname()的区别。&lt;/p&gt;</description>
       
       <guid>https://neo0moriarty.github.io/hexo-bind-domain/</guid>
       <description>&lt;p&gt;Hexo博客部署绑定域名教程&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Markdown编辑器Mweb</title>
-      <link>https://neo0moriarty.github.io/mac-mweb-markdown/</link>
-      <pubDate>Thu, 21 Sep 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://neo0moriarty.github.io/mac-mweb-markdown/</guid>
-      <description>&lt;p&gt;Mac下一款很好用的Markdow编辑软件&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -81,13 +81,14 @@
                         
                         
                         <div class="post-content">
-                            <p>这两天Mac时不时提示内存不足进而整个系统卡死，只能重启解决，打开活动监视器查看，CPU和内存狂飙。占用进程是「mds」和「mds_stores」。搜索了一下，貌似是系统的Spotlight索引引起的，出这么大的bug，实在不应该。</p>
+                            <p>这两天Mac时不时提示内存不足进而整个系统卡死，只能重启解决，打开活动监视器查看，CPU和内存狂飙。</p>
+
+<p>查看占用进程是「mds」和「mds_stores」。搜索了一下，貌似是系统的Spotlight索引引起的，出这么大的bug，实在不应该。</p>
 
 <p>暂时的解决方案是关闭该功能：</p>
 
 <pre><code>sudo mdutil -a -i off
 </code></pre>
-
                         </div>
 
                         
