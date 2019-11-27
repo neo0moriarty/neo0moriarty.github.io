@@ -6,10 +6,19 @@
     <description>Recent content in Tags on neo0moriarty</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 26 Nov 2019 02:20:53 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 27 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://neo0moriarty.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>os</title>
+      <link>https://neo0moriarty.github.io/tags/os/</link>
+      <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/tags/os/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>blog</title>
@@ -26,15 +35,6 @@
       <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/tags/dev/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>os</title>
-      <link>https://neo0moriarty.github.io/tags/os/</link>
-      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://neo0moriarty.github.io/tags/os/</guid>
       <description></description>
     </item>
     
