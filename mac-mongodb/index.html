@@ -94,7 +94,7 @@
 <p>安装后创建目录并修改权限：</p>
 
 <pre><code>$ sudo mkdir -p /data/db
-$ sudo chown molock:staff /data/db 
+$ sudo chown test:staff /data/db 
 </code></pre>
 
 <p>配置文件：</p>
@@ -105,7 +105,7 @@ $ sudo chown molock:staff /data/db
 #数据目录
 dbpath = /data/db
 #日志目录
-logpath = /home/molock/mongodb.log
+logpath = /home/test/mongodb.log
 #设置后台运行
 fork = true
 #日志输出方式
@@ -116,7 +116,7 @@ logappend = true
 
 <p>alias设置：</p>
 
-<pre><code>alias mongod='mongod --config /Users/molock/.mongodb.conf'
+<pre><code>alias mongod='mongod --config /Users/test/.mongodb.conf'
 </code></pre>
 
 <p>开启mongodb：</p>

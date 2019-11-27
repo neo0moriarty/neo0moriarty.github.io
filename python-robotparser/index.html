@@ -118,7 +118,7 @@ Disallow: /
 &gt;&gt;&gt; rp.set_url('http://movie.douban.com/robots.txt')
 &gt;&gt;&gt; rp.read()
 &gt;&gt;&gt; url = 'https://movie.douban.com/subject/24987018/'
-&gt;&gt;&gt; user_agent = 'molock_crawler'
+&gt;&gt;&gt; user_agent = 'test_crawler'
 &gt;&gt;&gt; rp.can_fetch(user_agent, url)
 True
 &gt;&gt;&gt; user_agent = 'Wandoujia Spider'
@@ -127,7 +127,7 @@ False
 &gt;&gt;&gt; url = 'https://movie.douban.com/j/new_search_subjects?tags=电影&amp;range=0,10&amp;start=0'
 &gt;&gt;&gt; rp.can_fetch(user_agent, url)
 False
-&gt;&gt;&gt; user_agent = 'molock_crawler'
+&gt;&gt;&gt; user_agent = 'test_crawler'
 &gt;&gt;&gt; url = 'https://movie.douban.com/subject/24987018/'
 &gt;&gt;&gt; rp.can_fetch(user_agent, url)
 True

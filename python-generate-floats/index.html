@@ -88,7 +88,7 @@
 
 <pre><code>from random import random
 from array import array
-with open('/Users/molock/floats-10M-lines.txt', 'w') as f:
+with open('/Users/test/floats-10M-lines.txt', 'w') as f:
     l = [str(random()) for i in range(10**7)]
     f.write('\n'.join(l))
 </code></pre>
@@ -109,7 +109,7 @@ with open('/Users/molock/floats-10M-lines.txt', 'w') as f:
 from time import perf_counter as pc
 
 t_load = pc()
-floats = numpy.loadtxt('/Users/molock/floats-10M-lines.txt')
+floats = numpy.loadtxt('/Users/test/floats-10M-lines.txt')
 print(&quot;load data time:&quot;, pc() - t_load)
 
 print(floats[-3:])  # 查看最后三个数
@@ -141,12 +141,12 @@ print(floats[-3:])
 
 t_save = pc()
 # 将运算后的结果floats数组存入后缀为.npy的二进制文件
-numpy.save('/Users/molock/floats-10M', floats)
+numpy.save('/Users/test/floats-10M', floats)
 print(&quot;save data time:&quot;, pc() - t_save)
 
 
 t_load_again = pc()
-floats2 = numpy.load('/Users/molock/floats-10M.npy', 'r+')
+floats2 = numpy.load('/Users/test/floats-10M.npy', 'r+')
 print(&quot;load data again time:&quot;, pc() - t_load_again)
 
 print(floats2[-3:])

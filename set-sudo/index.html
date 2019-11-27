@@ -85,12 +85,12 @@
 
 <p>以root用户编辑文件/etc/sudoers，找到root  ALL=(ALL)   ALL这一行，加入新的一行：</p>
 
-<pre><code>molock	ALL=(ALL) 	ALL
+<pre><code>test	ALL=(ALL) 	ALL
 </code></pre>
 
-<p>molock是用户名，用sudo su时需要输入molock密码，要免输密码，改成：</p>
+<p>test是用户名，用sudo su时需要输入test密码，要免输密码，改成：</p>
 
-<pre><code>molock	ALL=(ALL) 	NOPASSWD:ALL
+<pre><code>test	ALL=(ALL) 	NOPASSWD:ALL
 </code></pre>
 
 <p>保存即生效。</p>

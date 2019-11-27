@@ -103,7 +103,7 @@ def validate2(name):
     if len(name) &lt; 8:
         raise NameTooShortError(name)
 
-print(validate2('molock'))
+print(validate2('test'))
 </code></pre>
 
 <p>输出结果：</p>
@@ -112,10 +112,10 @@ print(validate2('molock'))
 ValueError
 
 validate1:
-ValueError: Name too short: molock
+ValueError: Name too short: test
 
 validate2:
-__main__.NameTooShortError: molock
+__main__.NameTooShortError: test
 </code></pre>
 
 <p>自定义异常类可以抛出更明确无歧义的异常信息。</p>

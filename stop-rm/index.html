@@ -85,7 +85,7 @@
 
 <p>1.准备shell脚本文件，rm.sh为例</p>
 
-<pre><code>TRASH_DIR='/Users/molock/.trash'
+<pre><code>TRASH_DIR='/Users/test/.trash'
 for i in $*; do
     STAMP=`date &quot;+%y%m%d%H%M%S&quot;`
     fileName=`basename $i`
@@ -95,12 +95,12 @@ done
 
 <p>2.alias设置，如果用zsh，则 vim ~/.zshrc</p>
 
-<pre><code>alias rm=&quot;sh /Users/molock/.tool/rm.sh&quot;
+<pre><code>alias rm=&quot;sh /Users/test/.tool/rm.sh&quot;
 </code></pre>
 
 <p>source ~/.zshrc</p>
 
-<p>上面个以普通用户molock为例，root用户方法一样。</p>
+<p>上面个以普通用户test为例，root用户方法一样。</p>
 
 <p>这种方式可以降低误删操作，但用rm绝对路径(/bin/rm)删除还是可以的，要彻底的话可以修改rm命令源码。</p>
                         </div>
