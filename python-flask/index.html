@@ -83,8 +83,6 @@
                         <div class="post-content">
                             <p>Linux下flask web项目的部署，也是本博客在阿里云服务器上的部署方式。</p>
 
-<hr />
-
 <h2 id="flask-gunicorn">flask + gunicorn</h2>
 
 <p>动态网站/后端接口要被客户端访问到，一般是通过过wsgi协议解析。wsgi是服务端和客户端交互的接口规范，wsgi服务器的作用是接受和分析用户的请求，调用应用程序进行处理并返回结果。wsgi服务器或叫做应用服务器，python里面一般用uwsgi和gunicorn，都是广泛应用和比较成熟的。这里使用gunicorn配置启动flask应用。安装完gunicorn后即可启动flask应用：</p>
