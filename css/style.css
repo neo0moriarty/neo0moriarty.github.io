@@ -6,23 +6,12 @@
  * @link http://pickcho.com
  */
 
- /* @font-face {
-    font-family: 'icomoon';
-    src:url('fonts/icomoon.woff?-i5ysuu') format('woff'),
-        url('fonts/icomoon.ttf?-i5ysuu') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-} */
-
 [class^="icon-"], [class*=" icon-"] {
-    /* font-family: 'icomoon'; */
-    speak: none;
     font-style: normal;
     font-weight: normal;
     font-variant: normal;
     text-transform: none;
     line-height: 1;
-
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -70,10 +59,7 @@
 body {
     background-color:#FFF;
     color:#444;
-    font-size: 17px;
-    /**
-    font-family:"TIBch", "Classic Grotesque W01", "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
-    **/
+    font-size: 16px;
     font-family: "Noto Serif CJK SC", "Source Han Serif SC", "Noto Sans CJK SC", "Noto Sans CJK", "Source Han Sans", "PingFangSC-Regular", "Hiragino Sans GB", "STHeiti", "Microsoft Yahei", "Droid Sans Fallback", "WenQuanYi Micro Hei", sans-serif;
     /**-webkit-font-smoothing: antialiased;**/
     -moz-osx-font-smoothing: grayscale;
@@ -422,7 +408,7 @@ textarea {
     border-top:1px solid #ddd;
     list-style:none;
     padding:25px 0 0;
-    font-size:19px;
+    font-size:18px;
     text-align: center;
 }
 .page-navigator li {
@@ -584,7 +570,7 @@ textarea.textarea {
     color:#6E7173;
     line-height:2.7;
     margin-top:0;
-    font-size:19px;
+    font-size:18px;
     border-bottom:1px solid #ddd;
     display:block;
 }
@@ -694,7 +680,7 @@ img.alignright {
     font-size: 74px;
 }
 .title404 span{
-    font-size: 17px;
+    font-size: 16px;
     width: 2px;
 }
 .site-name404 i {
@@ -907,7 +893,7 @@ img.alignright {
 
 /* for archive page starts*/
 .post-archive {
-    font-size: 17px;
+    font-size: 16px;
     line-height: 2;
     padding-bottom: .8em; 
 }
@@ -981,7 +967,7 @@ img.alignright {
 
 /* read more*/
 .readmore a {
-    font-size: 17px;
+    font-size: 16px;
     color: #444;
     margin: -10px 0;
     padding: 5px 10px;
