@@ -106,6 +106,14 @@ Mac下可以使用字幕制作软件Arctime来打开视频，然后简单配置�
 <p><img src="/h265_6.png" alt="" /></p>
 
 <p>上面两张截图左边是转码后的，右边是原来的文件，完全看不出来差别。重新编码除了可以节省空间，另外如果想备份到网盘的话，还是有好处的，因为文件大小和消重，自用不错。</p>
+
+<p>不使用软件，直接命令行使用<a href="https://ffmpeg.org/">ffmpeg</a>。</p>
+
+<pre><code>brew install ffmpeg
+ffmpeg -i input.avi -c:v libx265 -c:a copy output.mp4
+</code></pre>
+
+<p>再次警告，视频转码真的特别特别慢，亡命地吃CPU..</p>
                         </div>
 
                         
