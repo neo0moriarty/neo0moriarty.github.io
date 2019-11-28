@@ -111,8 +111,30 @@ Mac下可以使用字幕制作软件Arctime来打开视频，然后简单配置�
 
 <p>也可以不使用软件，直接命令行使用<strong><a href="https://ffmpeg.org/">ffmpeg</a></strong>。</p>
 
-<pre><code>brew install ffmpeg
-ffmpeg -i input.avi -c:v libx265 -c:a copy output.mp4
+<pre><code class="language-bash">brew install ffmpeg
+ffmpeg -i input.avi -c:v libx265  -crf 20 -c:a copy output.mp4
+</code></pre>
+
+<p>更进一步，可以封装成bash脚本文件命名为h265:</p>
+
+<pre><code class="language-bash">#!/bin/bash
+if [ -n &quot;$1&quot; ];then
+    if [ -n &quot;$2&quot; ];then
+        ffmpeg -i $1 -c:v libx265 -crf 20 -c:a copy  $2
+        exit
+    else
+        echo &quot;缺少输出文件路径&quot;
+        exit
+    fi
+else
+    echo &quot;缺少输入文件路径&quot;
+    exit
+fi
+</code></pre>
+
+<p>把文件放入$PATH路径中，命令h265就可以使用了，不用记住一堆参数：</p>
+
+<pre><code class="language-bash">h265 input.mp4 output.mp4
 </code></pre>
 
 <p><strong>再次警告，视频转码真的特别特别慢，亡命地吃CPU..</strong></p>
