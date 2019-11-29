@@ -12,7 +12,7 @@
     
     
     <item>
-      <title>ffmpeg使用H.265视频编码压缩视频</title>
+      <title>ffmpeg使用H265编码压缩视频</title>
       <link>https://neo0moriarty.github.io/h265-compress-video/</link>
       <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
       
@@ -25,7 +25,7 @@ Mac下可以使用字幕制作软件Arctime来打开视频，然后简单配置�
     <item>
       <title>Mac清理软件</title>
       <link>https://neo0moriarty.github.io/mac-cleanup-app/</link>
-      <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/mac-cleanup-app/</guid>
       <description>&lt;p&gt;一般来说Mac/Linux桌面不安装这类的软件也可以用得挺舒心，系统生态特点决定的。&lt;/p&gt;
