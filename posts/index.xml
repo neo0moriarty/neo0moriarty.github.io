@@ -1577,14 +1577,5 @@ os.getcwd()与os.path.dirname()的区别。&lt;/p&gt;</description>
       <description>&lt;p&gt;Hexo博客搭建教程简要记录&lt;/p&gt;</description>
     </item>
     
-    <item>
-      <title></title>
-      <link>https://neo0moriarty.github.io/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://neo0moriarty.github.io/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>
