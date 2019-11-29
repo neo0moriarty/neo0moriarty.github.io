@@ -153,7 +153,24 @@ posts = &quot;/:slug/&quot;
 
 <h2 id="托管到github脚本">托管到github脚本</h2>
 
-<pre><code class="language-bash"></code></pre>
+<pre><code class="language-bash">#!/bin/bash
+cd ~/neo0moriarty/
+echo -e &quot;\033[0;32mDeploying updates to GitHub...\033[0m&quot;
+msg=&quot;rebuilding site `date`&quot;
+if [ $# -eq 1 ]
+then msg=&quot;$1&quot;
+fi
+hugo 
+cd public
+git add -A
+git commit -m &quot;$msg&quot;
+# git push --force -u origin master
+git push -u origin master
+cd ../
+exit
+</code></pre>
+
+<p>制作成命令放入$PATH。</p>
                         </div>
 
                         
