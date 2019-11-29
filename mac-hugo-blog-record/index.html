@@ -81,21 +81,22 @@
                         
                         
                         <div class="post-content">
-                            <p>Mac下hugo博客的一些命令和操作、修改记录。</p>
+                            <p>Mac下hugo博客的一些命令和操作、修改记录，以及从Hexo迁移过来的主要操作。
+这篇也是<strong>迁移到hugo以后的第一篇，相当于重新开始，以后就只使用github来托管记录</strong>。</p>
 
 <h2 id="创建新博客站点">创建新博客站点</h2>
 
 <pre><code class="language-zsh">hugo new site 站点名称
 </code></pre>
 
-<p>hugo命令都需要在博客根目录运行</p>
+<p><strong>注：hugo命令都需要在博客根目录运行</strong></p>
 
 <h2 id="创建article">创建article</h2>
 
 <pre><code class="language-zsh">hugo new 目录/名称.md
 </code></pre>
 
-<h2 id="渲染draft">渲染draft</h2>
+<h2 id="本地渲染支持draft">本地渲染支持draft</h2>
 
 <pre><code class="language-bash">hugo server -D 
 </code></pre>
@@ -106,6 +107,8 @@
 </code></pre>
 
 <h2 id="hexo迁移批量添加文件日期">hexo迁移批量添加文件日期</h2>
+
+<p>原来hexo里都没有date信息，这里直接使用脚本（sed、awk）批量添加。</p>
 
 <pre><code class="language-zsh">for file in `ls *.md`;do value=`GetFileInfo  ${file} | awk '/created/{split($2,a,&quot;/&quot;);print &quot;date: &quot; a[3]&quot;-&quot;a[1]&quot;-&quot;-a[2]}'`;sed &quot;2 a\ 
 ${value}
@@ -118,7 +121,7 @@ for name in `ls *.new`;do mv $name ${name%.new};done
 
 <p>思路，遍历文件夹，获取文件时间戳信息，取出并格式化，插入文件，生成新文件，重命名。Mac下的命令跟Linux并不一样，包括内建命令和sed命令等。</p>
 
-<h2 id="推荐主题">推荐主题</h2>
+<h2 id="推荐使用主题">推荐使用主题</h2>
 
 <ul>
 <li><p><a href="https://github.com/neo0moriarty/hugo-theme-even">hugo-theme-even</a></p></li>
@@ -126,7 +129,12 @@ for name in `ls *.new`;do mv $name ${name%.new};done
 <li><p><a href="https://github.com/neo0moriarty/maupassant-hugo">maupassant-hugo</a></p></li>
 </ul>
 
+<p>试用了这两款，都挺不错，目前使用maupassant。</p>
+
 <h2 id="永久链接permalinks配置">永久链接permalinks配置</h2>
+
+<p>统一使用slug，这种方式最灵活，只要确保<strong>每篇slug唯一并且不再改变</strong>即可。
+可随时更改文件名和文章的title。</p>
 
 <pre><code>[frontmatter]
 date  = [&quot;:filename&quot;, &quot;:default&quot;]
@@ -134,6 +142,18 @@ date  = [&quot;:filename&quot;, &quot;:default&quot;]
 [permalinks]
 posts = &quot;/:slug/&quot;
 </code></pre>
+
+<h2 id="修改博客字体">修改博客字体</h2>
+
+<p>改成默认优先使用思源字体渲染，最喜欢思源宋体和思源黑体。</p>
+
+<h2 id="使用评论">使用评论</h2>
+
+<p><a href="https://utteranc.es">utteranc.es</a> 这款评论简洁好用，如果使用github托管的话可以考虑。</p>
+
+<h2 id="托管到github脚本">托管到github脚本</h2>
+
+<pre><code class="language-bash"></code></pre>
                         </div>
 
                         
@@ -141,7 +161,7 @@ posts = &quot;/:slug/&quot;
     <ul class="post-copyright">
         <li><strong>原文作者：</strong><a rel="author" href="https://neo0moriarty.github.io/">neo0moriarty</a></li>
         <li style="word-break:break-all"><strong>原文链接：</strong><a href="https://neo0moriarty.github.io/mac-hugo-blog-record/">https://neo0moriarty.github.io/mac-hugo-blog-record/</a></li>
-        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可，非商业转载请注明出处（作者，原文链接），商业转载请联系作者获得授权。</li>
+        <li><strong>版权声明：</strong>本作品采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议</a>进行许可。</li>
     </ul>
 </div>
 <br/>
@@ -158,11 +178,11 @@ posts = &quot;/:slug/&quot;
         
         <li><a href="/archives/">归档</a></li>
         
+        <li><a href="/"></a></li>
+        
         <li><a href="/hexo-elasticsearch/">用Elasticsearch作为Hexo的搜索服务</a></li>
         
         <li><a href="/hexo-change-font/">Hexo博客字体的调整</a></li>
-        
-        <li><a href="/hexo-trash/">Hexo草稿箱</a></li>
         
     </ul>
 </div>
@@ -214,11 +234,11 @@ posts = &quot;/:slug/&quot;
     </li>
     
     <li>
-        <a href="https://neo0moriarty.github.io/mac-cleanup-app/" title="Mac清理软件">Mac清理软件</a>
+        <a href="https://neo0moriarty.github.io/mac-hugo-blog-record/" title="Mac下Hugo搭建记录">Mac下Hugo搭建记录</a>
     </li>
     
     <li>
-        <a href="https://neo0moriarty.github.io/mac-hugo-blog-record/" title="Mac下Hugo搭建记录">Mac下Hugo搭建记录</a>
+        <a href="https://neo0moriarty.github.io/mac-cleanup-app/" title="Mac清理软件">Mac清理软件</a>
     </li>
     
     <li>

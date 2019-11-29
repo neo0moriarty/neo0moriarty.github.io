@@ -28,11 +28,6 @@
   </url>
   
   <url>
-    <loc>https://neo0moriarty.github.io/mac-cleanup-app/</loc>
-    <lastmod>2019-11-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://neo0moriarty.github.io/tags/blog/</loc>
     <lastmod>2019-11-26T02:20:53+08:00</lastmod>
   </url>
@@ -40,6 +35,11 @@
   <url>
     <loc>https://neo0moriarty.github.io/mac-hugo-blog-record/</loc>
     <lastmod>2019-11-26T02:20:53+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neo0moriarty.github.io/mac-cleanup-app/</loc>
+    <lastmod>2019-11-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -885,6 +885,11 @@
   <url>
     <loc>https://neo0moriarty.github.io/archives/</loc>
     <lastmod>1992-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://neo0moriarty.github.io/</loc>
+    <priority>0</priority>
   </url>
   
   <url>

@@ -6,7 +6,7 @@
     <description>Recent content in blog on neo0moriarty</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 26 Nov 2019 02:20:53 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 26 Nov 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://neo0moriarty.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,10 +14,11 @@
     <item>
       <title>Mac下Hugo搭建记录</title>
       <link>https://neo0moriarty.github.io/mac-hugo-blog-record/</link>
-      <pubDate>Tue, 26 Nov 2019 02:20:53 +0800</pubDate>
+      <pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>https://neo0moriarty.github.io/mac-hugo-blog-record/</guid>
-      <description>&lt;p&gt;Mac下hugo博客的一些命令和操作、修改记录。&lt;/p&gt;</description>
+      <description>&lt;p&gt;Mac下hugo博客的一些命令和操作、修改记录，以及从Hexo迁移过来的主要操作。
+这篇也是&lt;strong&gt;迁移到hugo以后的第一篇，相当于重新开始，以后就只使用github来托管记录&lt;/strong&gt;。&lt;/p&gt;</description>
     </item>
     
     <item>

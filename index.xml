@@ -18,8 +18,17 @@
       
       <guid>https://neo0moriarty.github.io/h265-compress-video/</guid>
       <description>&lt;p&gt;最近电脑硬盘空间紧张，舍不得删掉珍贵的高清视频，要么加硬盘，要么想办法压缩空间。这里分享后者的一种解决方案。
-实践了一番，最终用H.265重新编码视频来间接实现压缩视频文件，这种方式可以几乎不损失清晰度，压缩效率也是相当的高。
-Mac下可以使用字幕制作软件Arctime来打开视频，然后简单配置参数后直接导出，非常方便，记录下过程。&lt;/p&gt;</description>
+实践了一番，最终用H.265重新编码视频来间接实现压缩视频文件，这种方式可以几乎不损失清晰度，压缩效率也是相当的高。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Mac下Hugo搭建记录</title>
+      <link>https://neo0moriarty.github.io/mac-hugo-blog-record/</link>
+      <pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/mac-hugo-blog-record/</guid>
+      <description>&lt;p&gt;Mac下hugo博客的一些命令和操作、修改记录，以及从Hexo迁移过来的主要操作。
+这篇也是&lt;strong&gt;迁移到hugo以后的第一篇，相当于重新开始，以后就只使用github来托管记录&lt;/strong&gt;。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -31,15 +40,6 @@ Mac下可以使用字幕制作软件Arctime来打开视频，然后简单配置�
       <description>&lt;p&gt;一般来说Mac/Linux桌面不安装这类的软件也可以用得挺舒心，系统生态特点决定的。&lt;/p&gt;
 
 &lt;p&gt;Windows下就很有必要安装一个电脑管家，用来管理软件权限和弹窗之类的，windows流氓软件非常非常多，不能裸奔。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Mac下Hugo搭建记录</title>
-      <link>https://neo0moriarty.github.io/mac-hugo-blog-record/</link>
-      <pubDate>Tue, 26 Nov 2019 02:20:53 +0800</pubDate>
-      
-      <guid>https://neo0moriarty.github.io/mac-hugo-blog-record/</guid>
-      <description>&lt;p&gt;Mac下hugo博客的一些命令和操作、修改记录。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -1584,6 +1584,15 @@ os.getcwd()与os.path.dirname()的区别。&lt;/p&gt;</description>
       
       <guid>https://neo0moriarty.github.io/archives/</guid>
       <description>彩蛋在这里(゜-゜)つロ fun_world</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://neo0moriarty.github.io/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://neo0moriarty.github.io/</guid>
+      <description></description>
     </item>
     
   </channel>
