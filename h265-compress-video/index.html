@@ -185,6 +185,24 @@ r 每秒多少帧</p>
 
 <p>支持mkv，添加字幕重新编码字幕，过程同样缓慢</p>
 
+<h3 id="合并视频">合并视频</h3>
+
+<p>将要合并的视频名称放入文件中，如list.txt内容如下</p>
+
+<pre><code>file 'NTR1.mp4'
+file 'NTR2.mp4'
+file 'NTR4.mp4'
+file 'NTR5.mp4'
+file 'NTR6.mp4'
+file 'NTR7.mp4'
+file 'NTR8.mp4'
+</code></pre>
+
+<p>文件名必须是单引号括起来，合并命令</p>
+
+<pre><code class="language-bash">ffmpeg -f concat -i list.txt -c copy ntr.mp4
+</code></pre>
+
 <h2 id="参考">参考</h2>
 
 <ul>
