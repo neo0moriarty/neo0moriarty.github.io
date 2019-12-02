@@ -155,19 +155,46 @@ fi
 <pre><code class="language-bash">ffmpeg -i input.avi output.mp4
 </code></pre>
 
+<h3 id="提取音频">提取音频</h3>
+
+<pre><code class="language-bash">ffmpeg -i input.mp4 -vn output.mp3
+</code></pre>
+
+<p>vn 不包括视频</p>
+
+<h3 id="提取视频">提取视频</h3>
+
+<pre><code class="language-bash">ffmpeg -i input.mp4 -vcodec copy -an output.mp4
+</code></pre>
+
+<p>an 不包括音频</p>
+
+<h3 id="合并音频视频">合并音频视频</h3>
+
+<pre><code class="language-bash">ffmpeg -y –i input.mp4 –i input.mp3 –vcodec copy –acodec copy output.mp4
+</code></pre>
+
+<p>y 覆盖输出文件</p>
+
 <h3 id="裁剪视频">裁剪视频</h3>
 
 <pre><code class="language-bash">ffmpeg -i ABP-108.mp4 -ss 00:11:10 -t 00:19:10 -c copy ABP-108_cut.mp4
 </code></pre>
 
-<p>ss 开始时间 -t 结束时间</p>
+<p>ss 开始时间 -t <strong>持续总时长</strong></p>
 
-<h3 id="提取音频">提取音频</h3>
+<h3 id="视频截取成图片">视频截取成图片</h3>
 
-<pre><code class="language-bash">ffmpeg -i ABP-108.mp4 -vn ABP-108.mp3
+<pre><code class="language-bash">ffmpeg  -i test.mp4 -f image2 -ss 00:00:05 -t 00:00:03  -r 10  %5d.jpg
 </code></pre>
 
-<p>vn 不包括视频</p>
+<p>ss 开始时间 -t <strong>持续总时长</strong>
+去掉时间和帧数参数即可把整个视频转成图片</p>
+
+<h3 id="图片合并成视频">图片合并成视频</h3>
+
+<pre><code class="language-bash">ffmpeg  -i %5d.jpg test.mp4
+</code></pre>
 
 <h3 id="截取视频制作gif">截取视频制作gif</h3>
 
@@ -200,13 +227,16 @@ file 'NTR8.mp4'
 
 <p>文件名必须是单引号括起来，合并命令</p>
 
-<pre><code class="language-bash">ffmpeg -f concat -i list.txt -c copy ntr.mp4
+<pre><code class="language-bash">ffmpeg -f concat  -safe 0 -i filelist.txt -c copy output.mp4
 </code></pre>
+
+<p>safe 0 不加这个有时会报错 unsafe file</p>
 
 <h2 id="参考">参考</h2>
 
 <ul>
 <li><a href="https://www.youtube.com/watch?v=nvtdhZAqnes">https://www.youtube.com/watch?v=nvtdhZAqnes</a></li>
+<li><a href="https://www.jianshu.com/p/cf1e61eb6fc8">https://www.jianshu.com/p/cf1e61eb6fc8</a></li>
 </ul>
                         </div>
 
